@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S8 Checkliste</title>
+<style>
+:root{
+  --bg:#f3f4f1; --surface:#fff; --ink:#1d2320; --muted:#667069; --line:#dfe3dc;
+  --accent:#2f6f4f; --accent-ink:#fff; --done:#9aa39c;
+  --t1:#7d8b99; --t2:#4f9a5b; --t3:#3d86c6; --t4:#8a63c9; --t5:#d08a2e; --t6:#c9473f;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --bg:#141816; --surface:#1d2320; --ink:#e7ece8; --muted:#8f9a93; --line:#2c3530;
+    --accent:#5fbf8a; --accent-ink:#0f1a14; --done:#5d6861; }
+}
+*{box-sizing:border-box}
+html{color-scheme:light dark}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 "Segoe UI",system-ui,-apple-system,sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:14px 16px 12px}
+.wrap{max-width:1040px;margin:0 auto}
+h1{margin:0 0 8px;font-size:1.35rem;font-weight:700}
+.tabs{display:flex;gap:4px;margin:0 0 10px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tabs button{white-space:nowrap}
+.sub{font-size:.88rem;color:var(--muted)}
+.tabs button{border:0;border-bottom:3px solid transparent;background:transparent;color:var(--muted);padding:6px 14px 8px;font:inherit;font-weight:600;cursor:pointer;margin-bottom:-1px}
+.tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--accent)}
+table.ro tbody tr{cursor:default}
+table.ro tbody tr:hover{background:transparent}
+#progSel{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);margin-bottom:2px;min-width:14em}
+.ptitle{margin:0 0 8px;font-size:1.2rem}.ptitle span{color:var(--muted);font-weight:500}
+.stage{margin-bottom:12px}
+.pmeta{display:flex;align-items:center;gap:12px;margin-bottom:8px;font-size:.92rem;color:var(--muted)}
+.bar+table{margin-top:14px}
+.ctr{text-align:center}th.ctr{text-align:center}
+.chip{--cc:#8f2fd9;display:inline-flex;align-items:center;gap:8px;min-width:8.5em;padding:3px 14px 3px 10px;border-radius:999px;font-weight:600;color:var(--ink);background:color-mix(in srgb,var(--cc) 17%,transparent);border:1px solid color-mix(in srgb,var(--cc) 55%,transparent);transition:opacity .15s}
+.chip::before{content:"";flex:none;width:10px;height:10px;border-radius:50%;background:var(--cc)}
+tbody tr.done .chip{opacity:.5}
+.chip{white-space:nowrap}
+table.asp th,table.asp td{white-space:nowrap}
+.scroll{overflow-x:auto;border-radius:10px}
+.bar+.scroll{margin-top:14px}
+.bp{display:grid;grid-template-columns:1fr 1fr;gap:4px 24px;align-items:start}
+.bp>div{min-width:0}
+.bp h2{margin:0 0 8px;font-size:1.15rem}.bp h2 span{color:var(--muted);font-weight:500;font-size:.9rem}
+.bp section{margin-bottom:22px}
+.bp td,.bp th{white-space:nowrap}
+@media (max-width:700px){.bp{grid-template-columns:1fr}}
+.hint{margin:0 0 14px;color:var(--muted);font-size:.9rem}
+.hastip{text-decoration:underline dotted;text-underline-offset:3px;cursor:help}
+td.hastip:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.bp tr[data-tip]:hover{background:color-mix(in srgb,var(--accent) 7%,transparent)}
+.tip{position:fixed;z-index:30;left:0;top:0;max-width:340px;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;box-shadow:0 8px 24px rgba(0,0,0,.28);font-size:.9rem;pointer-events:none}
+.tip[hidden]{display:none}
+.tip .tmeta{color:var(--muted);font-size:.82rem}
+.tip .muted{color:var(--muted)}
+.tip dl{display:grid;grid-template-columns:auto 1fr;gap:2px 14px;margin:8px 0}
+.tip dt{color:var(--muted)}
+.tip dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.tip ul{margin:6px 0 8px;padding-left:18px}
+td.warn{background:color-mix(in srgb,#e53935 24%,transparent);color:var(--ink)}
+.callout{margin-top:18px;padding:12px 16px;background:color-mix(in srgb,#e53935 12%,var(--surface));border:1px solid color-mix(in srgb,#e53935 45%,transparent);border-left:5px solid #e53935;border-radius:10px}
+.callout b{display:block;margin-bottom:2px}
+.chip.b{--cc:#4a8be0}.chip.o{--cc:#f29a00}td.e.warn{background:color-mix(in srgb,#e53935 24%,transparent);color:var(--ink)}
+.chip.g{--cc:#5fa84d}.chip.n{--cc:#8a928c}
+.notes{margin-top:18px;padding:12px 16px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px}
+.notes h3{margin:0 0 6px;font-size:1rem}.notes ul{margin:0;padding-left:20px}.notes li{margin:3px 0}
+.total{display:flex;justify-content:space-between;gap:12px;font-size:.92rem;color:var(--muted);margin-bottom:6px}
+.total b{color:var(--ink);font-variant-numeric:tabular-nums}
+.bar{height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:12px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:var(--surface);color:var(--ink);padding:7px 14px;font:inherit;font-size:.92rem;cursor:pointer}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed=true]{background:var(--accent);color:var(--accent-ink);font-weight:600}
+label.opt{display:flex;align-items:center;gap:6px;font-size:.92rem;cursor:pointer}
+.reset{margin-left:auto;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:8px;padding:6px 12px;font:inherit;font-size:.88rem;cursor:pointer}
+.reset:hover{color:var(--ink)}
+#n,#w,#l{width:5.5em;font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+main{padding:16px}
+section{margin-bottom:22px}
+.tierhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 0 6px;padding-left:10px;border-left:5px solid var(--c)}
+.tierhead h2{margin:0;font-size:1.1rem}
+.tierhead span{font-size:.88rem;color:var(--muted);font-variant-numeric:tabular-nums}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:9px 12px;text-align:left}
+th{font-size:.82rem;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line)}
+td{border-top:1px solid var(--line)}
+tr:first-child td{border-top:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+td.nc,th.nc{text-align:center;font-variant-numeric:tabular-nums}
+td.c,th.c{width:44px;padding-right:0}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:color-mix(in srgb,var(--accent) 7%,transparent)}
+tbody tr.done td{color:var(--done)}
+tbody tr.done td.e{text-decoration:line-through}
+input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent);cursor:pointer;margin:0;vertical-align:middle}
+.tag{display:inline-block;min-width:2.2em;text-align:center;font-size:.78rem;font-weight:700;color:#fff;border-radius:5px;padding:1px 6px;margin-left:8px;background:var(--c)}
+.empty{padding:18px;text-align:center;color:var(--muted)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>S8 Checkliste</h1>
+  <nav class="tabs" role="tablist">
+    <button id="tList" type="button" role="tab">Essenzen</button>
+    <button id="tCheck" type="button" role="tab">Essenz Checkliste</button>
+    <button id="tProg" type="button" role="tab">Ausrüstungssets</button>
+    <button id="tSword" type="button" role="tab">Schwerter</button>
+    <button id="tAsp" type="button" role="tab">AC Aspekte</button>
+    <button id="tBp" type="button" role="tab">Schmiedelevel Baupläne</button>
+  </nav>
+  <div id="progHead" hidden><select id="progSel" aria-label="Seite wählen"></select></div>
+  <div id="checkHead">
+  <div class="total"><span><b id="doneAmt">0</b> von <b id="allAmt">0</b> Essenzen gefarmt</span><span id="doneCnt"></span></div>
+  <div class="bar"><i id="fill"></i></div>
+  <div class="controls">
+    <div class="seg" role="group" aria-label="Ansicht">
+      <button id="vTier" type="button">Nach Tier</button>
+      <button id="vAmt" type="button">Nach Menge</button>
+    </div>
+    <label class="opt">Bis Level <input type="number" id="l" min="2" max="335" step="1" placeholder="336"></label>
+    <label class="opt">Aktuelle Welle <input type="number" id="w" min="0" step="1" placeholder="alle"></label>
+    <label class="opt">Machtkristalle <input type="number" id="n" min="1" max="6" step="1" value="1"></label>
+    <label class="opt"><input type="checkbox" id="hide"> Erledigte ausblenden</label>
+    <button class="reset" id="reset" type="button">Zurücksetzen</button>
+  </div>
+  </div>
+</div></header>
+<main><div class="wrap" id="out"></div></main>
+
+<div id="tip" class="tip" role="tooltip" hidden></div>
+
+<script>
+// Level 2 bis 336 in Reihenfolge; Menge je Level = (Level+1)*1000; Welle = optimale Welle laut Wiki
+const SEQ="Pferd1 Lohe1 Witherskelett1 Zombie1 Wolf1 Lohe1 Witherskelett1 Zombie1 Pferd1 Stray1 Ziege1 Witherskelett1 Wolf1 Lohe2 Biene1 Wolf2 Ziege1 Piglin1 Biene1 Ziege2 Piglin2 Huhn2 Ziege2 Endermite2 Wolf2 Piglin2 Huhn2 Piglin2 Endermite2 Huhn3 Witherskelett3 Lohe3 Piglin3 Skelett3 Piglin3 Schneemann2 Piglin3 Piglin3 Schneemann2 Biene3 Wächter3 Fuchs2 Wolf4 Witherskelett4 Wächter3 Lohe4 Pferd4 Creeper3 Lohe5 Zombiepiglin3 Creeper4 Hoglin4 Witherskelett5 Biene4 Frosch3 Huhn5 Vindicator3 Wächter4 Vindicator3 Hexe4 Schildkröte5 Spinne5 Axolotl5 Enderman3 Lohe6 Hoglin5 Schneemann5 Stray6 Endermite6 Piglin6 Huhn6 Zombie7 Piglin6 Wolf7 Skelett7 Endermite6 Ziege7 Lohe7 Stray7 Piglin7 Piglin7 Zoglin4 Pferd8 Axolotl7 Schneemann6 Lohe8 Ziege7 Spinne7 Axolotl7 Piglin8 Witherskelett8 Spinne8 Wächter7 Panda5 Piglin8 Hoglin7 Witherskelett9 Wächter8 Piglin8 Panda6 Schildkröte8 Piglin9 Zombie9 Zombie9 Piglin9 Skelett9 Biene9 Polarbär6 Ziege9 Piglin9 Piglin9 Pferd10 Fuchs8 Zoglin7 Evoker6 Creeper9 Endermite10 Axolotl10 Husk11 Zombiepiglin9 Skelett10 Frosch9 Evoker7 Wächter10 Schildkröte10 Biene11 Lohe11 Piglin11 Ertrunkener8 Spinne11 Biene11 Pferd12 Ozelot12 Stray12 Huhn12 Axolotl11 Schildkröte11 Wolf12 Wächter11 Piglin11 Evoker8 Stray12 Stray12 Schneemann10 Schneemann10 Pferd12 Ozelot12 Ozelot12 Piglin11 Creeper11 Vindicator10 Fuchs10 Endermite11 Zombiepferd8 Stray12 Piglin11 Piglin11 Evoker8 Ozelot12 Vindicator10 Piglin11 Enderman9 Skelett12 Huhn11 Piglin11 Witherskelett12 Wither4 Polarbär8 Skelett12 Vindicator10 Witherskelett12 Endermite11 Wächter11 Zombiepferd8 Ertrunkener9 Ziege11 Pferd12 Vindicator10 Pferd12 Ozelot12 Creeper11 Hoglin11 Axolotl11 Evoker8 Hexe10 Biene11 Zombie12 Zombiepiglin10 Piglin-Brute9 Zombiepiglin10 Wächter11 Stray12 Piglin11 Ertrunkener9 Piglin11 Stray12 Huhn12 Husk12 Schildkröte11 Skelettpferd9 Endermite11 Piglin11 Panda9 Lohe12 Zoglin8 Evoker8 Vindicator10 Witherskelett12 Spinne11 Spinne11 Piglin11 Hexe10 Spinne11 Zombie12 Vindicator10 Zombiepiglin10 Hexe10 Husk12 Zoglin8 Skelett12 Witherskelett12 Zombie12 Evoker8 Wolf12 Piglin11 Lohe12 Zombiepferd8 Husk12 Piglin11 Ozelot12 Witherskelett12 Zombie12 Huhn12 Biene11 Zoglin8 Piglin11 Witherskelett12 Endermite11 Piglin11 Husk12 Piglin11 Lohe12 Ozelot12 Piglin11 Ozelot12 Lohe12 Zombiepferd8 Piglin11 Creeper11 Polarbär8 Stray12 Enderman9 Piglin11 Huhn12 Fuchs10 Lohe12 Piglin11 Wächter11 Pferd12 Stray12 Lohe12 Zombie12 Zombiepiglin10 Ozelot12 Piglin-Brute9 Fuchs10 Husk12 Piglin11 Endermite11 Panda9 Zombiepferd8 Piglin11 Skelett12 Ozelot12 Schneemann10 Zombiepferd8 Husk12 Schildkröte11 Piglin-Brute9 Panda9 Endermite11 Biene11 Biene11 Huhn12 Stray12 Polarbär8 Axolotl11 Pferd12 Ozelot12 Evoker8 Huhn12 Skelettpferd9 Evoker8 Ertrunkener9 Pferd12 Frosch10 Piglin11 Biene11 Lohe12 Hexe10 Skelettpferd9 Biene11 Ozelot12 Schildkröte11 Zombiepferd8 Fuchs10 Ozelot12 Zombiepferd8 Endermite11 Ziege11 Axolotl11 Piglin11 Schneemann10 Pferd12 Hexe10 Zombiepiglin10 Biene11 Stray12 Creeper11 Vindicator10 Lohe12 Skelett12 Enderman9 Huhn12 Piglin11 Biene11 Lohe12 Biene11 Piglin-Brute9 Huhn12 Frosch10 Pferd12 Zombiepiglin10 Frosch10 Wither8".split(" ");
+const WAVE={"Pferd1":701,"Lohe1":385,"Witherskelett1":827,"Zombie1":526,"Wolf1":608,"Stray1":541,"Ziege1":884,"Lohe2":1410,"Biene1":836,"Wolf2":1112,"Piglin1":1034,"Ziege2":1191,"Piglin2":1429,"Huhn2":1262,"Endermite2":1374,"Huhn3":2186,"Witherskelett3":2148,"Lohe3":1942,"Piglin3":1925,"Skelett3":1850,"Schneemann2":2365,"Biene3":2380,"Wächter3":2664,"Fuchs2":2460,"Wolf4":2569,"Witherskelett4":2393,"Lohe4":2706,"Pferd4":2312,"Creeper3":2854,"Lohe5":3504,"Zombiepiglin3":2836,"Creeper4":3583,"Hoglin4":3233,"Witherskelett5":3405,"Biene4":3006,"Frosch3":3506,"Huhn5":3227,"Vindicator3":3362,"Wächter4":3422,"Hexe4":3827,"Schildkröte5":4078,"Spinne5":3868,"Axolotl5":3488,"Enderman3":3743,"Lohe6":3730,"Hoglin5":4191,"Schneemann5":4396,"Stray6":4030,"Endermite6":4111,"Piglin6":4544,"Huhn6":4046,"Zombie7":4262,"Wolf7":4376,"Skelett7":4442,"Ziege7":4562,"Lohe7":4596,"Stray7":4483,"Piglin7":5142,"Zoglin4":4874,"Pferd8":5292,"Axolotl7":5188,"Schneemann6":5043,"Lohe8":5115,"Spinne7":4739,"Piglin8":5332,"Witherskelett8":5452,"Spinne8":5465,"Wächter7":5524,"Panda5":5607,"Hoglin7":5768,"Witherskelett9":6386,"Wächter8":5836,"Panda6":5657,"Schildkröte8":5591,"Piglin9":6233,"Zombie9":6131,"Skelett9":6464,"Biene9":6204,"Polarbär6":6456,"Ziege9":6236,"Pferd10":6658,"Fuchs8":6721,"Zoglin7":6856,"Evoker6":6994,"Creeper9":6895,"Endermite10":7125,"Axolotl10":7022,"Husk11":7332,"Zombiepiglin9":7293,"Skelett10":7201,"Frosch9":7301,"Evoker7":7428,"Wächter10":7382,"Schildkröte10":7471,"Biene11":8973,"Lohe11":7075,"Piglin11":9889,"Ertrunkener8":7482,"Spinne11":9335,"Pferd12":9994,"Ozelot12":8379,"Stray12":9111,"Huhn12":9883,"Axolotl11":8101,"Schildkröte11":9598,"Wolf12":9446,"Wächter11":7870,"Evoker8":8114,"Schneemann10":9645,"Creeper11":8802,"Vindicator10":9772,"Fuchs10":9105,"Endermite11":9529,"Zombiepferd8":7555,"Enderman9":8795,"Skelett12":9784,"Huhn11":7756,"Witherskelett12":9579,"Wither4":10000,"Polarbär8":9148,"Ertrunkener9":9742,"Ziege11":8921,"Hoglin11":9041,"Hexe10":8410,"Zombie12":8190,"Zombiepiglin10":9379,"Piglin-Brute9":8478,"Husk12":8558,"Skelettpferd9":9309,"Panda9":7969,"Lohe12":9933,"Zoglin8":8717,"Frosch10":9855,"Wither8":20000};
+let DATA=[];
+function build(){
+  const cap=st.l||336,agg={};
+  SEQ.forEach((k,i)=>{if(i+2<=cap)agg[k]=(agg[k]||0)+(i+3)*1000;});
+  DATA=Object.keys(agg).map(k=>{const m=k.match(/^(.*?)(\d+)$/);return {amt:agg[k],name:m[1],tier:+m[2],wave:WAVE[k],key:m[1]+"|"+m[2]};});
+}
+
+const KEY="essenzen-tracker-v2";
+let st={done:{},view:"tier",hide:false,n:1,w:null,l:null,tab:"check",prog:"coin",coin:{},skl:{},swd:{},asp:{},stg:{},stage:"early"};
+try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.done)st={...st,...s};}catch(e){}
+if(!(st.n>=1))st.n=1;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
+
+const fmt=n=>n.toLocaleString("de-DE");
+const out=document.getElementById("out");
+const need=d=>d.amt*st.n;
+const prog=d=>st.done[d.key]?need(d):0;
+const isDone=d=>prog(d)>=need(d);
+const okW=d=>!st.w||d.wave<=st.w;
+const byAmt=(a,b)=>b.amt-a.amt||b.tier-a.tier||a.name.localeCompare(b.name);
+
+function rows(list,showTag){
+  const vis=list.filter(d=>okW(d)&&!(st.hide&&isDone(d)));
+  if(!vis.length)return '<div class="empty">Keine Einträge: alles erledigt oder noch nicht farmbar.</div>';
+  return '<table><thead><tr><th class="c"></th><th class="nc">Menge</th>'+'<th>Essenz</th><th class="n">Welle</th></tr></thead><tbody>'+
+    vis.map(d=>`<tr data-k="${d.key}" class="${isDone(d)?"done":""}">
+      <td class="c"><input type="checkbox" aria-label="${d.name} T${d.tier} gefarmt" ${isDone(d)?"checked":""}></td>
+      <td class="nc">${fmt(d.amt*st.n)}</td>
+      <td class="e">${d.name} T${d.tier}</td>
+      <td class="n">${d.wave}</td></tr>`).join("")+'</tbody></table>';
+}
+
+const SETS={
+coin:{title:"Coin Set Progression",store:"coin",legacy:true,stages:[["early","Early"],["mid","Mid"],["late","Late"]],data:{
+early:{rows:[["Hose",1,"Rubinrote Kriegshose","p"],["Ring",1,"Ewiges Lichtband","p"],["Schuhe",2,"Göttliche Plattenläufer (Kaskade)","o"],["Schultern",2,"Rubinrote Kriegsschultern","p"],["Amulett",2,"Ewiges Lichtamulett","p"],["Handschuhe",3,"Rubinrote Kriegshandschuhe","p"],["Axt",3,"Blutige Fleischhackeraxt","b"],["Spitzhacke",4,"Rubinstaub Schrammer","b"],["Helm",4,"Rubinroter Kriegshelm","p"],["Brustplatte",5,"Rubinroter Kriegsharnisch","p"],["Gürtel",6,"Rubinroter Kriegsgürtel","p"],["Hacke",6,"Kaktuszermalmer","b"]],
+notes:["ab Ebene 13/14 Coin auf Menge % stellen","DMG flat Modifier stacken (bis Blitzzorn ca.) → danach %","Laufgeschwindigkeit wenn geht","bis Titangeschmiedet Set usen","für Aspekte kann man die anderen austauschen","minimal upgraden"]},
+mid:{rows:[["Ring",38,"Wurzelring des Lebens","o"],["Schulter",40,"Kristalline Schulterpanzer","o"],["Schuhe",41,"Sculkwanderer Plattenschuhe","o"],["Spitzhacke",41,"Spitzhacke des Kaktusmeister","o"],["Brustplatte",45,"Kristallkürass","o"],["Helm",46,"Kristalliner Helmpanzer","o"],["Axt",46,"Göttliche Pilzfällaxt","o"],["Handschuhe",47,"Kristalline Plattenhandschuhe","o"],["Amulett",47,"Amulett der Unsterblichkeit","o"],["Hose",48,"Kristalline Plattenhose","o"],["Gürtel",48,"Kristallines Schutzband","o"],["Hacke",54,"Der Kaktusernter","o"]],
+notes:["Coin auf Menge % stellen","DMG% auf jedem Teil. Versuchen jeden Stat auf der Armor zu haben","Laufgeschwindigkeit wenn geht","Full Titangeschmiedet","Aspekte raufcraften","aufwerten auf +10 oder höher"]},
+late:{rows:[["Spitzhacke",74,"Göttliche Erzzerstörung","o"],["Hacke",77,"Großer Kaktussporn","o"],["Axt",83,"Donnerfaust Pilzspalteraxt","p"],["Helm",86,"Himmlischer Panzerhelm","o"],["Handschuhe",86,"Himmlische Plattenhandschuhe","o"],["Gürtel",87,"Himmlischer Gürtel","o"],["Amulett",87,"Anhänger des Himmels","o"],["Schuhe",89,"Himmlische Tretter","o"],["Hose",90,"Himmlische Plattenhose","o"],["Ring",90,"Ring des Himmels","o"],["Schulter",91,"Himmlische Schulterplatten","o"],["Brustplatte",92,"Himmlischer Brustharnisch","o"]],
+notes:["Coin auf Menge % stellen","DMG wie bei Mid","Full Dämon+","Aspekte wie immer","aufwerten nach eigenem Ermessen"]}
+}},
+skills:{title:"Fähigkeiten Set Progression",store:"skl",stages:[["early","Early"],["early+","Early+"],["mid","Mid"],["late","Late"]],data:{
+early:{rows:[["Helm",1,"Drachenschuppen Kriegshelm","o"],["Schuhe",1,"Stählernde Sabatons","b"],["Schulter",1,"Eroberers Schulterpanzer","b"],["Gürtel",2,"Demonischer Gürtel","b"],["Waffe",2,"Panzerbrecher","p"],["Ring",3,"Zirkonband","g"],["Handschuhe",3,"Rubinrote Kriegshandschuhe","p"],["Amulett",4,"Anhänger des Windes","b"],["Brustplatte",5,"Blutrünstige Brustplatte","b"],["Hose",5,"Drachenschuppen Kriegshosen","o"],["Axt","x","schnellste Axt","n"],["Hacke","x","gibt keine unter E13","n"],["Spitzhacke","x","schnelllste Spitzhacke","n"]],
+notes:["Fähigkeiten Set alles auf Holzfäller EP bis lvl 4","Set dann switchen auf Bergbau EP bis lvl 5","Set danach \"trashable\""]},
+"early+":{rows:[["Waffe",2,"Panzerbrecher","p"],["Hose",6,"Dunkelmond Gamaschen","o"],["Helm",6,"Dunkelmond Helmvisir","o"],["Handschuhe",7,"Dunkelmond Panzerhandbuckel","o"],["Ring",7,"Band der dunklen Herrschaft","o"],["Schulter",8,"Dunkelmond Schulterbuckel","o"],["Amulett",8,"Angus Abzeichen der Dunkelheit","o"],["Schuhe",10,"Sternenstahlstiefel","o"],["Brustplatte",11,"Dunkelmond Brustpanzer","o"],["Gürtel",12,"Dunkelmond Gurt","o"],["Axt","x","schnellste Axt (pref. mit Fähigkeiten)","n"],["Hacke",13,"Stabiler Kornpflücker","g"],["Spitzhacke","x","schnellste Spitzhacke (pref. mit Fähigkeiten)","n"]],
+notes:["Bergbau Ertrag + Holz Ertrag","kein Schmiedezustand, vllt aufwerten auf +5"]},
+mid:{rows:[["Waffe",36,"Der Zeitverzerrer","o"],["Schuhe",51,"Mithril Sabatons","p"],["Brustplatte",53,"Zwergenstahl Plattenpanzer","p"],["Schulter",53,"Mithril Schulterhaube","p"],["Gürtel",54,"Mithril Band","p"],["Handschuhe",54,"Zwergenstahl Plattenhandschuhe","p"],["Hacke",54,"Majestätische Kaktushacke","o"],["Helm",55,"Mithril Kopfschutz","p"],["Amulett",55,"Sternenfeuer Anhänger","p"],["Hose",56,"Mithril Gamaschen","p"],["Ring",56,"Sternenfeuer Ring","p"],["Axt","x","schnellste Axt (pref. mit Fähigkeiten)","n"],["Spitzhacke","x","schnellste Spitzhacke (pref. mit Fähigkeiten)","n"]],
+notes:["Bergbau Ertrag + Holz Ertrag","Full Titangeschmiedet + aufwerten auf +10 - +15"]},
+late:{rows:[["Hacke",75,"Obsidian Hacke","p"],["Waffe",80,"Sturmgesang","p"],["Brustplatte",82,"Nebelwacht Plattenpanzer","o"],["Ring",82,"Kometenband","o"],["Spitzhacke",82,"Der Bergversetzer","o"],["Schuhe",83,"NebelSchreiter","o"],["Hose",83,"Nebelwächter Gamaschen","o"],["Handschuhe",83,"Nebelwächter Stulpen","o"],["Schulter",84,"Nebelwächter Schulterhaube","o"],["Amulett",84,"Kosmischer Anhänger","o"],["Helm",85,"Nebelwächter Helm","o"],["Gürtel",85,"Nebelwacht Schutzband","o"],["Axt",94,"Saphirhacke","b"]],
+notes:["Full Ertrag Set","alles auf Dämon+ + aufwerten"]}
+}},
+amboss:{title:"Amboss / Ofen Set Progression",store:"amb",stages:[["early","Early"],["mid","Mid"],["late","Late"]],data:{
+early:{rows:[["Helm",1,"Drachenschuppen Kriegshelm","o"],["Gürtel",1,"Drachenschuppen Kriegsgürtel","o"],["Schuhe",2,"Göttliche Plattenläufer","o"],["Handschuhe",3,"Drachenschuppen Kriegshandschuhe","o"],["Waffe",3,"Excalibur","p"],["Brustplatte",4,"Drachenschuppen Kriegsbrustplatte","o"],["Schulter",4,"Drachenschuppen Kriegsschultern","o"],["Hose",5,"Drachenschuppen Kriegshosen","o"],["Ring",5,"Drachenblutband","o"],["Amulett",6,"Drachenblutamulett","o"],["Axt",6,"Titanstahl Dschungelholzhacker","p"],["Hacke","x","gibt keine hacke early","n","warn"],["Spitzhacke",7,"Frostfänger Eisenzerstörung","p"]],
+notes:["2x Das Set herstellen","Amboss: Amboss Geschw.% | Amboss Kap%","Ofen: Ofen Effi% | Ofen Speed% → wenn nur 1x Herstellung → Effi% > Speed%","Falls nötig 1-2 Ofen Geschw.% in Ofen Kap%","aufwerten bis +5 - +10 etwa","Andere Stat → Essenz Dropchance bei Amboss Set"]},
+mid:{rows:[["Waffe",36,"Der Zeitverzerrer","o"],["Axt",42,"Rubin Beil","p"],["Hacke",44,"Meeres Furcher","b"],["Helm",48,"Sternenstahl Helmschale","p"],["Gürtel",49,"Sternenstahl Gürtelschutz","p"],["Ring",49,"Band der Sterne","p"],["Handschuhe",50,"Sternenstahl Handrüstung","p"],["Amulett",50,"Halsband der Sterne","p"],["Schulter",51,"Sternenstahl Schulterrüstung","p"],["Schuhe",52,"Stählernde Stiefel des Mutes","p"],["Hose",52,"Sternenstahl Leggings","p"],["Brustplatte",52,"Sternenstahl Brustpanzer","p"],["Spitzhacke",60,"Götterstahl Kohledezimierer","o"]],
+notes:["2x Das Set herstellen","Full Titan Set + aufwerten auf +5 - +15","Essenz Drp. jetzt auf Dropchance Set","Amboss: Amboss Geschw.% | Amboss Kap%","Ofen: Ofen Effi% | Ofen Speed% → wenn nur 1x Herstellung → Effi% > Speed%","Falls nötig 1-2 Ofen Geschw.% in Ofen Kap%","Für Essenz + Amboss in Fabrik → Mix aus Amboss Titan + Dropchance Titan Set"]},
+late:{rows:[["Spitzhacke (max Blitz)",60,"Götterstahl Kohledezimierer","o"],["Waffe",71,"Die Morgenröte","o"],["Axt",72,"Meister Spaltaxt","o"],["Schuhe",74,"Auroras Schritte","o"],["Handschuhe",75,"Himmelsstahl Fingerschützer","p"],["Gürtel",76,"Schattenstahl Gürtelschutz","o"],["Brustplatte",78,"Schattenstahl Brustpanzer","o"],["Helm",79,"Schattenstahl Helmpanzer","o"],["Ring",88,"Ring der scharfen Klinge","p"],["Schulter",90,"Himmelsstahl Schulterplatten","p"],["Hose",94,"Himmelsstahl Beinschienen","p"],["Hacke",94,"Teuflische Kaktushacke","o"],["Amulett",95,"Anhänger der Klinge","p"]],
+notes:["2x Das Set herstellen","Full Titan+ Set + aufwerten","Essenz Drp. wenn man will hier auf andere","Amboss: Amboss Geschw.% | Amboss Kap%","Ofen: Ofen Effi% | Ofen Speed% → wenn nur 1x Herstellung → Effi% > Speed%","Falls nötig 1-2 Ofen Geschw.% in Ofen Kap%"]}
+}},
+drop:{title:"Dropchance / Essenz Set Progression",store:"drp",stages:[["early","Early"],["mid","Mid"],["late","Late"]],data:{
+early:{rows:[["Hose",1,"Rubinrote Kriegshose","p"],["Ring",1,"Ewiges Lichtband","p"],["Schuhe",2,"Göttliche Plattenläufer (Kaskade)","o"],["Schultern",2,"Rubinrote Kriegsschultern","p"],["Amulett",2,"Ewiges Lichtamulett","p"],["Handschuhe",3,"Rubinrote Kriegshandschuhe","p"],["Axt",3,"Blutige Fleischhackeraxt","b"],["Spitzhacke",4,"Rubinstaub Schrammer","b"],["Helm",4,"Rubinroter Kriegshelm","p"],["Brustplatte",5,"Rubinroter Kriegsharnisch","p"],["Gürtel",6,"Rubinroter Kriegsgürtel","p"],["Hacke",6,"Kaktuszermalmer","b"]],
+notes:["1 Stat Dropchance, anderer Essenz Dropchance","minimal aufwerten"]},
+mid:{rows:[["Schulter",40,"Kristalline Schulterpanzer","o"],["Schuhe",41,"Sculkwanderer Plattenschuhe","o"],["Spitzhacke",41,"Spitzhacke des Kaktusmeister","o"],["Ring",43,"Ring der Unsterblichkeit","o"],["Brustplatte",45,"Kristallkürass","o"],["Helm",46,"Kristalliner Helmpanzer","o"],["Axt",46,"Göttliche Pilzfällaxt","o"],["Handschuhe",47,"Kristalline Plattenhandschuhe","o"],["Amulett",47,"Amulett der Unsterblichkeit","o"],["Hose",48,"Kristalline Plattenhose","o"],["Gürtel",48,"Kristallines Schutzband","o"],["Hacke",54,"Der Kaktusernter","o"]],
+notes:["1 Stat Dropchance, anderer Essenz Dropchance","aufwerten auf +10 - +15"]},
+late:{rows:[["Spitzhacke",74,"Göttliche Erzzerstörung","o"],["Hacke",77,"Großer Kaktussporn","o"],["Axt",83,"Donnerfaust Pilzspalteraxt","p"],["Helm",86,"Himmlischer Panzerhelm","o"],["Handschuhe",86,"Himmlische Plattenhandschuhe","o"],["Gürtel",87,"Himmlischer Gürtel","o"],["Amulett",87,"Anhänger des Himmels","o"],["Schuhe",89,"Himmlische Tretter","o"],["Hose",90,"Himmlische Plattenhose","o"],["Ring",90,"Ring des Himmels","o"],["Schulter",91,"Himmlische Schulterplatten","o"],["Brustplatte",92,"Himmlischer Brustharnisch","o"]],
+notes:["1 Stat Dropchance, anderer Essenz Dropchance","aufwerten so weit man möchte"]}
+}},
+endgame:{title:"Seele + Kaktus Endgame Set",store:"end",stages:[["late","Late"]],data:{
+late:{rows:[["Spitzhacke",82,"Der Bergversetzer","o"],["Axt",83,"Donnerfaust Pilzspalteraxt","p"],["Schulter",91,"Himmlische Schulterplatten","o"],["Brust",92,"Himmlischer Brustharnisch","o"],["Schuhe",93,"Donnerknalltretter","o"],["Halskette",95,"Halsband des Meisterschützen","o"],["Waffe",95,"Leichenschnitt","p"],["Ring",95,"Phönixring","o"],["Helm",95,"Ragnaröks Helmdeckung","o"],["Gürtel",95,"Mondsichel Gürtel","p"],["Ring (Alternative)",97,"Ring des Meisterschützen","o"],["Handschuhe",99,"Phönixfeuer Handschützer","o"],["Hose",99,"Phönixfeuer Beinkleid","o"],["Hacke",99,"Götterstahl Erdscharfer","o"]],
+notes:["1x andere zuerst auf EssDrp.","Richtung Ende Season → Erst Switch auf Seele","Als Seelenspieler ab hier Ende","Als Kaktusspieler hier auf jedes Piece Kaktus Ertrag + auf Tools oder wo 2x andere noch 1x Jackpot und Kaktus Glück auf die Rüstung/Tools","ugpraden so viel es geht"]}
+}}
+};
+Object.entries(SETS).forEach(([id,S])=>S.id=id);
+const curSet=()=>SETS[st.prog]||SETS.coin;
+const curStage=S=>{const id=(st.stg&&st.stg[S.id])||(S.id==="coin"&&st.stage);return S.data[id]?id:S.stages[0][0];};
+const ckey=(S,g,r)=>S.legacy?r[0]+"|"+r[1]:g+"|"+r[0]+"|"+r[1];
+function progHtml(S){
+  const g=curStage(S),d=S.data[g],label=S.stages.find(x=>x[0]===g)[1],store=st[S.store]||(st[S.store]={});
+  const n=d.rows.filter(r=>store[ckey(S,g,r)]).length,pct=d.rows.length?n/d.rows.length*100:0;
+  const table=d.rows.length?`<table class="pt"><thead><tr><th class="c"></th><th>Teil</th><th class="ctr">Ebene</th><th>Gegenstandsname</th></tr></thead><tbody>${d.rows.map(r=>{const k=ckey(S,g,r);return `<tr data-c="${k}"${tr_(r[2],r[1])} class="${store[k]?"done":""}"><td class="c"><input type="checkbox" aria-label="${r[2]} erledigt" ${store[k]?"checked":""}></td><td><span class="chip ${r[3]}">${r[0]}</span></td><td class="ctr">${r[1]}</td><td class="e${r[4]?" "+r[4]:""}${tc_(r[2],r[1])}"${ta_(r[2],r[1])}>${r[2]}</td></tr>`;}).join("")}</tbody></table>`:'<div class="empty">Noch keine Einträge.</div>';
+  const notes=d.notes.length?`<aside class="notes"><h3>Notizen</h3><ul>${d.notes.map(t=>`<li>${t}</li>`).join("")}</ul></aside>`:"";
+  return `${S.stages.length>1?`<div class="seg stage" role="group" aria-label="Stadium">${S.stages.map(([id,l])=>`<button type="button" data-stage="${id}" aria-pressed="${id===g}">${l}</button>`).join("")}</div>`:""}
+  <h2 class="ptitle">${S.title} <span>[${label}]</span></h2>
+  <div class="pmeta"><span>${n} / ${d.rows.length} erledigt</span><button class="reset" id="coinReset" type="button">Zurücksetzen</button></div>
+  <div class="bar"><i style="width:${pct}%"></i></div>
+  <p class="hint">Tipp: Mit der Maus über den Gegenstandsnamen fahren, um die Herstellungskosten aus dem Wiki zu sehen.</p>
+  ${table}${notes}`;
+}
+const PROG={};
+Object.entries(SETS).forEach(([k,S])=>PROG[k]={title:S.title,html:()=>progHtml(S)});
+const SWORDS=[["Drachenzahn",1,"-","offhand bis 4 | Main bis 4","p"],["Witwengruß",4,"-","offhand bis 16 | Main bis 10","p"],["Flammenfuror",10,"Ziegelstein [Amboss LVL 10]","Main bis 16","p"],["Blitzzorn",16,"Ziegelstein [Amboss LVL 10]","offhand bis 45 | Main bis 21","o"],["Drachenzorn",21,"Kettenglied [Amboss LVL 15]","Main bis 33","o"],["Anduril",33,"Ziegelstein [Amboss LVL 10]","Main bis 51","o"],["Klinge des Lehrmeisters",45,"Klammer [Amboss LVL 30]","offhand bis 73 | Main bis 73","o"],["Vampirsäbel",73,"Leder [Amboss LVL 20]","Offhand | Main","o"]];
+function swordHtml(){
+  const store=st.swd||(st.swd={}),n=SWORDS.filter(r=>store[r[0]]).length;
+  return `<h2 class="ptitle">Waffen Progression</h2>
+  <div class="pmeta"><span>${n} / ${SWORDS.length} erledigt</span><button class="reset" id="swordReset" type="button">Zurücksetzen</button></div>
+  <div class="bar"><i style="width:${n/SWORDS.length*100}%"></i></div>
+  <p class="hint">Tipp: Mit der Maus über den Gegenstandsnamen fahren, um die Herstellungskosten aus dem Wiki zu sehen.</p>
+  <table class="pt"><thead><tr><th class="c"></th><th>Waffe</th><th class="ctr">Ebene</th><th>Amboss</th><th>Notizen</th></tr></thead><tbody>${SWORDS.map(r=>`<tr data-s="${r[0]}"${tr_(r[0],r[1])} class="${store[r[0]]?"done":""}"><td class="c"><input type="checkbox" aria-label="${r[0]} erledigt" ${store[r[0]]?"checked":""}></td><td class="${tc_(r[0],r[1]).trim()}"${ta_(r[0],r[1])}><span class="chip ${r[4]}">${r[0]}</span></td><td class="ctr">${r[1]}</td><td class="sub">${r[2]}</td><td class="e">${r[3]}</td></tr>`).join("")}</tbody></table>`;
+}
+const ASP=[["Schuhe","Aspekt der Kaskade",2,"Göttliche Plattenläufer","3 - 10% | 5 - 12 Blöcke"],["Handschuhe","Aspekt der Flamme",3,"Drachenschuppen Kriegshandschuhe","10 - 25%",1],["Handschuhe","Aspekt des Blitzes",5,"Fäustlinge der Ahnen","3 - 10% | 2 - 8 Blöcke"],["Schuhe","Aspekt des Meteors",8,"Sabatons der Ahnen","3 - 10% | 5 - 12 Blöcke | 3 - 5 Blöcke"],["Gürtel","Aspekt des Reichtums",10,"Gürtel der Ahnen","10 - 20% | 5 - 10% | 10 - 20 sek"],["Hose","Aspekt der Substanz",11,"Beinkleid der Ahnen","10 - 20% | 5 - 10% | 10 - 20 sek"],["Ring","Aspekt der Gier",12,"Ring der Ahnen","10 - 20% | 5 - 10% | 10 - 20 sek"],["Schwert","Aspekt der Pyrolyse",21,"Drachenzorn","80 - 100% | 2 - 6 Blöcke",1],["Axt","Aspekt des Wirbelwinds",29,"Enthaupter des Gladiators","3 - 10% | 2 - 5 Blöcke"],["Schulter","Aspekt der Raserei",53,"Karmesin Schulterbuckel","3 - 8 | 3 - 5 sek | 5 - 10%"],["Handschuhe","Aspekt der flinken Wut",66,"Arkanstahl Handhaube","1 - 3% | 3 - 10 sek | 1-3"],["Schuhe","Aspekt der Hast",72,"Sternenfeuer Plattenstiefel","1 - 5% | 5 - 10% | 3 - 7 sek"]];
+function aspHtml(){
+  const store=st.asp||(st.asp={}),n=ASP.filter(r=>store[r[1]]).length;
+  return `<h2 class="ptitle">AC Aspekte</h2>
+  <div class="pmeta"><span>${n} / ${ASP.length} erledigt</span><button class="reset" id="aspReset" type="button">Zurücksetzen</button></div>
+  <div class="bar"><i style="width:${n/ASP.length*100}%"></i></div>
+  <p class="hint">Tipp: Mit der Maus über den Gegenstandsnamen fahren, um die Herstellungskosten aus dem Wiki zu sehen.</p>
+  <div class="scroll"><table class="pt asp"><thead><tr><th class="c"></th><th>Teil</th><th>Aspekt</th><th class="ctr">Ebene</th><th>Gegenstandsname</th><th>Range</th></tr></thead><tbody>${ASP.map(r=>`<tr data-a="${r[1]}"${tr_(r[3],r[2])} class="${store[r[1]]?"done":""}"><td class="c"><input type="checkbox" aria-label="${r[1]} erledigt" ${store[r[1]]?"checked":""}></td><td>${r[0]}</td><td class="${r[5]?"warn":""}">${r[1]}</td><td class="ctr">${r[2]}</td><td class="e${tc_(r[3],r[2])}"${ta_(r[3],r[2])}>${r[3]}</td><td>${r[4]}</td></tr>`).join("")}</tbody></table></div>
+  <aside class="callout"><b>Funktioniert nur in Kombination</b>Einzeln funktioniert nur Aspekt der Flamme und ohne viel Nutzen.</aside>`;
+}
+const BP={
+"Waffen":["Laminierter Bogen|35","Marode Kriegsaxt|38","Primitiver Bogen|39","Berstender Holzbogen|41","Küchenmesser|43","Brüchiger Langbogen|45","Knochenarmbrust|46","Zerrissene Sehne|49","Laminierte Armbrust|52","Antike Armbrust|56","Leichte Armbrust|59","Durchnässte Armbrust|62","Beschmierte Armbrust|65","Wolfsgeheul|67","Tannenknacker|69","Moosbedeckter Langbogen|73","Eisenschwert|76","Verstärkter Bogen|77","Primitiver Lehrlingsbogen|79","Morscher Jagdbogen|81","Rostige Klinge|88"],
+"Werkzeuge":["Einfache Hacke|49","Zerfallene Spitzhacke|49","CACTUS_CLICKER.tools.rusty_destroyer|58","Abgenutzte Erdbrecher|84"],
+"Rüstung":["Kette des Schutzes|35","Steintalisman|36","Leichte Lederfäustlinge|40","Enge Plattenschuhe|45","Knappen Kappe|45","Einfache Lederhose|47","Lässiger Lederriemen|47","Zweckmäßige Wildlederstiefel|47","Eckiger Kupferring|48","Plattenbrust|48","Moos Handpelz|49","Natürliche Lederschulterhaube|50","Stahlfußlatschen|50","Weicher Ledergürtel|50","Natürliche Lederhandhaube|51","Natürlicher Ledergurt|51","Struppige Strohhose|51","Abgenutzte Rüstungskappe|52","Abgenutzter Stahlpanzergurt|53","Verbeulte Plattenstiefel|56","Schlammiger Talisman|57","Messingkette|61","Knappen Fingerlinge|63","Leichte Lederrüstung|65","Kupferhelm|66","Schmutzige Erdfäuste|68","Zinnring|68","Hölzerner Kopfschutz|69","Einfaches Gurtband|70","Lederfußlatschen|70","Simpler Gurtstrick|74","Verzierte Schulterplatten|74","Solide Stahlschulter|76","Bronzekette|83","Kupfergeflotenes Amulett|99"]
+};
+const COST={"Abgenutzte Erdbrecher|84":{"l":84,"r":"Gewöhnlich","c":"1.340.187","s":"63,840 bs","k":"1,838 iz","m":["29 Pandafell","29 Snifferborste","90 Obsidian","Kupferplatten"]},"Abgenutzte Rüstungskappe|52":{"l":52,"r":"Gewöhnlich","c":"175.300","s":"6,579 ar","k":"533,920 dx","m":["18 Wässrige Karotte","36 Tinte","44 Pilzholz","Kupferplatten"],"t":"Abgenutze Rüstungskappe"},"Abgenutzter Stahlpanzergurt|53":{"l":53,"r":"Gewöhnlich","c":"189.851","s":"828,691 ar","k":"6,431 eb","m":["36 Weicher Kaninchenpelz","36 Durchstochener Strohut","45 Goldbarren","Stabile Schnur"],"t":"Abgenutzer Stahlpanzergurt"},"Amulett der Unsterblichkeit|47":{"l":47,"r":"Legendär","c":"460.032","s":"509,673 ap","k":"9,885 dr","m":["7 Fledermausflügel","133 Goblinohr","155 Rohes Kupfererz","20 Zahnrad"]},"Anduril|33":{"l":33,"r":"Legendär","c":"108.224","s":"18,557 ah","k":"77,426 cc","m":["55 Weicher Schafsflaum","2 Eselsohr","107 Eichenholz","70 Ziegelstein"]},"Angus Abzeichen der Dunkelheit|8":{"l":8,"r":"Legendär","c":"1.104","s":"2,345 M","k":"3,780 af","m":["49 Eselshaut","98 Pferdehaar","63 Rohes Kupfererz","37 Stoff"]},"Anhänger der Klinge|95":{"l":95,"r":"Episch","c":"6.828.089","s":"67,478 cg","k":"9,549 lo","m":["42 Verblichene Zügel","208 Pilzige Kuhhaut","335 Netherite Schrott","23 Eisenplatten"]},"Anhänger des Himmels|87":{"l":87,"r":"Legendär","c":"6.232.932","s":"375,830 by","k":"2,290 kd","m":["247 Rostiger Hufnagel","12 Edelsteinscherbe","385 Sulfur","98 Kettenglied"]},"Anhänger des Windes|4":{"l":4,"r":"Selten","c":"182","s":"118","k":"8,851 B","m":["51 Weicher Kaninchenpelz","25 Hühnerfuß"]},"Arkanstahl Handhaube|66":{"l":66,"r":"Legendär","c":"1.915.057","s":"37,503 be","k":"35,938 gj","m":["9 Schleimkern","36 Tiefenkoralle","247 Goldbarren","25 Eisenplatten"]},"Auroras Schritte|74":{"l":74,"r":"Legendär","c":"3.116.133","s":"183,167 bl","k":"4,588 hs","m":["202 Fetziger Ravagerpelz","4 Strahlendes Pilzhorn","295 Dschungelholz","27 Eisenplatten"]},"Band der dunklen Herrschaft|7":{"l":7,"r":"Legendär","c":"854","s":"332,507 K","k":"319,626 ad","m":["98 Weicher Kaninchenpelz","98 Schweineborste","62 Eichenholz","64 Spinnfaden"]},"Band der Sterne|49":{"l":49,"r":"Episch","c":"410.345","s":"55,957 aq","k":"61,619 du","m":["2 Verkorkte Seele","5 Edelsteinscherbe","122 Pilzholz","52 Kettenglied"]},"Beinkleid der Ahnen|11":{"l":11,"r":"Legendär","c":"2.322","s":"1,243 B","k":"45,115 aj","m":["5 Lamaknochen","97 Eselshaar","66 Dschungelholz","81 Spinnfaden"]},"Blitzzorn|16":{"l":16,"r":"Legendär","c":"7.180","s":"170,311 T","k":"204,158 ar","m":["97 Wolfshaar","5 Kuhschweif","72 Kohle","33 Ziegelstein"]},"Blutige Fleischhackeraxt|3":{"l":3,"r":"Selten","c":"126","s":"24","k":"4,580 M","m":["3 Hühnerflügel","51 Schweineborste"]},"Blutrünstige Brustplatte|5":{"l":5,"r":"Selten","c":"248","s":"612","k":"23,777 T","m":["25 Kuhklaue","30 Kohle","28 Spinnfaden"]},"Bronzekette|83":{"l":83,"r":"Gewöhnlich","c":"1.273.050","s":"60,406 br","k":"5,613 iu","m":["29 Schädelfragment","29 Erdiger Apfel","89 Kupferbarren","Stabile Schnur"]},"CACTUS_CLICKER.tools.rusty_destroyer|58":{"l":58,"r":"Gewöhnlich","c":"277.254","s":"73,494 av","k":"228,047 es","m":["20 Kuhleder","20 Prächtiges Fuchsfell","51 Eichenholz","Kupferplatten"],"t":"Rostiger Zerstörer"},"Demonischer Gürtel|2":{"l":2,"r":"Selten","c":"76","s":"5","k":"3,295 K","m":["52 Hühnerfeder","52 Weicher Kaninchenpelz"]},"Der Bergversetzer|82":{"l":82,"r":"Legendär","c":"4.834.228","s":"72,261 bt","k":"837,072 jd","m":["229 Schneebrocken","229 Magmatröpfchen","349 Quartz","2 Kupferplatten"]},"Der Kaktusernter|54":{"l":54,"r":"Legendär","c":"821.289","s":"414,075 au","k":"3,647 ep","m":["148 Prächtiges Eselhaar","3 Antike Seele","186 Eisenbarren","4 Stabile Schnur"]},"Der Zeitverzerrer|36":{"l":36,"r":"Legendär","c":"153.804","s":"1,690 aj","k":"49,455 ck","m":["57 Prächtiges Pandafell","116 Eisenbarren","4 Schraube"]},"Die Morgenröte|71":{"l":71,"r":"Legendär","c":"2.612.125","s":"805,465 bi","k":"354,018 he","m":["39 Kampfplakette","39 Prächtiges Schweineohr","277 Rohes Eisenerz","8 Schraube"]},"Donnerfaust Pilzspalteraxt|83":{"l":83,"r":"Episch","c":"3.819.150","s":"72,261 bt","k":"837,072 jd","m":["35 Eisfragment","3 Arkane Hühnerzügel","266 Sulfur","22 Zahnrad"],"t":"Donnerfaust-Pilzspalteraxt"},"Donnerknalltretter|93":{"l":93,"r":"Legendär","c":"8.305.839","s":"26,166 cf","k":"402,849 li","m":["270 Pilzige Kuhhaut","13 Glutkiemen","431 Antiker Schutt","10 Verbessertes Zahnrad"]},"Drachenblutamulett|6":{"l":6,"r":"Legendär","c":"656","s":"50,477 K","k":"37,569 ac","m":["5 Hühnerflügel","99 Pferdehaar","62 Eichenholz","33 Stoff"]},"Drachenblutband|5":{"l":5,"r":"Legendär","c":"496","s":"8,207 K","k":"6,138 ab","m":["50 Kuhklaue","50 Schweineschwanzquaste","62 Kohle","31 Stoff"]},"Drachenschuppen Kriegsbrustplatte|4":{"l":4,"r":"Legendär","c":"364","s":"1,429 K","k":"1,394 aa","m":["2 Schafsmähne","2 Regenbogen-Eierschale"]},"Drachenschuppen Kriegsgürtel|1":{"l":1,"r":"Legendär","c":"60","s":"11","k":"117,903 K","m":["21 Kaninchenschwanz","52 Kaninchenpfote"]},"Drachenschuppen Kriegshandschuhe|3":{"l":3,"r":"Legendär","c":"252","s":"267","k":"440,260 B","m":["2 Kräftiger Schweinehuf","51 Hühnerfuß"]},"Drachenschuppen Kriegshelm|1":{"l":1,"r":"Legendär","c":"60","s":"11","k":"117,903 K","m":["21 Kaninchenschwanz"]},"Drachenschuppen Kriegshosen|5":{"l":5,"r":"Legendär","c":"496","s":"8,207 K","k":"6,138 ab","m":["20 Rosa Schweineohr","2 Kuhhorn","62 Eichenholz","56 Spinnfaden"]},"Drachenschuppen Kriegsschultern|4":{"l":4,"r":"Legendär","c":"364","s":"1,429 K","k":"1,394 aa","m":["20 Rosa Schweineohr","51 Schweineschwanzquaste"]},"Drachenzahn|1":{"l":1,"r":"Episch","c":"45","s":"3","k":"100","m":["16 Kaninchenschwanz","4 Kaninchenohr"]},"Drachenzorn|21":{"l":21,"r":"Legendär","c":"18.759","s":"129,679 ab","k":"3,481 bb","m":["5 Axolotlflosse","2 Magische Allay Überreste","79 Eichenholz","23 Kettenglied"]},"Dunkelmond Brustpanzer|11":{"l":11,"r":"Legendär","c":"2.322","s":"1,243 B","k":"45,115 aj","m":["48 Kamelfell","48 Kuhklaue","66 Kohle","25 Ziegelstein"]},"Dunkelmond Gamaschen|6":{"l":6,"r":"Legendär","c":"656","s":"50,477 K","k":"37,569 ac","m":["5 Schafsglocke","50 Kuhklaue","62 Kohle","33 Stoff"]},"Dunkelmond Gurt|12":{"l":12,"r":"Legendär","c":"2.947","s":"11,544 B","k":"1,992 al","m":["19 Ozelotschwanz","2 Kamelhuf","67 Kohle","86 Spinnfaden"]},"Dunkelmond Helmvisir|6":{"l":6,"r":"Legendär","c":"656","s":"50,477 K","k":"37,569 ac","m":["99 Weicher Kaninchenpelz","20 Schafswolle","62 Kohle","33 Stoff"],"t":"Dunkelmond Helmvisier"},"Dunkelmond Panzerhandbuckel|7":{"l":7,"r":"Legendär","c":"854","s":"332,507 K","k":"319,626 ad","m":["49 Eselshaut","49 Pferdehuf","62 Eichenholz","64 Spinnfaden"]},"Dunkelmond Schulterbuckel|8":{"l":8,"r":"Legendär","c":"1.104","s":"2,345 M","k":"3,780 af","m":["98 Eselshaar","20 Hühnerkralle","63 Rohes Kupfererz","68 Spinnfaden"]},"Eckiger Kupferring|48":{"l":48,"r":"Gewöhnlich","c":"125.529","s":"51,947 ao","k":"683,456 dk","m":["17 Prächtiger Froschschenkel","34 Prächtiges Polarbärhaar","39 Dunkles Eichenholz","Kupferplatten"]},"Einfache Hacke|49":{"l":49,"r":"Gewöhnlich","c":"136.782","s":"4,971 ap","k":"2,204 do","m":["17 Prächtiger Polarbärpelz","17 Weicher Schafsflaum","40 Rohes Eisenerz","Kupferplatten"]},"Eisenschwert|76":{"l":76,"r":"Gewöhnlich","c":"872.996","s":"280,185 bk","k":"140,520 hn","m":["26 Spinnenauge","52 Faden","76 Sulfur","Stabile Schnur"]},"Enge Plattenschuhe|45":{"l":45,"r":"Gewöhnlich","c":"96.029","s":"89,430 am","k":"146,935 db","m":["16 Prächtige Schildkrötenklaue","32 Ozelothaar","36 Rohes Eisenerz","Kupferplatten"]},"Enthaupter des Gladiators|29":{"l":29,"r":"Legendär","c":"64.663","s":"11,834 af","k":"141,614 bs","m":["2 Goldenepfote","105 Zerbröselter Keks","96 Fichtenholz","60 Ziegelstein"]},"Eroberers Schulterpanzer|1":{"l":1,"r":"Selten","c":"30","s":"3","k":"100","m":["52 Weicher Kaninchenpelz","26 Kaninchenpfote"]},"Ewiges Lichtamulett|2":{"l":2,"r":"Episch","c":"114","s":"11","k":"117,903 K","m":["2 Magisches Kaninchenhaar","4 Hühnerflügel"]},"Ewiges Lichtband|1":{"l":1,"r":"Episch","c":"45","s":"3","k":"100","m":["79 Weicher Kaninchenpelz","4 Kaninchenohr"]},"Excalibur|3":{"l":3,"r":"Episch","c":"189","s":"53","k":"193,238 M","m":["15 Hühnerkralle","77 Schweineborste"]},"Fäustlinge der Ahnen|5":{"l":5,"r":"Legendär","c":"496","s":"8,207 K","k":"6,138 ab","m":["100 Hühnerfeder","20 Kaninchenschwanz","62 Eichenholz","56 Spinnfaden"]},"Flammenfuror|10":{"l":10,"r":"Episch","c":"1.365","s":"17,726 M","k":"62,142 ag","m":["4 Kuhschweif","1 Kräftiger Schweinehuf","49 Kohle","17 Ziegelstein"]},"Frostfänger Eisenzerstörung|7":{"l":7,"r":"Episch","c":"641","s":"50,477 K","k":"37,569 ac","m":["15 Pferdemähne","37 Kuhklaue","47 Eichenholz","26 Stoff"],"t":"Frostfänger-Eisenzerstörung"},"Götterstahl Erdscharfer|99":{"l":99,"r":"Legendär","c":"10.878.944","s":"21,544 cm","k":"10 mq","m":["6 Glibberblitz","6 Herz des Titanen","481 Goldbarren","3 Kupferplatten"],"t":"Götterstahl-Erdscharfer"},"Götterstahl Kohledezimierer|60":{"l":60,"r":"Legendär","c":"1.279.428","s":"36,236 az","k":"30,474 fl","m":["162 Schleimball","81 Prächtiges Ozelotfell","215 Goldbarren","138 Ziegelstein"],"t":"Götterstahl-Kohledezimierer"},"Göttliche Erzzerstörung|74":{"l":74,"r":"Legendär","c":"3.116.133","s":"183,167 bl","k":"4,588 hs","m":["101 Zerfetzte Hornspitze","4 Arkane Siegelrolle","295 Rohes Eisenerz","8 Schraube"]},"Göttliche Pilzfällaxt|46":{"l":46,"r":"Legendär","c":"420.743","s":"4,971 ap","k":"2,204 do","m":["131 Schafsflaum","65 Spinnenauge","151 Dunkles Eichenholz","356 Spinnfaden"]},"Göttliche Plattenläufer|2":{"l":2,"r":"Legendär","c":"152","s":"53","k":"193,238 M","m":["5 Kaninchenohr","52 Hühnerfuß"]},"Großer Kaktussporn|77":{"l":77,"r":"Legendär","c":"3.692.642","s":"77,243 bo","k":"1,152 ig","m":["42 Eisfragment","42 Wächterstachel","315 Eisenbarren","51 Gehärteter Ziegelstein"]},"Gürtel der Ahnen|10":{"l":10,"r":"Legendär","c":"1.820","s":"143,461 M","k":"1,420 ai","m":["5 Ozelotzahn","19 Lamaschweif","65 Kupferbarren","23 Ziegelstein"]},"Halsband der Sterne|50":{"l":50,"r":"Episch","c":"446.410","s":"6,579 ar","k":"533,920 dx","m":["21 Kamelknochen","21 Perlmuttfaser","125 Rohes Eisenerz","1 Kupferplatten"]},"Halsband des Meisterschützen|91":{"l":91,"r":"Legendär","c":"7.563.078","s":"4,833 cd","k":"1,925 ky","m":["52 Mächtiger Hauer","262 Prächtiges Polarbärhaar","415 Sulfur","10 Verbessertes Zahnrad"]},"Himmelsstahl Beinschienen|94":{"l":94,"r":"Episch","c":"6.523.395","s":"26,166 cf","k":"402,849 li","m":["205 Prächtige Panzerschuppe","103 Piglinhuf","329 Rohes Gold","2 Kupferplatten"]},"Himmelsstahl Fingerschützer|89":{"l":89,"r":"Episch","c":"5.154.764","s":"642,115 bz","k":"7,525 ki","m":["191 Knochenhuf","4 Hoglinhauer","300 Sulfur","22 Zahnrad"]},"Himmelsstahl Schulterplatten|90":{"l":90,"r":"Episch","c":"5.408.725","s":"1,174 cb","k":"34,369 kn","m":["97 Vex Flügel","39 Vex Klinge","306 Dunkles Eichenholz","23 Eisenplatten"]},"Himmlische Plattenhandschuhe|86":{"l":86,"r":"Legendär","c":"5.930.800","s":"235,598 bx","k":"969,236 jx","m":["243 Schleimball","243 Verrottete Haut","377 Obsidian","304 Stoff"]},"Himmlische Plattenhose|90":{"l":90,"r":"Legendär","c":"7.211.633","s":"2,302 cc","k":"218,194 ks","m":["52 Sattledecke","258 Magmafragment","408 Sulfur","56 Leder"],"t":"himmlische Plattenhose"},"Himmlische Schulterplatten|91":{"l":91,"r":"Legendär","c":"7.563.078","s":"4,833 cd","k":"1,925 ky","m":["52 Hoglinzahn","262 Kaninchenfellfaden","415 Kupferbarren","17 Verstärkte Schraube"]},"Himmlische Tretter|89":{"l":89,"r":"Legendär","c":"6.873.018","s":"1,174 cb","k":"34,369 kn","m":["51 Schleimperle","13 Vex Kristalle","400 Kupferbarren","30 Eisenplatten"]},"Himmlischer Brustharnisch|92":{"l":92,"r":"Legendär","c":"7.927.697","s":"10,867 ce","k":"23,622 ld","m":["133 Faule Kartoffel","133 Wächterflosse","423 Dunkles Eichenholz","178 Ziegelstein"]},"Himmlischer Gürtel|87":{"l":87,"r":"Legendär","c":"6.232.932","s":"375,830 by","k":"2,290 kd","m":["5 Eiskristall","247 Creeperstaub","385 Dunkles Eichenholz","5 Stabile Schnur"]},"Himmlischer Panzerhelm|86":{"l":86,"r":"Legendär","c":"5.930.800","s":"235,598 bx","k":"969,236 jx","m":["49 Dunkle Runenrolle","243 Piglinleder","377 Quartz","304 Stoff"]},"Kaktuszermalmer|6":{"l":6,"r":"Selten","c":"328","s":"3,396 K","k":"88,786 aa","m":["25 Pferdehuf","31 Kohle","29 Spinnfaden"]},"Karmesin Schulterbuckel|53":{"l":53,"r":"Legendär","c":"759.401","s":"2,498 au","k":"81,094 el","m":["73 Brennende Kartoffel","145 Leinenstoff","181 Goldbarren","73 Kettenglied"]},"Kette des Schutzes|35":{"l":35,"r":"Gewöhnlich","c":"34.303","s":"473,122 ag","k":"1,737 ca","m":["14 Prächtiges Fuchsfell","14 Ziegenfell","28 Rohes Eisenerz","Schraube"]},"Klinge des Lehrmeisters|45":{"l":45,"r":"Legendär","c":"384.113","s":"51,947 ao","k":"683,456 dk","m":["65 Prächtiges Ozelotfell","65 Schweineschwanzquaste","147 Eisenbarren","10 Klammer"]},"Knappen Fingerlinge|63":{"l":63,"r":"Gewöhnlich","c":"393.107","s":"36,236 az","k":"30,474 fl","m":["21 Ziegenfell","42 Totemfragment","57 Rohes Gold","Stabile Schnur"]},"Knappen Kappe|45":{"l":45,"r":"Gewöhnlich","c":"96.029","s":"89,430 am","k":"146,935 db","m":["32 Papageifeder","32 Polarbärhaar","36 Rohes Eisenerz","Kupferplatten"]},"Kometenband|82":{"l":82,"r":"Legendär","c":"4.834.228","s":"72,261 bt","k":"837,072 jd","m":["5 Eiskönigsphäre","11 Kriegshorn","349 Obsidian","5 Stabile Schnur"]},"Kosmischer Anhänger|84":{"l":84,"r":"Legendär","c":"5.360.748","s":"113,746 bv","k":"466,125 jn","m":["5 Geist des Feuers","236 Rostiger Hufnagel","363 Obsidian","2 Kupferplatten"]},"Kristalline Plattenhandschuhe|47":{"l":47,"r":"Legendär","c":"460.032","s":"509,673 ap","k":"9,885 dr","m":["7 Edelsteinscherbe","133 Goblinohr","155 Eisenbarren","1 Kupferplatten"]},"Kristalline Plattenhose|48":{"l":48,"r":"Legendär","c":"502.114","s":"55,957 aq","k":"61,619 du","m":["135 Hühnerfeder","27 Prächtiges Schweineohr","159 Dunkles Eichenholz","6 Schraube"]},"Kristalline Schulterpanzer|40":{"l":40,"r":"Legendär","c":"236.405","s":"18,103 al","k":"273,717 cv","m":["60 Prächtiger Ziegenfell","6 Papageikralle","129 Kupferbarren","2 Stabile Schnur"]},"Kristalliner Helmpanzer|46":{"l":46,"r":"Legendär","c":"420.743","s":"4,971 ap","k":"2,204 do","m":["131 Prächtige Froschhaut","26 Goblinherz","151 Pilzholz","63 Kettenglied"]},"Kristallines Schutzband|48":{"l":48,"r":"Legendär","c":"502.114","s":"55,957 aq","k":"61,619 du","m":["135 Prächtiges Wolfshaar","135 Tinte","159 Rohes Eisenerz","68 Kettenglied"],"t":"Kristallenes Schutzband"},"Kristallkürass|45":{"l":45,"r":"Legendär","c":"384.113","s":"51,947 ao","k":"683,456 dk","m":["6 Papageikralle","26 Kaninchenschwanz","147 Pilzholz","1 Kupferplatten"]},"Küchenmesser|43":{"l":43,"r":"Gewöhnlich","c":"79.578","s":"18,103 al","k":"273,717 cv","m":["31 Zerbröselter Keks","16 Prächtiges Fuchsfell","34 Dunkles Eichenholz","Stabile Schnur"]},"Kupfergeflotenes Amulett|99":{"l":99,"r":"Gewöhnlich","c":"2.719.736","s":"551,352 ci","k":"14,416 lz","m":["37 Elder Stachel","37 Alte Schriftrolle","119 Antiker Schutt","Kupferplatten"]},"Leichenschnitt|95":{"l":95,"r":"Episch","c":"6.828.089","s":"67,478 cg","k":"9,549 lo","m":["42 Prächtiger Wolfsschwanz","42 Creeperkopf","335 Eisenbarren","13 Verstärkte Schraube"]},"Majestätische Kaktushacke|54":{"l":54,"r":"Legendär","c":"821.289","s":"414,075 au","k":"3,647 ep","m":["148 Prächtiges Lamahaar","7 Magischer Waffensplitter","186 Goldbarren","Kupferplatten"]},"Marode Kriegsaxt|38":{"l":38,"r":"Gewöhnlich","c":"47.915","s":"35,076 ai","k":"413,104 ch","m":["15 Ozelotfell","15 Prächtiges Axolotlbein","30 Dunkles Eichenholz","Schraube"]},"Meeres Furcher|44":{"l":44,"r":"Selten","c":"175.006","s":"782,597 am","k":"4,886 dd","m":["3 Scharfer Ozelotzahn","64 Prächtiges Wolfshaar","71 Rohes Eisenerz","29 Kettenglied"]},"Meister Spaltaxt|72":{"l":72,"r":"Legendär","c":"2.772.497","s":"459,034 bj","k":"5,982 hj","m":["4 Schleimkristall","98 Verzauberte Axtklinge","283 Rohes Gold","15 Klammer"]},"Messingkette|61":{"l":61,"r":"Gewöhnlich","c":"342.980","s":"620,282 ax","k":"402,187 fd","m":["41 Faden","21 Prächtiger Polarbärpelz","55 Rohes Kupfererz","Stabile Schnur"]},"Mithril Band|54":{"l":54,"r":"Episch","c":"615.967","s":"2,498 au","k":"81,094 el","m":["22 Hühnerschnabel","6 Magischer Waffensplitter","139 Rohes Eisenerz","9 Klammer"]},"Mithril Gamaschen|56":{"l":56,"r":"Episch","c":"717.582","s":"73,494 av","k":"228,047 es","m":["23 Fledermausohr","23 Kampfplakette","146 Goldbarren","32 Leder"]},"Mithril Kopfschutz|55":{"l":55,"r":"Episch","c":"665.269","s":"414,075 au","k":"3,647 ep","m":["56 Hexenkrautbündel","6 Verkorkter Schrei","142 Dunkles Eichenholz","Kupferplatten"]},"Mithril Sabatons|51":{"l":51,"r":"Episch","c":"484.890","s":"828,691 ar","k":"6,431 eb","m":["21 Verstärkter Schafshuf","53 Schädelfragment","129 Rohes Eisenerz","Kupferplatten"]},"Mithril Schulterhaube|53":{"l":53,"r":"Episch","c":"569.551","s":"16,148 at","k":"2,506 ei","m":["55 Verzauberte Axtklinge","109 Tinte","136 Pilzholz","172 Stoff"]},"Mondsichel Gürtel|95":{"l":95,"r":"Episch","c":"6.828.089","s":"67,478 cg","k":"9,549 lo","m":["10 Geisterschattenperle","208 Eisenklumpen","335 Antiker Schutt","7 Verbessertes Zahnrad"]},"NebelSchreiter|83":{"l":83,"r":"Legendär","c":"5.092.200","s":"87,603 bu","k":"529,797 ji","m":["46 Glühende Asche","5 Nephthys Schleier","356 Obsidian","9 Schraube"]},"Nebelwacht Plattenpanzer|82":{"l":82,"r":"Legendär","c":"4.834.228","s":"72,261 bt","k":"837,072 jd","m":["11 Giftzahn","114 Sprengpulver","349 Obsidian","28 Eisenplatten"]},"Nebelwacht Schutzband|85":{"l":85,"r":"Legendär","c":"5.640.178","s":"158,181 bw","k":"570,089 js","m":["12 Frostschattenkristall","5 Zoglinhauer","370 Obsidian","17 Verstärkte Schraube"]},"Nebelwächter Gamaschen|83":{"l":83,"r":"Legendär","c":"5.092.200","s":"87,603 bu","k":"529,797 ji","m":["5 Ghastkern","116 Großer Zahn","356 Rohes Kupfererz","53 Gehärteter Ziegelstein"]},"Nebelwächter Helm|85":{"l":85,"r":"Legendär","c":"5.640.178","s":"158,181 bw","k":"570,089 js","m":["48 Prachtvoller Ozelotschwanz","12 Lohenauge","370 Sulfur","29 Eisenplatten"]},"Nebelwächter Schulterhaube|84":{"l":84,"r":"Legendär","c":"5.360.748","s":"113,746 bv","k":"466,125 jn","m":["47 Wasser Umwobener Rüstungssplitter","12 Silberfischgräte","363 Obsidian","5 Stabile Schnur"]},"Nebelwächter Stulpen|83":{"l":83,"r":"Legendär","c":"5.092.200","s":"87,603 bu","k":"529,797 ji","m":["116 Prächtige Schildkrötenklaue","46 Piglinhauer","356 Dunkles Eichenholz","9 Schraube"]},"Obsidian Hacke|75":{"l":75,"r":"Episch","c":"2.474.927","s":"183,167 bl","k":"4,588 hs","m":["154 Totemfragment","154 Moosiger Pelz","226 Dunkles Eichenholz","20 Eisenplatten"]},"Panzerbrecher|2":{"l":2,"r":"Episch","c":"114","s":"11","k":"117,903 K","m":["78 Weicher Kaninchenpelz","39 Hühnerfuß"]},"Phönixfeuer Beinkleid|99":{"l":99,"r":"Legendär","c":"10.878.944","s":"21,544 cm","k":"10 mq","m":["6 Herz des Titanen","294 Magmafragment","481 Quartz","59 Gehärteter Ziegelstein"],"t":"PhönixFeder Beinkleid"},"Phönixfeuer Handschützer|99":{"l":99,"r":"Legendär","c":"10.878.944","s":"21,544 cm","k":"10 mq","m":["15 Hühnerflügel","6 Schleimiges Herz","481 Quartz","10 Verbessertes Zahnrad"]},"Phönixring|95":{"l":95,"r":"Legendär","c":"9.104.119","s":"186,379 ch","k":"314,708 lt","m":["56 Snifferhuf","278 Leuchtende Schuppe","447 Karmesinholz","32 Zahnrad"]},"Plattenbrust|48":{"l":48,"r":"Gewöhnlich","c":"125.529","s":"51,947 ao","k":"683,456 dk","m":["34 Zombie Überreste","34 Wollfaden","39 Rohes Eisenerz","Kupferplatten"]},"Ragnaröks Helmdeckung|95":{"l":95,"r":"Legendär","c":"9.104.119","s":"186,379 ch","k":"314,708 lt","m":["278 Schweinehuf","139 Kuhleder","447 Netherite Schrott","17 Verstärkte Schraube"]},"Ring der Ahnen|12":{"l":12,"r":"Legendär","c":"2.947","s":"11,544 B","k":"1,992 al","m":["5 Ozelotzahn","5 Fuchspfote","67 Kupferbarren","86 Spinnfaden"]},"Ring der scharfen Klinge|88":{"l":88,"r":"Episch","c":"4.910.172","s":"375,830 by","k":"2,290 kd","m":["4 Giftiger Bienenstachel","188 Geladene Haut","294 Rohes Gold","6 Verbessertes Zahnrad"]},"Ring der Unsterblichkeit|43":{"l":43,"r":"Legendär","c":"318.309","s":"6,966 an","k":"176,444 de","m":["63 Eselschweif","63 Fledermausklaue","140 Rohes Eisenerz","57 Kettenglied"]},"Ring des Himmels|90":{"l":90,"r":"Legendär","c":"7.211.633","s":"2,302 cc","k":"218,194 ks","m":["129 Hühnerfuß","258 Prächtiges Lamahaar","408 Rohes Gold","31 Zahnrad"]},"Ring des Meisterschützen|97":{"l":97,"r":"Legendär","c":"9.960.822","s":"1,746 ck","k":"918,038 me","m":["286 Riesige Schleimhaut","286 Klebriger Faden","464 Netherite Schrott","10 Verbessertes Zahnrad"]},"Rostige Klinge|88":{"l":88,"r":"Gewöhnlich","c":"1.636.724","s":"158,181 bw","k":"570,089 js","m":["63 Piglinleder","63 Klebriger Schleimball","97 Sulfur","Kupferplatten"]},"Rubin Beil|42":{"l":42,"r":"Episch","c":"216.665","s":"1,229 am","k":"170,094 cy","m":["19 Prächtiger Bienenwachs","5 Steinhuf","102 Dunkles Eichenholz","Stabile Schnur"]},"Rubinrote Kriegshandschuhe|3":{"l":3,"r":"Episch","c":"189","s":"53","k":"193,238 M","m":["38 Schweineschwanzquaste","38 Hühnerfuß"]},"Rubinrote Kriegshose|1":{"l":1,"r":"Episch","c":"45","s":"3","k":"100","m":["39 Kaninchenpfote","4 Kaninchenohr"]},"Rubinrote Kriegsschultern|2":{"l":2,"r":"Episch","c":"114","s":"11","k":"117,903 K","m":["78 Hühnerfeder","16 Kaninchenschwanz"]},"Rubinroter Kriegsgürtel|6":{"l":6,"r":"Episch","c":"492","s":"8,207 K","k":"6,138 ab","m":["37 Schafshuf","4 Schweine Rippe","46 Eichenholz","25 Stoff"]},"Rubinroter Kriegsharnisch|5":{"l":5,"r":"Episch","c":"372","s":"1,429 K","k":"1,394 aa","m":["75 Schweineborste","75 Wollfaden","46 Eichenholz","23 Stoff"]},"Rubinroter Kriegshelm|4":{"l":4,"r":"Episch","c":"273","s":"267","k":"440,260 B","m":["76 Schweineborste"]},"Rubinstaub Schrammer|4":{"l":4,"r":"Selten","c":"182","s":"118","k":"8,851 B","m":["25 Hühnerfuß","10 Kaninchenschwanz"]},"Sabatons der Ahnen|8":{"l":8,"r":"Legendär","c":"1.104","s":"2,345 M","k":"3,780 af","m":["2 Dekorierte Decke","49 Kuhklaue","63 Rohes Kupfererz","68 Spinnfaden"]},"Saphirhacke|94":{"l":94,"r":"Selten","c":"4.348.930","s":"528,687 ce","k":"2,960 lg","m":["7 Leuchtende Haut","7 Vortex-Kristall","219 Dschungelholz","8 Klammer"],"t":"Saphir Hacke"},"Schattenstahl Brustpanzer|78":{"l":78,"r":"Legendär","c":"3.902.148","s":"66,445 bp","k":"140,553 ik","m":["11 Zoglinhuf","11 Prachvoller Lamaschweif","321 Eisenbarren","5 Stabile Schnur"]},"Schattenstahl Gürtelschutz|76":{"l":76,"r":"Legendär","c":"3.491.983","s":"96,173 bn","k":"13,141 ib","m":["104 Piglinhuf","4 Phantomherz","308 Quartz","15 Klammer"]},"Schattenstahl Helmpanzer|79":{"l":79,"r":"Legendär","c":"4.120.777","s":"61,217 bq","k":"23,823 ip","m":["4 Silberfischflosse","11 Arkane Pilzsporen","328 Obsidian","28 Zahnrad"]},"Schlammiger Talisman|57":{"l":57,"r":"Gewöhnlich","c":"257.679","s":"414,075 au","k":"3,647 ep","m":["19 Prächtige Feder","39 Prächtiges Fuchshaar","50 Rohes Gold","Kupferplatten"]},"Sculkwanderer Plattenschuhe|41":{"l":41,"r":"Legendär","c":"261.624","s":"1,229 am","k":"170,094 cy","m":["61 Eselschweif","24 Fledermausohr","132 Kupferbarren","2 Stabile Schnur"]},"Solide Stahlschulter|76":{"l":76,"r":"Gewöhnlich","c":"872.996","s":"280,185 bk","k":"140,520 hn","m":["52 Chitin","26 Verstärkter Lederflicken","76 Sulfur","Kupferplatten"],"t":"Solide Stahlschultern"},"Spitzhacke des Kaktusmeister|41":{"l":41,"r":"Legendär","c":"261.624","s":"1,229 am","k":"170,094 cy","m":["61 Prächtige Schildkrötenklaue","61 Prächtiges Ozelotfell","132 Eisenbarren","167 Stoff"]},"Stabiler Kornpflücker|13":{"l":13,"r":"Ungewöhnlich","c":"1.395","s":"1,243 B","k":"45,115 aj","m":["18 Ozelotfell","36 Kamelhaar","25 Kupferbarren","10 Ziegelstein"]},"Stählernde Sabatons|1":{"l":1,"r":"Selten","c":"30","s":"3","k":"100","m":["26 Kaninchenpfote"]},"Stählernde Stiefel des Mutes|52":{"l":52,"r":"Episch","c":"525.899","s":"111,779 as","k":"107,681 ee","m":["5 Schweine Rippe","2 Ebisus Pranke","132 Dschungelholz","5 Schraube"]},"Steintalisman|36":{"l":36,"r":"Gewöhnlich","c":"38.451","s":"18,557 ah","k":"77,426 cc","m":["29 Große Feder","29 Kaninchenfellfaden","28 Dschungelholz","Schraube"]},"Sternenfeuer Anhänger|55":{"l":55,"r":"Episch","c":"665.269","s":"414,075 au","k":"3,647 ep","m":["2 Fuchsschwanz","2 Arkane Siegelrolle","142 Rohes Gold","3 Stabile Schnur"],"t":"Sternenfeuer-Anhänger"},"Sternenfeuer Plattenstiefel|72":{"l":72,"r":"Legendär","c":"2.772.497","s":"459,034 bj","k":"5,982 hj","m":["10 Glühender Waffensplitter","10 Ziegenhuf","283 Goldbarren","2 Kupferplatten"]},"Sternenfeuer Ring|56":{"l":56,"r":"Episch","c":"717.582","s":"73,494 av","k":"228,047 es","m":["6 Magische Waffenklinge","57 Lamafell","146 Goldbarren","32 Gehärteter Ziegelstein"],"t":"Sternenfeuer-Ring"},"Sternenstahl Brustpanzer|52":{"l":52,"r":"Episch","c":"525.899","s":"111,779 as","k":"107,681 ee","m":["5 Scharfer Polarbärzahn","2 Huf des Osiris","132 Goldbarren","170 Stoff"]},"Sternenstahl Gürtelschutz|49":{"l":49,"r":"Episch","c":"410.345","s":"55,957 aq","k":"61,619 du","m":["103 Faden","103 Prächtige Axolotlhaut","122 Pilzholz","8 Klammer"]},"Sternenstahl Handrüstung|50":{"l":50,"r":"Episch","c":"446.410","s":"6,579 ar","k":"533,920 dx","m":["5 Hühnerkamm","52 Frische Kartoffel","125 Kohle","5 Schraube"]},"Sternenstahl Helmschale|48":{"l":48,"r":"Episch","c":"376.585","s":"509,673 ap","k":"9,885 dr","m":["2 Papageischnabel","2 Geist des Feuers","119 Eichenholz","1 Kupferplatten"]},"Sternenstahl Leggings|52":{"l":52,"r":"Episch","c":"525.899","s":"111,779 as","k":"107,681 ee","m":["107 Tinte","107 Chitin","132 Eichenholz","17 Zahnrad"]},"Sternenstahl Schulterrüstung|51":{"l":51,"r":"Episch","c":"484.890","s":"828,691 ar","k":"6,431 eb","m":["53 Faule Kartoffel","2 Antike Seele","129 Goldbarren","1 Kupferplatten"]},"Sternenstahlstiefel|10":{"l":10,"r":"Legendär","c":"1.820","s":"143,461 M","k":"1,420 ai","m":["97 Wollfaden","5 Lamaknochen","65 Dschungelholz","23 Ziegelstein"]},"Sturmgesang|80":{"l":80,"r":"Episch","c":"3.261.607","s":"61,217 bq","k":"23,823 ip","m":["3 Eisige Pranke","3 Flammenkristall","251 Rohes Kupfererz","11 Verstärkte Schraube"]},"Tannenknacker|69":{"l":69,"r":"Gewöhnlich","c":"578.262","s":"37,503 be","k":"35,938 gj","m":["47 Rostiger Hufnagel","23 Wächterflosse","66 Bambus","Kupferplatten"]},"Teuflische Kaktushacke|94":{"l":94,"r":"Legendär","c":"8.697.859","s":"67,478 cg","k":"9,549 lo","m":["5 Poseidons Zacken","5 Herz der Tiefsee","439 Kupferbarren","57 Gehärteter Ziegelstein"]},"Titanstahl Dschungelholzhacker|6":{"l":6,"r":"Episch","c":"492","s":"8,207 K","k":"6,138 ab","m":["74 Pferdehaar","15 Kuhknochen","46 Kohle","45 Spinnfaden"],"t":"Titanstahl-Dschungelholzhacker"},"Vampirsäbel|73":{"l":73,"r":"Legendär","c":"2.940.417","s":"280,185 bk","k":"140,520 hn","m":["4 Arkane Hühnerzügel","199 Kräftiger Spinnenfaden","289 Pilzholz","49 Leder"]},"Verbeulte Plattenstiefel|56":{"l":56,"r":"Gewöhnlich","c":"239.194","s":"2,498 au","k":"81,094 el","m":["38 Große Feder","38 Prächtiges Fuchshaar","48 Eisenbarren","Kupferplatten"]},"Verzierte Schulterplatten|74":{"l":74,"r":"Gewöhnlich","c":"779.034","s":"805,465 bi","k":"354,018 he","m":["25 Verwelkte Blume","25 Glibbrige Haut","73 Sulfur","Stabile Schnur"]},"Witwengruß|4":{"l":4,"r":"Episch","c":"273","s":"267","k":"440,260 B","m":["15 Schafswolle"]},"Wurzelring des Lebens|38":{"l":38,"r":"Legendär","c":"191.660","s":"4,822 ak","k":"1,903 cq","m":["59 Eselschweif","6 Prächtiger Eselschweif","122 Dunkles Eichenholz","8 Klammer"]},"Zerfallene Spitzhacke|49":{"l":49,"r":"Gewöhnlich","c":"136.782","s":"4,971 ap","k":"2,204 do","m":["34 Prächtiges Wolfshaar","17 Kuhleder","40 Eichenholz","Stabile Schnur"]},"Zinnring|68":{"l":68,"r":"Gewöhnlich","c":"543.466","s":"99,330 bd","k":"15,346 gf","m":["23 Hexenkrautbündel","46 Leinenstoff","64 Rohes Kupfererz","Kupferplatten"]},"Zirkonband|3":{"l":3,"r":"Ungewöhnlich","c":"95","s":"11","k":"117,903 K","m":["19 Hühnerfuß","8 Rosa Schweineohr"]},"Zwergenstahl Plattenhandschuhe|54":{"l":54,"r":"Episch","c":"615.967","s":"2,498 au","k":"81,094 el","m":["2 Giftiger Bienenstachel","6 Kaninchenzahn","139 Rohes Gold","56 Kettenglied"]},"Zwergenstahl Plattenpanzer|53":{"l":53,"r":"Episch","c":"569.551","s":"16,148 at","k":"2,506 ei","m":["5 Magische Felsspitze","22 Plattenspieler","136 Pilzholz","17 Zahnrad"]}};
+const COSTN={};Object.keys(COST).forEach(k=>{const n=k.split("|")[0];(COSTN[n]=COSTN[n]||[]).push(COST[k]);});
+function costFor(n,l){n=String(n).replace(/ \(.*\)$/,"");return COST[n+"|"+l]||(COSTN[n]&&COSTN[n].length===1?COSTN[n][0]:null);}
+const tipKey=(n,l)=>String(n).replace(/ \(.*\)$/,"")+"|"+l;
+const tr_=(n,l)=>costFor(n,l)?` data-tip="${tipKey(n,l)}"`:"";
+const tc_=(n,l)=>costFor(n,l)?" hastip":"";
+const ta_=(n,l)=>costFor(n,l)?' tabindex="0"':"";
+function bpSection(name){
+  const list=BP[name];
+  return `<section><h2>${name} <span>${list.length}</span></h2><div class="scroll"><table class="ro"><thead><tr><th>Name</th><th class="ctr">Ebene</th></tr></thead><tbody>${list.map(r=>{const [n,l]=r.split("|");return `<tr><td>${n}</td><td class="ctr">${l}</td></tr>`;}).join("")}</tbody></table></div></section>`;
+}
+function bpHtml(){
+  return `<div class="bp"><div>${bpSection("Waffen")}${bpSection("Werkzeuge")}</div><div>${bpSection("Rüstung")}</div></div>`;
+}
+const tip=document.getElementById("tip");
+function tipHtml(key){
+  const [n,l]=key.split("|"),c=costFor(n,l),mats=c.m.map(x=>/^\d/.test(x)?`<li>${x}</li>`:`<li>${x} <span class="muted">(Menge nicht angegeben)</span></li>`).join("");
+  return `<strong>${c.t||n}</strong><div class="tmeta">Ebene ${c.l} · ${c.r}</div><dl><dt>Coins</dt><dd>${c.c}</dd><dt>Seelen</dt><dd>${c.s}</dd><dt>Kaktus</dt><dd>${c.k}</dd></dl><ul>${mats}</ul><div class="tmeta">Quelle: PlayLegend Wiki</div>`;
+}
+function moveTip(x,y){
+  const w=tip.offsetWidth,h=tip.offsetHeight,W=window.innerWidth||1000,H=window.innerHeight||800;
+  let l=x+16,t=y+16;if(l+w>W-8)l=Math.max(8,x-w-16);if(t+h>H-8)t=Math.max(8,y-h-16);
+  tip.style.left=l+"px";tip.style.top=t+"px";
+}
+function showTip(n,x,y){const kk=n.split("|");if(!costFor(kk[0],kk[1]))return;tip.innerHTML=tipHtml(n);tip.dataset.n=n;tip.hidden=false;moveTip(x,y);}
+function hideTip(){tip.hidden=true;tip.dataset.n="";}
+const touchOnly=()=>window.matchMedia&&window.matchMedia("(hover:none)").matches;
+out.addEventListener("mouseover",e=>{if(touchOnly())return;const r=e.target.closest("tr[data-tip]");if(r)showTip(r.dataset.tip,e.clientX,e.clientY);});
+out.addEventListener("mousemove",e=>{if(!tip.hidden&&!touchOnly())moveTip(e.clientX,e.clientY);});
+out.addEventListener("mouseout",e=>{const r=e.target.closest("tr[data-tip]");if(r&&!r.contains(e.relatedTarget))hideTip();});
+out.addEventListener("focusin",e=>{const c=e.target.closest("td.hastip");if(c){const b=c.getBoundingClientRect();showTip(c.closest("tr").dataset.tip,b.left,b.bottom-8);}});
+out.addEventListener("focusout",e=>{if(e.target.closest&&e.target.closest("td.hastip"))hideTip();});
+out.addEventListener("click",e=>{
+  if(!touchOnly())return;
+  const r=e.target.closest("tr[data-tip]");
+  if(!r||tip.dataset.n===r.dataset.tip){hideTip();return;}
+  showTip(r.dataset.tip,e.clientX,e.clientY);
+});
+function listHtml(){
+  return '<table class="ro"><thead><tr><th class="n">Level</th><th class="nc">Menge</th><th>Essenz</th><th class="n">Welle</th></tr></thead><tbody>'+
+    SEQ.map((k,i)=>{const m=k.match(/^(.*?)(\d+)$/);
+      return `<tr><td class="n">${i+2}</td><td class="nc">${fmt((i+3)*1000)}</td><td>${m[1]} T${m[2]}</td><td class="n">${WAVE[k]}</td></tr>`;}).join("")+'</tbody></table>';
+}
+function render(){
+  build();
+  hideTip();
+  document.getElementById("checkHead").hidden=st.tab!=="check";
+  document.getElementById("progHead").hidden=st.tab!=="prog";
+  document.getElementById("tList").setAttribute("aria-selected",st.tab==="list");
+  document.getElementById("tCheck").setAttribute("aria-selected",st.tab==="check");
+  document.getElementById("tProg").setAttribute("aria-selected",st.tab==="prog");
+  document.getElementById("tSword").setAttribute("aria-selected",st.tab==="sword");
+  document.getElementById("tAsp").setAttribute("aria-selected",st.tab==="asp");
+  document.getElementById("tBp").setAttribute("aria-selected",st.tab==="bp");
+  if(st.tab==="list"){out.innerHTML=listHtml();return;}
+  if(st.tab==="sword"){out.innerHTML=swordHtml();return;}
+  if(st.tab==="asp"){out.innerHTML=aspHtml();return;}
+  if(st.tab==="bp"){out.innerHTML=bpHtml();return;}
+  if(st.tab==="prog"){
+    const sel=document.getElementById("progSel");
+    if(!sel.options.length)Object.entries(PROG).forEach(([k,v])=>sel.add(new Option(v.title,k)));
+    sel.value=st.prog;
+    out.innerHTML=(PROG[st.prog]||PROG.coin).html();return;
+  }
+  document.getElementById("vTier").setAttribute("aria-pressed",st.view==="tier");
+  document.getElementById("vAmt").setAttribute("aria-pressed",st.view==="amt");
+  document.getElementById("hide").checked=st.hide;
+  const ni=document.getElementById("n");if(document.activeElement!==ni)ni.value=st.n;
+  const wi=document.getElementById("w");if(document.activeElement!==wi)wi.value=st.w||"";
+  const li=document.getElementById("l");if(document.activeElement!==li)li.value=st.l||"";
+
+  const V=DATA.filter(okW);
+  const all=V.reduce((s,d)=>s+d.amt,0)*st.n;
+  const done=V.filter(isDone);
+  const doneSum=V.reduce((s,d)=>s+prog(d),0);
+  document.getElementById("allAmt").textContent=fmt(all);
+  document.getElementById("doneAmt").textContent=fmt(doneSum);
+  document.getElementById("doneCnt").textContent=done.length+" / "+V.length+" · "+Math.round(all?doneSum/all*100:0)+" %";
+  document.getElementById("fill").style.width=(all?doneSum/all*100:0)+"%";
+
+  if(st.view==="amt"){
+    out.innerHTML=rows(DATA.filter(okW).sort((a,b)=>a.amt-b.amt||a.tier-b.tier||a.name.localeCompare(b.name)));
+  }else{
+    let h="";
+    for(let t=1;t<=12;t++){
+      const list=DATA.filter(d=>d.tier===t&&okW(d)).sort(byAmt);
+      if(!list.length)continue;
+      const sum=list.reduce((s,d)=>s+d.amt,0)*st.n;
+      const ds=list.reduce((s,d)=>s+prog(d),0);
+      h+=`<section style="--c:var(--t${(t-1)%6+1})"><div class="tierhead"><h2>Tier ${t}</h2><span>${fmt(ds)} / ${fmt(sum)}</span></div>${rows(list)}</section>`;
+    }
+    out.innerHTML=h;
+  }
+}
+
+function toggle(k){
+  if(st.done[k])delete st.done[k];else st.done[k]=true;
+  save();render();
+}
+out.addEventListener("click",e=>{
+  const ar=e.target.closest("tr[data-a]");
+  if(ar){const k=ar.dataset.a,store=st.asp||(st.asp={});if(store[k])delete store[k];else store[k]=true;save();render();return;}
+  if(e.target.id==="aspReset"){if(confirm("Alle Häkchen der AC Aspekte zurücksetzen?")){st.asp={};save();render();}return;}
+  const sr=e.target.closest("tr[data-s]");
+  if(sr){const k=sr.dataset.s,store=st.swd||(st.swd={});if(store[k])delete store[k];else store[k]=true;save();render();return;}
+  if(e.target.id==="swordReset"){if(confirm("Alle Häkchen der Waffen Progression zurücksetzen?")){st.swd={};save();render();}return;}
+  const S=curSet();
+  const sb=e.target.closest("[data-stage]");
+  if(sb){st.stg=st.stg||{};st.stg[S.id]=sb.dataset.stage;save();render();return;}
+  const cr=e.target.closest("tr[data-c]");
+  if(cr){const k=cr.dataset.c,store=st[S.store]||(st[S.store]={});if(store[k])delete store[k];else store[k]=true;save();render();return;}
+  if(e.target.id==="coinReset"){const g=curStage(S),store=st[S.store]||(st[S.store]={});if(confirm("Alle Häkchen dieses Stadiums zurücksetzen?")){S.data[g].rows.forEach(r=>delete store[ckey(S,g,r)]);save();render();}return;}
+  const tr=e.target.closest("tr[data-k]");
+  if(!tr)return;
+  if(e.target.tagName==="INPUT"){toggle(tr.dataset.k);return;}
+  toggle(tr.dataset.k);
+});
+document.getElementById("tBp").onclick=()=>{st.tab="bp";save();render();window.scrollTo(0,0);};
+document.getElementById("tAsp").onclick=()=>{st.tab="asp";save();render();window.scrollTo(0,0);};
+document.getElementById("tSword").onclick=()=>{st.tab="sword";save();render();window.scrollTo(0,0);};
+document.getElementById("tProg").onclick=()=>{st.tab="prog";save();render();window.scrollTo(0,0);};
+document.getElementById("progSel").onchange=e=>{st.prog=e.target.value;save();render();};
+document.getElementById("tList").onclick=()=>{st.tab="list";save();render();window.scrollTo(0,0);};
+document.getElementById("tCheck").onclick=()=>{st.tab="check";save();render();window.scrollTo(0,0);};
+document.getElementById("vTier").onclick=()=>{st.view="tier";save();render();};
+document.getElementById("vAmt").onclick=()=>{st.view="amt";save();render();};
+document.getElementById("l").oninput=e=>{const v=Math.floor(+e.target.value);st.l=v>=2?Math.min(v,336):null;save();render();};
+document.getElementById("w").oninput=e=>{const v=Math.floor(+e.target.value);st.w=v>0?v:null;save();render();};
+document.getElementById("n").oninput=e=>{const v=Math.floor(+e.target.value);if(v>=1){st.n=Math.min(v,9999);save();render();}};
+document.getElementById("hide").onchange=e=>{st.hide=e.target.checked;save();render();};
+document.getElementById("reset").onclick=()=>{
+  if(confirm("Alle Häkchen zurücksetzen?")){st.done={};save();render();}
+};
+render();
+</script>
+</body>
+</html>
