@@ -99,6 +99,17 @@ tbody tr.done td.e{text-decoration:line-through}
 input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent);cursor:pointer;margin:0;vertical-align:middle}
 .tag{display:inline-block;min-width:2.2em;text-align:center;font-size:.78rem;font-weight:700;color:#fff;border-radius:5px;padding:1px 6px;margin-left:8px;background:var(--c)}
 .empty{padding:18px;text-align:center;color:var(--muted)}
+.lsub{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:0 0 14px}
+.planbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:0 0 12px}
+table.plan td{vertical-align:top}
+table.plan td.miss{color:#e5484d;font-weight:600}
+table.plan td.muted{color:var(--muted)}
+table.plan tr.future{opacity:.5}
+table.plan tr.now td{background:color-mix(in srgb,var(--accent) 16%,transparent)}
+.here{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:999px;font-size:.75rem;font-weight:700;background:var(--accent);color:var(--accent-ink);white-space:nowrap}
+.notice{margin:0 0 14px;padding:10px 14px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;background:var(--surface);font-size:.92rem}
+table.plan .mob{cursor:help;text-decoration:underline dotted;text-underline-offset:3px}
+table.plan .mob:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
 </style>
 </head>
 <body>
@@ -146,7 +157,7 @@ function build(){
 }
 
 const KEY="essenzen-tracker-v2";
-let st={done:{},view:"tier",hide:false,n:1,w:null,l:null,f:null,tab:"check",prog:"coin",coin:{},skl:{},swd:{},asp:{},stg:{},stage:"early"};
+let st={done:{},view:"tier",hide:false,n:1,w:null,l:null,f:null,lsub:"list",tab:"check",prog:"coin",coin:{},skl:{},swd:{},asp:{},stg:{},stage:"early"};
 try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.done)st={...st,...s};}catch(e){}
 if(!(st.n>=1))st.n=1;
 function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
@@ -276,17 +287,30 @@ function moveTip(x,y){
   let l=x+16,t=y+16;if(l+w>W-8)l=Math.max(8,x-w-16);if(t+h>H-8)t=Math.max(8,y-h-16);
   tip.style.left=l+"px";tip.style.top=t+"px";
 }
-function showTip(n,x,y){const kk=n.split("|");if(!costFor(kk[0],kk[1]))return;tip.innerHTML=tipHtml(n);tip.dataset.n=n;tip.hidden=false;moveTip(x,y);}
+const MOBALIAS={Skeleton:"Skelett",Schneeman:"Schneemann",Wither:"Witherskelett",Blaze:"Lohe","Hühner":"Huhn"};
+function mobInfo(label){
+  const m=/^(.*?)\s*T(\d+)$/.exec(label.trim());if(!m)return null;
+  const name=MOBALIAS[m[1]]||m[1],tier=+m[2],w=WAVE[name+tier];
+  const others=Object.keys(WAVE).map(k=>k.match(/^(.*?)(\d+)$/)).filter(x=>x&&x[1]===name).map(x=>({t:+x[2],w:WAVE[x[0]]})).sort((a,b)=>a.t-b.t);
+  return {label:label.trim(),name,tier,w,others};
+}
+function mobTipHtml(label){
+  const i=mobInfo(label);if(!i)return "";
+  if(i.w)return `<strong>${i.label}</strong><div class="tmeta">Beste Welle für diese Essenz</div><dl><dt>Welle</dt><dd>${i.w}</dd></dl>`;
+  const alt=i.others.length?`Vorhanden: ${i.others.map(o=>"T"+o.t+" (Welle "+o.w+")").join(", ")}`:"Keine Welle hinterlegt.";
+  return `<strong>${i.label}</strong><div class="tmeta">Diese Essenz steht nicht in der Essenzliste.</div><div class="tmeta">${alt}</div>`;
+}
+function showTip(n,x,y){if(n.startsWith("mob:")){const h=mobTipHtml(n.slice(4));if(!h)return;tip.innerHTML=h;tip.dataset.n=n;tip.hidden=false;moveTip(x,y);return;}const kk=n.split("|");if(!costFor(kk[0],kk[1]))return;tip.innerHTML=tipHtml(n);tip.dataset.n=n;tip.hidden=false;moveTip(x,y);}
 function hideTip(){tip.hidden=true;tip.dataset.n="";}
 const touchOnly=()=>window.matchMedia&&window.matchMedia("(hover:none)").matches;
-out.addEventListener("mouseover",e=>{if(touchOnly())return;const r=e.target.closest("tr[data-tip]");if(r)showTip(r.dataset.tip,e.clientX,e.clientY);});
+out.addEventListener("mouseover",e=>{if(touchOnly())return;const r=e.target.closest("[data-tip]");if(r)showTip(r.dataset.tip,e.clientX,e.clientY);});
 out.addEventListener("mousemove",e=>{if(!tip.hidden&&!touchOnly())moveTip(e.clientX,e.clientY);});
-out.addEventListener("mouseout",e=>{const r=e.target.closest("tr[data-tip]");if(r&&!r.contains(e.relatedTarget))hideTip();});
-out.addEventListener("focusin",e=>{const c=e.target.closest("td.hastip");if(c){const b=c.getBoundingClientRect();showTip(c.closest("tr").dataset.tip,b.left,b.bottom-8);}});
-out.addEventListener("focusout",e=>{if(e.target.closest&&e.target.closest("td.hastip"))hideTip();});
+out.addEventListener("mouseout",e=>{const r=e.target.closest("[data-tip]");if(r&&!r.contains(e.relatedTarget))hideTip();});
+out.addEventListener("focusin",e=>{const c=e.target.closest("td.hastip,.mob");if(c){const b=c.getBoundingClientRect();showTip(c.dataset.tip||c.closest("tr").dataset.tip,b.left,b.bottom-8);}});
+out.addEventListener("focusout",e=>{if(e.target.closest&&e.target.closest("td.hastip,.mob"))hideTip();});
 out.addEventListener("click",e=>{
   if(!touchOnly())return;
-  const r=e.target.closest("tr[data-tip]");
+  const r=e.target.closest("[data-tip]");
   if(!r||tip.dataset.n===r.dataset.tip){hideTip();return;}
   showTip(r.dataset.tip,e.clientX,e.clientY);
 });
@@ -294,6 +318,35 @@ function listHtml(){
   return '<table class="ro"><thead><tr><th class="n">Level</th><th class="nc">Menge</th><th>Essenz</th><th class="n">Welle</th></tr></thead><tbody>'+
     SEQ.map((k,i)=>{const m=k.match(/^(.*?)(\d+)$/);
       return `<tr><td class="n">${i+2}</td><td class="nc">${fmt((i+3)*1000)}</td><td>${m[1]} T${m[2]}</td><td class="n">${WAVE[k]}</td></tr>`;}).join("")+'</tbody></table>';
+}
+const PLAN=[["1-13",603,"-","-"],["15-20",946,"Piglin T1","-"],["21-24",1141,"-","-"],["21-29",1237,"Endermite T2","-"],["25 + 30",1471,"-","Endermite T2"],["30-40",1923,"Skeleton T3","Piglin T3"],["31-41",1929,"Wither T3, Endermite T2","-"],["31-34",1950,"-","Wither T3, Huhn T3, Blaze T3, Piglin T3"]];
+function planLevels(t){
+  let m=/^(\d+)\s*-\s*(\d+)$/.exec(t);
+  if(m){const a=Math.max(2,+m[1]),b=Math.min(336,+m[2]),o=[];for(let L=a;L<=b;L++)o.push(L);return o;}
+  m=/^(\d+)\s*\+\s*(\d+)$/.exec(t);
+  return m?[+m[1],+m[2]]:[];
+}
+const mobKeyOf=x=>{const i=mobInfo(x);return i?i.name+i.tier:x;};
+function planMobs(r){
+  const miss=new Set(r[2]==="-"?[]:r[2].split(/,\s*/).map(mobKeyOf));
+  const need=new Set(planLevels(r[0]).map(L=>SEQ[L-2]).filter(Boolean));
+  if(r[3]!=="-")r[3].split(/,\s*/).forEach(x=>need.add(mobKeyOf(x)));
+  const list=[...need].filter(k=>!miss.has(k)).map(k=>{const m=/^(.*?)(\d+)$/.exec(k);return m?{n:m[1],t:+m[2]}:{n:k,t:0};}).sort((a,b)=>a.t-b.t||a.n.localeCompare(b.n,"de"));
+  return list.length?list.map(o=>o.t?`${o.n} T${o.t}`:o.n).join(", "):"-";
+}
+function planHtml(){
+  const w=st.w||0,cur=w?PLAN.reduce((a,r,i)=>r[1]<=w?i:a,-1):-1;
+  const body=PLAN.map((r,i)=>{
+    const miss=r[2]==="-"?"-":r[2].split(/,\s*/).map(x=>mobInfo(x)?`<span class="mob" tabindex="0" data-tip="mob:${x}">${x}</span>`:x).join(", ");
+    const mobs=planMobs(r);
+    const cls=i===cur?"now":(w&&r[1]>w?"future":"");
+    return `<tr class="${cls}"><td class="n">${r[0]}</td><td class="n">${r[1]}${i===cur?'<span class="here">Du bist hier</span>':""}</td><td class="${r[2]==="-"?"muted":"miss"}">${miss}</td><td class="${mobs==="-"?"muted":""}">${mobs}</td></tr>`;
+  }).join("");
+  return `<p class="notice"><b>Hinweis:</b> Diese Wellen kombinieren teilweise einzelne Machtkristall Level. Mit Hovern auf die Fehlenden Mobs kannst du sehen was die beste Welle für diese Essenz ist.</p>
+  <div class="scroll"><table class="ro plan"><thead><tr><th class="n">Machtkristall Level</th><th class="n">Welle</th><th>Fehlende Mobs</th><th>Mobs</th></tr></thead><tbody>${body}</tbody></table></div>`;
+}
+function lsubBar(){
+  return `<div class="lsub"><div class="seg" role="group" aria-label="Ansicht"><button type="button" data-lsub="list" aria-pressed="${st.lsub!=="plan"}">Essenzen pro Level</button><button type="button" data-lsub="plan" aria-pressed="${st.lsub==="plan"}">Kombinierte Wellen</button></div></div>`;
 }
 function render(){
   build();
@@ -306,7 +359,7 @@ function render(){
   document.getElementById("tSword").setAttribute("aria-selected",st.tab==="sword");
   document.getElementById("tAsp").setAttribute("aria-selected",st.tab==="asp");
   document.getElementById("tBp").setAttribute("aria-selected",st.tab==="bp");
-  if(st.tab==="list"){out.innerHTML=listHtml();return;}
+  if(st.tab==="list"){out.innerHTML=lsubBar()+(st.lsub==="plan"?planHtml():listHtml());return;}
   if(st.tab==="sword"){out.innerHTML=swordHtml();return;}
   if(st.tab==="asp"){out.innerHTML=aspHtml();return;}
   if(st.tab==="bp"){out.innerHTML=bpHtml();return;}
@@ -353,6 +406,8 @@ function toggle(k){
   save();render();
 }
 out.addEventListener("click",e=>{
+  const ls=e.target.closest("[data-lsub]");
+  if(ls){st.lsub=ls.dataset.lsub;save();render();return;}
   const ar=e.target.closest("tr[data-a]");
   if(ar){const k=ar.dataset.a,store=st.asp||(st.asp={});if(store[k])delete store[k];else store[k]=true;save();render();return;}
   if(e.target.id==="aspReset"){if(confirm("Alle Häkchen der AC Aspekte zurücksetzen?")){st.asp={};save();render();}return;}
