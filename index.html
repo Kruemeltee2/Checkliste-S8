@@ -77,7 +77,7 @@ td.warn{background:color-mix(in srgb,#e53935 24%,transparent);color:var(--ink)}
 label.opt{display:flex;align-items:center;gap:6px;font-size:.92rem;cursor:pointer}
 .reset{margin-left:auto;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:8px;padding:6px 12px;font:inherit;font-size:.88rem;cursor:pointer}
 .reset:hover{color:var(--ink)}
-#n,#w,#l{width:5.5em;font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+#n,#w,#l,#f{width:5.5em;font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
 button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 main{padding:16px}
 section{margin-bottom:22px}
@@ -121,9 +121,10 @@ input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent);cursor:po
       <button id="vTier" type="button">Nach Tier</button>
       <button id="vAmt" type="button">Nach Menge</button>
     </div>
-    <label class="opt">Bis Level <input type="number" id="l" min="2" max="335" step="1" placeholder="336"></label>
-    <label class="opt">Aktuelle Welle <input type="number" id="w" min="0" step="1" placeholder="alle"></label>
-    <label class="opt">Machtkristalle <input type="number" id="n" min="1" max="6" step="1" value="1"></label>
+    <label class="opt">Von Level <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="3" autocomplete="off" id="f" placeholder="2"></label>
+    <label class="opt">Bis Level <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="3" autocomplete="off" id="l" placeholder="335"></label>
+    <label class="opt">Aktuelle Welle <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5" autocomplete="off" id="w" placeholder="alle"></label>
+    <label class="opt">Machtkristalle <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" id="n" value="1"></label>
     <label class="opt"><input type="checkbox" id="hide"> Erledigte ausblenden</label>
     <button class="reset" id="reset" type="button">Zurücksetzen</button>
   </div>
@@ -139,13 +140,13 @@ const SEQ="Pferd1 Lohe1 Witherskelett1 Zombie1 Wolf1 Lohe1 Witherskelett1 Zombie
 const WAVE={"Pferd1":701,"Lohe1":385,"Witherskelett1":827,"Zombie1":526,"Wolf1":608,"Stray1":541,"Ziege1":884,"Lohe2":1410,"Biene1":836,"Wolf2":1112,"Piglin1":1034,"Ziege2":1191,"Piglin2":1429,"Huhn2":1262,"Endermite2":1374,"Huhn3":2186,"Witherskelett3":2148,"Lohe3":1942,"Piglin3":1925,"Skelett3":1850,"Schneemann2":2365,"Biene3":2380,"Wächter3":2664,"Fuchs2":2460,"Wolf4":2569,"Witherskelett4":2393,"Lohe4":2706,"Pferd4":2312,"Creeper3":2854,"Lohe5":3504,"Zombiepiglin3":2836,"Creeper4":3583,"Hoglin4":3233,"Witherskelett5":3405,"Biene4":3006,"Frosch3":3506,"Huhn5":3227,"Vindicator3":3362,"Wächter4":3422,"Hexe4":3827,"Schildkröte5":4078,"Spinne5":3868,"Axolotl5":3488,"Enderman3":3743,"Lohe6":3730,"Hoglin5":4191,"Schneemann5":4396,"Stray6":4030,"Endermite6":4111,"Piglin6":4544,"Huhn6":4046,"Zombie7":4262,"Wolf7":4376,"Skelett7":4442,"Ziege7":4562,"Lohe7":4596,"Stray7":4483,"Piglin7":5142,"Zoglin4":4874,"Pferd8":5292,"Axolotl7":5188,"Schneemann6":5043,"Lohe8":5115,"Spinne7":4739,"Piglin8":5332,"Witherskelett8":5452,"Spinne8":5465,"Wächter7":5524,"Panda5":5607,"Hoglin7":5768,"Witherskelett9":6386,"Wächter8":5836,"Panda6":5657,"Schildkröte8":5591,"Piglin9":6233,"Zombie9":6131,"Skelett9":6464,"Biene9":6204,"Polarbär6":6456,"Ziege9":6236,"Pferd10":6658,"Fuchs8":6721,"Zoglin7":6856,"Evoker6":6994,"Creeper9":6895,"Endermite10":7125,"Axolotl10":7022,"Husk11":7332,"Zombiepiglin9":7293,"Skelett10":7201,"Frosch9":7301,"Evoker7":7428,"Wächter10":7382,"Schildkröte10":7471,"Biene11":8973,"Lohe11":7075,"Piglin11":9889,"Ertrunkener8":7482,"Spinne11":9335,"Pferd12":9994,"Ozelot12":8379,"Stray12":9111,"Huhn12":9883,"Axolotl11":8101,"Schildkröte11":9598,"Wolf12":9446,"Wächter11":7870,"Evoker8":8114,"Schneemann10":9645,"Creeper11":8802,"Vindicator10":9772,"Fuchs10":9105,"Endermite11":9529,"Zombiepferd8":7555,"Enderman9":8795,"Skelett12":9784,"Huhn11":7756,"Witherskelett12":9579,"Wither4":10000,"Polarbär8":9148,"Ertrunkener9":9742,"Ziege11":8921,"Hoglin11":9041,"Hexe10":8410,"Zombie12":8190,"Zombiepiglin10":9379,"Piglin-Brute9":8478,"Husk12":8558,"Skelettpferd9":9309,"Panda9":7969,"Lohe12":9933,"Zoglin8":8717,"Frosch10":9855,"Wither8":20000};
 let DATA=[];
 function build(){
-  const cap=st.l||336,agg={};
-  SEQ.forEach((k,i)=>{if(i+2<=cap)agg[k]=(agg[k]||0)+(i+3)*1000;});
+  const cap=st.l||336,from=st.f||2,agg={};
+  SEQ.forEach((k,i)=>{if(i+2<=cap&&i+2>=from)agg[k]=(agg[k]||0)+(i+3)*1000;});
   DATA=Object.keys(agg).map(k=>{const m=k.match(/^(.*?)(\d+)$/);return {amt:agg[k],name:m[1],tier:+m[2],wave:WAVE[k],key:m[1]+"|"+m[2]};});
 }
 
 const KEY="essenzen-tracker-v2";
-let st={done:{},view:"tier",hide:false,n:1,w:null,l:null,tab:"check",prog:"coin",coin:{},skl:{},swd:{},asp:{},stg:{},stage:"early"};
+let st={done:{},view:"tier",hide:false,n:1,w:null,l:null,f:null,tab:"check",prog:"coin",coin:{},skl:{},swd:{},asp:{},stg:{},stage:"early"};
 try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.done)st={...st,...s};}catch(e){}
 if(!(st.n>=1))st.n=1;
 function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
@@ -321,6 +322,7 @@ function render(){
   const ni=document.getElementById("n");if(document.activeElement!==ni)ni.value=st.n;
   const wi=document.getElementById("w");if(document.activeElement!==wi)wi.value=st.w||"";
   const li=document.getElementById("l");if(document.activeElement!==li)li.value=st.l||"";
+  const fi=document.getElementById("f");if(document.activeElement!==fi)fi.value=st.f||"";
 
   const V=DATA.filter(okW);
   const all=V.reduce((s,d)=>s+d.amt,0)*st.n;
@@ -377,9 +379,10 @@ document.getElementById("tList").onclick=()=>{st.tab="list";save();render();wind
 document.getElementById("tCheck").onclick=()=>{st.tab="check";save();render();window.scrollTo(0,0);};
 document.getElementById("vTier").onclick=()=>{st.view="tier";save();render();};
 document.getElementById("vAmt").onclick=()=>{st.view="amt";save();render();};
-document.getElementById("l").oninput=e=>{const v=Math.floor(+e.target.value);st.l=v>=2?Math.min(v,336):null;save();render();};
-document.getElementById("w").oninput=e=>{const v=Math.floor(+e.target.value);st.w=v>0?v:null;save();render();};
-document.getElementById("n").oninput=e=>{const v=Math.floor(+e.target.value);if(v>=1){st.n=Math.min(v,9999);save();render();}};
+document.getElementById("f").oninput=e=>{e.target.value=e.target.value.replace(/\D/g,"");const v=Math.floor(+e.target.value);st.f=v>=2?Math.min(v,336):null;save();render();};
+document.getElementById("l").oninput=e=>{e.target.value=e.target.value.replace(/\D/g,"");const v=Math.floor(+e.target.value);st.l=v>=2?Math.min(v,336):null;save();render();};
+document.getElementById("w").oninput=e=>{e.target.value=e.target.value.replace(/\D/g,"");const v=Math.floor(+e.target.value);st.w=v>0?v:null;save();render();};
+document.getElementById("n").oninput=e=>{e.target.value=e.target.value.replace(/\D/g,"");const v=Math.floor(+e.target.value);if(v>=1){st.n=Math.min(v,9999);save();render();}};
 document.getElementById("hide").onchange=e=>{st.hide=e.target.checked;save();render();};
 document.getElementById("reset").onclick=()=>{
   if(confirm("Alle Häkchen zurücksetzen?")){st.done={};save();render();}
