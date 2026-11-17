@@ -19,7 +19,12 @@ html{color-scheme:light dark}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 "Segoe UI",system-ui,-apple-system,sans-serif}
 header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:14px 16px 12px}
 .wrap{max-width:1040px;margin:0 auto}
-h1{margin:0 0 8px;font-size:1.35rem;font-weight:700}
+.hrow{display:flex;align-items:center;justify-content:space-between;margin:0 0 8px}
+.dc{color:var(--accent);display:inline-flex;padding:4px;border-radius:8px}
+.soc{display:inline-flex;align-items:center;gap:4px}
+.tw{color:var(--accent)}
+.dc:hover{background:var(--line)}
+h1{margin:0;font-size:1.35rem;font-weight:700}
 .tabs{display:flex;gap:4px;margin:0 0 10px;border-bottom:1px solid var(--line);flex-wrap:wrap}
 .tabs button{white-space:nowrap}
 .sub{font-size:.88rem;color:var(--muted)}
@@ -99,6 +104,68 @@ tbody tr.done td.e{text-decoration:line-through}
 input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent);cursor:pointer;margin:0;vertical-align:middle}
 .tag{display:inline-block;min-width:2.2em;text-align:center;font-size:.78rem;font-weight:700;color:#fff;border-radius:5px;padding:1px 6px;margin-left:8px;background:var(--c)}
 .empty{padding:18px;text-align:center;color:var(--muted)}
+.mc{max-width:560px;margin:8px auto;background:linear-gradient(160deg,#2a3f43,#16262a 70%);border:3px solid #0d1719;border-radius:10px;padding:12px 14px 16px;box-shadow:0 0 0 2px #3b5559,0 10px 28px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.08)}
+.mc h2{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 10px;font:700 1.5rem/1.1 "Courier New",monospace;color:#ffff55;text-shadow:2px 2px 0 #3f3f15,0 0 14px rgba(255,255,85,.25);letter-spacing:.5px}
+.mcg{display:grid;grid-template-columns:repeat(9,1fr);gap:3px;background:#05090a;border:3px solid #05090a;border-radius:4px}
+.mcs{aspect-ratio:1;background:#14242a;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:inset 0 0 0 2px #1d3238,inset 0 -6px 10px rgba(0,0,0,.25)}
+.mcs.o{background:linear-gradient(135deg,#b4b4ae,#8f8f8a);box-shadow:inset 0 0 0 2px #a5a5a0,inset 0 0 0 3px rgba(255,255,255,.25),inset 0 -6px 10px rgba(0,0,0,.15)}
+.mcs.i{background:radial-gradient(circle at 50% 35%,#2f5058,#1b343b);box-shadow:inset 0 0 0 2px #3b6670,0 0 8px rgba(95,191,138,.18);cursor:pointer;transition:transform .12s,box-shadow .12s}
+.mcs.i:hover{transform:translateY(-2px) scale(1.06);z-index:2;box-shadow:inset 0 0 0 2px #7fd6a4,0 0 14px rgba(95,191,138,.45)}
+.mcc{position:absolute;right:3px;bottom:1px;font:700 11px/1 "Courier New",monospace;color:#fff;text-shadow:1px 1px 0 #000,-1px 1px 0 #000,1px -1px 0 #000,-1px -1px 0 #000;pointer-events:none}
+@keyframes mcflash{0%{box-shadow:inset 0 0 0 2px #7fb4ff,0 0 14px 3px rgba(110,170,255,.65);background:radial-gradient(circle at 50% 35%,#3b6a8a,#24485f)}100%{}}
+@keyframes mcflashneg{0%{box-shadow:inset 0 0 0 2px #ff7b7b,0 0 14px 3px rgba(255,90,90,.6);background:radial-gradient(circle at 50% 35%,#7a3b3b,#4f2424)}100%{}}
+.mcs.i.flash{animation:mcflash 1.2s ease-out 1}
+.mcs.i.flash.neg{animation:mcflashneg 1.2s ease-out 1}
+.mcs.i.ro{cursor:default}
+.mcs.i.ro:hover{transform:none}
+.mcs.i.lk{cursor:not-allowed;background:#16262b}
+.mcs.i.lk>svg,.mcs.i.lk>.mcc{opacity:.4;filter:grayscale(.8)}
+.mcs.i.lk:hover{transform:none;box-shadow:inset 0 0 0 2px #3b6670}
+.mcs.i.max .mcc{color:#7dff9a}
+.mcs.i.max{box-shadow:inset 0 0 0 2px #7dff9a,0 0 10px rgba(125,255,154,.45)}
+.mcs.o.g{background:linear-gradient(135deg,#5fae3c,#3d7d26);box-shadow:inset 0 0 0 2px #7ad24f,inset 0 0 0 3px rgba(255,255,255,.2),inset 0 -6px 10px rgba(0,0,0,.2)}
+.mct{display:none;position:absolute;bottom:108%;left:50%;transform:translateX(-50%);width:max-content;max-width:min(300px,70vw);background:#100010;color:#fff;border:2px solid #29d3e6;border-radius:3px;padding:7px 10px;font:14px/1.4 "Segoe UI",system-ui,-apple-system,sans-serif;text-align:left;z-index:5;pointer-events:none;box-shadow:0 4px 14px rgba(0,0,0,.5)}
+.mcs.tb .mct{bottom:auto;top:108%}
+.mcs.tl .mct{left:0;transform:none}.mcs.tr .mct{left:auto;right:0;transform:none}
+.mcs.hd:hover .mct,.mcs.hd:focus-visible .mct{display:block}
+.mctt{display:flex;align-items:center;gap:6px;font-weight:700;margin-bottom:5px}.mctt i{display:inline-flex;width:16px;height:16px}.mctt svg{width:16px;height:16px;filter:none}
+.mctd{color:#e8e8e8}.mctd.w{color:#ff5555}
+.modes{margin:0 0 10px;display:flex;justify-content:center}
+.modes[hidden]{display:none}
+.skrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,560px) minmax(0,1fr);gap:16px;align-items:start}
+.skrow .mc{margin:0;grid-column:2;grid-row:1}
+.skside{grid-column:1;grid-row:1;justify-self:end;display:flex;flex-direction:column;gap:8px;width:100%;max-width:190px}
+.skbuy{grid-column:3;grid-row:1;justify-self:start;width:100%;max-width:230px;box-sizing:border-box;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.skbt{font-size:.95rem;margin-bottom:10px}
+.skbr{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.skbc{font-size:.85rem;color:var(--muted);text-align:center;flex:1;min-width:0;line-height:1.3;min-height:3.9em;display:flex;flex-direction:column;justify-content:center}
+.skbc b{color:var(--ink);font-weight:600;overflow-wrap:anywhere}
+.skbm{display:flex;gap:8px;margin-top:10px}
+.skmm{flex:1;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:.85rem;cursor:pointer}
+.skmm:hover:not(:disabled){background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.skmm:disabled{opacity:.4;cursor:not-allowed}
+.skb{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:1.2rem;line-height:1;cursor:pointer}
+.skb:hover:not(:disabled){background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.skb:disabled{opacity:.4;cursor:not-allowed}
+@media(max-width:1060px){.skrow{grid-template-columns:1fr}.skrow .mc,.skside,.skbuy{grid-column:1}.skbuy{grid-row:3;justify-self:center}.skside{grid-row:1;justify-self:center;flex-direction:row;width:auto}.skrow .mc{grid-row:2}}
+.skside button{width:100%;margin:0;padding:8px 12px;text-align:center}
+.skt{display:flex;justify-content:center;margin:4px 0 12px}
+.mce{margin:6px 2px 4px;color:#9db3b6}
+.skav{font:400 .9rem/1.2 "Segoe UI",system-ui,sans-serif;color:#cfe3e6;text-shadow:none;letter-spacing:0;white-space:nowrap}
+.skav b{color:#fff}
+.skt .seg{overflow:visible}
+.skt .seg button{position:relative}
+.skt .seg button:first-child{border-radius:7px 0 0 7px}
+.skt .seg button:last-child{border-radius:0 7px 7px 0}
+.mct.skm{top:calc(100% + 6px);bottom:auto;left:0;transform:none;text-align:left;font-weight:400;white-space:normal;width:max-content;max-width:min(320px,80vw)}
+.skt .seg button:hover .mct.skm,.skt .seg button:focus-visible .mct.skm{display:block}
+.skm .mctt{display:block;margin-bottom:5px}.skm .mctd{display:block}
+.mg{color:#55ff55}.mctt.mcy{color:#55ffff}.mctt.mcw{color:#ffff55}
+.skt .seg button:last-child .mct.skm{left:auto;right:0}.my{color:#ffff55;font-weight:400}
+.mch{margin:8px 2px 0;color:#9db3b6;font:12px/1.3 "Courier New",monospace}
+.mcs svg{width:78%;height:78%;display:block;filter:drop-shadow(0 2px 2px rgba(0,0,0,.5))}
+.mcs[data-n]:hover::after{content:attr(data-n);position:absolute;bottom:108%;left:50%;transform:translateX(-50%);background:#14061f;color:#fff;border:2px solid #3a1a7a;border-radius:3px;padding:2px 8px;font:12px/1.3 "Courier New",monospace;white-space:nowrap;z-index:4;pointer-events:none}
+#essSw[hidden]{display:none}
 .lsub{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:0 0 14px}
 .planbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:0 0 12px}
 table.plan td{vertical-align:top}
@@ -114,15 +181,18 @@ table.plan .mob:focus-visible{outline:2px solid var(--accent);outline-offset:2px
 </head>
 <body>
 <header><div class="wrap">
-  <h1>S8 Checkliste</h1>
+  <div class="hrow"><h1>S8 Checkliste</h1><span class="soc"><a class="dc tw" href="https://www.twitch.tv/kruemeltee2" target="_blank" rel="noopener noreferrer" title="Twitch ansehen" aria-label="Twitch ansehen"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M11.64 5.93h1.43v4.28h-1.43m3.93-4.28H17v4.28h-1.43M7 2L3.43 5.57v12.86h4.28V22l3.58-3.57h2.85L20.57 12V2m-1.43 9.29l-2.85 2.85h-2.86l-2.5 2.5v-2.5H7.71V3.43h11.43Z"/></svg></a><a class="dc" href="https://discord.gg/3zyV6rBZUK" target="_blank" rel="noopener noreferrer" title="Discord beitreten" aria-label="Discord beitreten"><svg viewBox="0 0 127.14 96.36" width="26" height="20" fill="currentColor" aria-hidden="true"><path d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0a105.89 105.89 0 0 0-26.25 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.15ZM42.45 65.69C36.18 65.69 31 60 31 53s5-12.74 11.43-12.74S54 46 53.89 53s-5.05 12.69-11.44 12.69Zm42.24 0C78.41 65.69 73.25 60 73.25 53s5-12.74 11.44-12.74S96.23 46 96.12 53s-5.04 12.69-11.43 12.69Z"/></svg></a></span></div>
   <nav class="tabs" role="tablist">
     <button id="tList" type="button" role="tab">Essenzen</button>
-    <button id="tCheck" type="button" role="tab">Essenz Checkliste</button>
     <button id="tProg" type="button" role="tab">Ausrüstungssets</button>
     <button id="tSword" type="button" role="tab">Schwerter</button>
     <button id="tAsp" type="button" role="tab">AC Aspekte</button>
     <button id="tBp" type="button" role="tab">Schmiedelevel Baupläne</button>
+    <button id="tMinion" type="button" role="tab">Minions</button>
+    <button id="tSkill" type="button" role="tab">Skilltree</button>
   </nav>
+  <div class="modes" id="modes" hidden><div class="seg" id="modeSeg" role="group" aria-label="Modus"><button type="button" data-mode="kaktus">Kaktus LB</button><button type="button" data-mode="seelen">Seelen LB</button><button type="button" data-mode="casual">Casual</button><button type="button" data-mode="custom">Custom</button></div></div>
+  <div id="essSw" class="lsub" hidden><div class="seg" role="group" aria-label="Ansicht"><button type="button" id="swList">Essenzen</button><button type="button" id="swCheck">Checkliste</button></div></div>
   <div id="progHead" hidden><select id="progSel" aria-label="Seite wählen"></select></div>
   <div id="checkHead">
   <div class="total"><span><b id="doneAmt">0</b> von <b id="allAmt">0</b> Essenzen gefarmt</span><span id="doneCnt"></span></div>
@@ -239,7 +309,7 @@ function progHtml(S){
 }
 const PROG={};
 Object.entries(SETS).forEach(([k,S])=>PROG[k]={title:S.title,html:()=>progHtml(S)});
-const SWORDS=[["Drachenzahn",1,"-","offhand bis 4 | Main bis 4","p"],["Witwengruß",4,"-","offhand bis 16 | Main bis 10","p"],["Flammenfuror",10,"Ziegelstein [Amboss LVL 10]","Main bis 16","p"],["Blitzzorn",16,"Ziegelstein [Amboss LVL 10]","offhand bis 45 | Main bis 21","o"],["Drachenzorn",21,"Kettenglied [Amboss LVL 15]","Main bis 33","o"],["Anduril",33,"Ziegelstein [Amboss LVL 10]","Main bis 51","o"],["Klinge des Lehrmeisters",45,"Klammer [Amboss LVL 30]","offhand bis 73 | Main bis 73","o"],["Vampirsäbel",73,"Leder [Amboss LVL 20]","Offhand | Main","o"]];
+const SWORDS=[["Drachenzahn",1,"-","offhand bis 4 | Main bis 4","p"],["Witwengruß",4,"-","offhand bis 16 | Main bis 10","p"],["Flammenfuror",10,"Ziegelstein [Amboss LVL 10]","Main bis 16","p"],["Blitzzorn",16,"Ziegelstein [Amboss LVL 10]","offhand bis 45 | Main bis 21","o"],["Drachenzorn",21,"Kettenglied [Amboss LVL 15]","Main bis 33","o"],["Anduril",33,"Ziegelstein [Amboss LVL 10]","Main bis 45","o"],["Klinge des Lehrmeisters",45,"Klammer [Amboss LVL 30]","offhand bis 73 | Main bis 73","o"],["Vampirsäbel",73,"Leder [Amboss LVL 20]","Offhand | Main","o"]];
 function swordHtml(){
   const store=st.swd||(st.swd={}),n=SWORDS.filter(r=>store[r[0]]).length;
   return `<h2 class="ptitle">Waffen Progression</h2>
@@ -345,24 +415,307 @@ function planHtml(){
   return `<p class="notice"><b>Hinweis:</b> Diese Wellen kombinieren teilweise einzelne Machtkristall Level. Mit Hovern auf die Fehlenden Mobs kannst du sehen was die beste Welle für diese Essenz ist.</p>
   <div class="scroll"><table class="ro plan"><thead><tr><th class="n">Machtkristall Level</th><th class="n">Welle</th><th>Fehlende Mobs</th><th>Mobs</th></tr></thead><tbody>${body}</tbody></table></div>`;
 }
+function mcCube(t,l,r,x){return `<svg viewBox="0 0 32 32"><polygon points="16,3 29,10 16,17 3,10" fill="${t}"/><polygon points="3,10 16,17 16,30 3,23" fill="${l}"/><polygon points="29,10 16,17 16,30 29,23" fill="${r}"/>${x||""}</svg>`;}
+const MC_ICON={
+ werfer:mcCube("#e8e8e8","#cfcfcf","#b5b5b5",'<polygon points="6,16 11,14 11,15.5 14,15.5 14,17.5 11,17.5 11,19" fill="#222"/>'),
+ erde:mcCube("#8a5a36","#6e4528","#5c3a21"),
+ kuchen:'<svg viewBox="0 0 32 32"><rect x="8" y="13" width="16" height="11" fill="#f3d6a0"/><rect x="8" y="9" width="16" height="6" fill="#fff3e8"/><rect x="8" y="14" width="16" height="2" fill="#e0603a"/><rect x="14" y="5" width="3" height="5" fill="#ffd25a"/></svg>',
+ gras:mcCube("#5f9a3a","#7a5233","#654125",'<polygon points="3,10 16,17 16,20 3,13" fill="#4c8230"/><polygon points="29,10 16,17 16,20 29,13" fill="#3f6d28"/>'),
+ knochen:'<svg viewBox="0 0 32 32"><g transform="rotate(-45 16 16)" fill="#e8dcd8"><rect x="9" y="14" width="14" height="4"/><circle cx="8" cy="13" r="3"/><circle cx="8" cy="19" r="3"/><circle cx="24" cy="13" r="3"/><circle cx="24" cy="19" r="3"/></g></svg>',
+ sandstein:mcCube("#e4d9ae","#cfc394","#b9ad7e"),
+ kaktus:mcCube("#78b23c","#5f9a2e","#4d8325",'<g fill="#2d5a14"><rect x="7" y="16" width="2" height="2"/><rect x="11" y="21" width="2" height="2"/><rect x="21" y="17" width="2" height="2"/><rect x="24" y="22" width="2" height="2"/></g>'),
+ busch:'<svg viewBox="0 0 32 32"><g stroke="#2f7a3a" stroke-width="2" fill="none"><path d="M10 28V16M16 28V8M22 28V18"/></g></svg>',
+ barriere:'<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="11" fill="none" stroke="#e01818" stroke-width="4"/><path d="M8 24L24 8" stroke="#e01818" stroke-width="4"/></svg>',
+ truhe:mcCube("#a8743a","#8a5a28","#6e4620",'<rect x="3" y="14" width="13" height="2" fill="#4a2d12" transform="skewY(0)"/><rect x="14" y="18" width="3" height="3" fill="#ddd"/>'),
+ goldbarren:'<svg viewBox="0 0 32 32"><polygon points="4,18 10,10 28,10 22,18" fill="#ffe27a"/><polygon points="4,18 22,18 22,24 4,24" fill="#f0a830"/><polygon points="22,18 28,10 28,16 22,24" fill="#d98a1c"/></svg>',
+ goldblock:mcCube("#f8c24a","#e0a02a","#c98a1c"),
+ schloss:mcCube("#3a4048","#2a2f36","#1f242a",'<rect x="14" y="17" width="4" height="6" fill="#d8b44a"/>'),
+ diamant:'<svg viewBox="0 0 32 32"><polygon points="8,6 24,6 29,13 16,28 3,13" fill="#3fa8e8"/><polygon points="8,6 16,6 13,13 3,13" fill="#8fd8ff"/><polygon points="16,6 24,6 29,13 19,13" fill="#5cc0f5"/><polygon points="3,13 13,13 16,28" fill="#2a86c4"/><polygon points="19,13 29,13 16,28" fill="#1f6fa8"/></svg>',
+ laterne:'<svg viewBox="0 0 32 32"><path d="M13 8c0-4 6-4 6 0" stroke="#555" stroke-width="1.6" fill="none"/><rect x="12" y="8" width="8" height="3" fill="#3a3f45"/><rect x="11" y="11" width="10" height="13" rx="2" fill="#35d6e0"/><rect x="13" y="13" width="6" height="9" fill="#b9fbff"/><rect x="11" y="24" width="10" height="2" fill="#3a3f45"/></svg>',
+ fackel:'<svg viewBox="0 0 32 32"><rect x="14" y="11" width="4" height="18" fill="#8a5a28"/><rect x="14" y="11" width="2" height="18" fill="#a8743a"/><rect x="14" y="5" width="4" height="6" fill="#3fe0f0"/><rect x="15" y="4" width="2" height="3" fill="#d6ffff"/></svg>',
+ diamantblock:mcCube("#6fe3e0","#4cc2c4","#38a4a8"),
+ dunkel:'<svg viewBox="0 0 32 32"><rect x="3" y="3" width="26" height="26" fill="#050505"/><path d="M18 26c-2-5 0-9 4-12" stroke="#55a02c" stroke-width="2.5" fill="none"/><rect x="21" y="19" width="4" height="5" fill="#e07b1a"/></svg>'
+};
+MC_ICON.s_moos=mcCube("#5a9a30","#437a24","#386a1e",'<g fill="#2a4d14"><rect x="7" y="15" width="3" height="3"/><rect x="12" y="21" width="3" height="3"/><rect x="21" y="16" width="3" height="3"/><rect x="23" y="22" width="3" height="3"/></g>');
+MC_ICON.s_moos2=MC_ICON.s_moos;
+MC_ICON.s_fackel0=MC_ICON.fackel;MC_ICON.s_fackel6=MC_ICON.fackel;
+MC_ICON.s_komp='<svg viewBox="0 0 32 32"><polygon points="4,21 14,17 28,22 17,27" fill="#d8d8d8"/><polygon points="4,21 17,27 17,30 4,24" fill="#9a9a9a"/><rect x="8" y="15" width="3" height="6" fill="#c0392b"/><rect x="22" y="9" width="3" height="12" fill="#c0392b"/><rect x="22" y="7" width="3" height="3" fill="#ff6a5a"/></svg>';
+MC_ICON.s_karte='<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="#c9a24a"/><circle cx="12" cy="13" r="4" fill="#5e9c3a"/><circle cx="20" cy="20" r="4" fill="#5e9c3a"/><circle cx="21" cy="11" r="2.5" fill="#e07b1a"/></svg>';
+MC_ICON.s_pfeil='<svg viewBox="0 0 32 32"><g transform="rotate(-45 16 16)"><rect x="5" y="14.5" width="22" height="3" fill="#8a5a28"/><polygon points="27,16 21,11 21,21" fill="#c8c8c8"/><polygon points="5,16 2,10 9,13" fill="#e8e8e8"/><polygon points="5,16 2,22 9,19" fill="#e8e8e8"/></g></svg>';
+MC_ICON.s_uhr='<svg viewBox="0 0 32 32"><rect x="4" y="4" width="24" height="24" rx="5" fill="#f0a830"/><rect x="7" y="7" width="18" height="18" rx="3" fill="#2d5fd0"/><path d="M19 12a5 5 0 1 0 0 8" stroke="#fff" stroke-width="2.5" fill="none"/></svg>';
+MC_ICON.s_schwert='<svg viewBox="0 0 32 32"><g transform="rotate(45 16 16)"><rect x="14" y="2" width="4" height="19" fill="#4a4048"/><rect x="14" y="2" width="1.5" height="19" fill="#6a5f68"/><rect x="9" y="21" width="14" height="3" fill="#7a2a30"/><rect x="14.5" y="24" width="3" height="6" fill="#5a3a2e"/></g></svg>';
+MC_ICON.s_rakete='<svg viewBox="0 0 32 32"><g transform="rotate(45 16 16)"><rect x="12" y="6" width="8" height="20" fill="#f4f4f4"/><g fill="#d63a3a"><rect x="12" y="8" width="8" height="3"/><rect x="12" y="14" width="8" height="3"/><rect x="12" y="20" width="8" height="3"/></g><polygon points="12,6 20,6 16,1" fill="#d63a3a"/></g></svg>';
+MC_ICON.s_eis='<svg viewBox="0 0 32 32"><rect x="6" y="5" width="20" height="22" rx="3" fill="#dfe9f5"/><rect x="9" y="8" width="14" height="10" fill="#5db4f0"/><rect x="12" y="21" width="8" height="3" fill="#8fb4d8"/></svg>';
+MC_ICON.s_erde=mcCube("#5b3a30","#47291f","#38211a");
+MC_ICON.s_erde2=MC_ICON.s_erde;
+MC_ICON.s_laterne=MC_ICON.laterne;
+MC_ICON.s_feuer='<svg viewBox="0 0 32 32"><rect x="4" y="22" width="24" height="5" rx="1" fill="#6e4620"/><rect x="8" y="19" width="16" height="4" fill="#8a5a28"/><path d="M16 4c4 5 7 8 7 13a7 7 0 0 1-14 0c0-3 2-5 3-8 1 2 2 2 2 1 0-2 1-4 2-6Z" fill="#35d6e0"/><path d="M16 12c2 3 3 4 3 6a3 3 0 0 1-6 0c0-2 1-3 3-6Z" fill="#c9fbff"/></svg>';
+MC_ICON.f_kaktus=MC_ICON.kaktus;
+MC_ICON.f_maske=MC_ICON.s_uhr;
+MC_ICON.f_trank='<svg viewBox="0 0 32 32"><rect x="13" y="3" width="6" height="5" fill="#b98a4a"/><rect x="14" y="8" width="4" height="4" fill="#d8e8ef"/><circle cx="16" cy="19" r="9" fill="#cfe9d2"/><circle cx="16" cy="20" r="7" fill="#5dd16a"/><rect x="15" y="16" width="2" height="8" fill="#e8ffe8"/><rect x="12" y="19" width="8" height="2" fill="#e8ffe8"/></svg>';
+MC_ICON.f_netz='<svg viewBox="0 0 32 32"><g fill="none" stroke="#e8eef2" stroke-width="1.6"><rect x="3" y="3" width="26" height="26"/><rect x="8" y="8" width="16" height="16"/><rect x="12" y="12" width="8" height="8"/><path d="M3 3L29 29M29 3L3 29M16 3v26M3 16h26"/></g></svg>';
+MC_ICON.f_fackel=MC_ICON.fackel;
+MC_ICON.f_barren=MC_ICON.goldbarren;
+MC_ICON.f_tresor=mcCube("#6a6e74","#4e5258","#3b3f44",'<rect x="14" y="17" width="4" height="5" fill="#d8b44a"/>');
+MC_ICON.f_erde=mcCube("#8a5a36","#6e4528","#5c3a21");
+MC_ICON.f_leiter='<svg viewBox="0 0 32 32"><rect x="7" y="3" width="18" height="26" fill="#9a6a38"/><rect x="7" y="3" width="18" height="26" fill="none" stroke="#6e4620" stroke-width="2"/><g fill="#c89a5c"><rect x="10" y="6" width="5" height="7"/><rect x="17" y="6" width="5" height="7"/><rect x="10" y="16" width="5" height="9"/><rect x="17" y="16" width="5" height="9"/></g></svg>';
+MC_ICON.f_truhe=MC_ICON.truhe;
+MC_ICON.f_stein=mcCube("#9a9a9a","#7c7c7c","#666");
+MC_ICON.f_gold=MC_ICON.goldblock;
+MC_ICON.f_schloss=MC_ICON.schloss;
+MC_ICON.f_laterne=MC_ICON.laterne;
+MC_ICON.f_smaragd='<svg viewBox="0 0 32 32"><polygon points="4,17 10,9 28,9 22,17" fill="#6ff08a"/><polygon points="4,17 22,17 22,24 4,24" fill="#1fa84a"/><polygon points="22,17 28,9 28,16 22,24" fill="#13803a"/></svg>';
+const TREES={
+ kaktus:{store:"mc",title:"Kaktus Talentbaum",
+  grid:[
+   [0,0,["erde","Erde"],0,["kuchen","Kuchen"],0,["gras","Grasblock"],0,0],
+   [0,0,0,0,0,0,0,0,0],
+   [["knochen","Knochen"],0,["sandstein","Sandstein"],0,["kaktus","Kaktus"],0,["busch","Gras"],0,["barriere","Gesperrt"]],
+   [0,0,0,0,0,0,0,0,0],
+   [["truhe","Truhe"],0,["goldbarren","Goldbarren"],0,0,0,["goldblock","Goldblock"],0,["schloss","Verschlossen"]],
+   [0,0,0,0,0,0,0,0,0],
+   [0,0,["diamant","Diamant"],0,["laterne","Seelaterne"],0,["fackel","Seelenfackel"],0,["diamantblock","Diamantblock"]]
+  ],
+  olive:["0,3","0,5","1,2","1,4","1,6","2,1","2,3","2,5","2,7","3,2","3,6","4,1","4,7","5,2","5,6","6,3","6,5","6,7"],
+  req:{kuchen:[],erde:["kuchen"],gras:["kuchen"],kaktus:["kuchen"],sandstein:["kaktus","erde"],busch:["kaktus","gras"],knochen:["sandstein"],goldbarren:["sandstein"],barriere:["busch"],goldblock:["busch"],truhe:["goldbarren"],schloss:["goldblock"],diamant:["goldbarren"],fackel:["goldblock"],laterne:["diamant","fackel"],diamantblock:["fackel"]},
+  max:{kaktus:1},noskill:["barriere"],desc:{"kuchen": ["Kaktus-Geschäftsmann", "Pro Punkt erhöht sich sämtlicher Kaktus-Ertrag um den Faktor 2"], "erde": ["Ertragreiches Feld", "Pro Punkt erhöht sich der Ertrag des Felds um den Faktor 3"], "gras": ["Ertragreiche Farm", "Pro Punkt erhöht sich der Ertrag der Farm um den Faktor 3"], "kaktus": ["Unerbittlicher Kaktusfarmer", "Die Kaktusstrafe bei Tod oder Wellendurchbruch wird halbiert"], "sandstein": ["Mehr! Mehr! Mehr!", "Pro Kaktusfeld erhöht sich der Kaktusertrag um 2%"], "knochen": ["Tödliche Ernte", "Beim Abbau des Startkaktus besteht eine Chance von Stufe zu 600 Seelen zu bekommen die der aktuellen Welle entsprechen"], "goldbarren": ["Goldspeicher", "Beim Verpassen eines Goldkaktus werden Stufe mal 10 Sekunden gespeichert bis zu einem Limit von 60 mal Stufe und der Boost kann manuell im Menü aktiviert werden"], "truhe": ["Stachlige Ernte", "[Funktioniert nicht in dieser Season]", 1], "diamant": ["Meeeeehr!", "Pro neu erreichte Zahleneinheit erhöht sich der Kaktusertrag um 1% pro Stufe"], "busch": ["Doppelt hält besser!", "Pro Farmebene pro Stufe erhöht sich der Ertrag um 2%"], "goldblock": ["Goldrausch", "Bei einem Tick der Farm besteht eine Chance von Stufe zu 6000, dass ein Goldboost für die Farm ausgelöst wird (Faktor 200)"], "schloss": ["Nadelhaufen", "[Funktioniert nicht in dieser Season]", 1], "fackel": ["Spukernte", "Die Kaktusfarm produziert mit einer Chance von Stufe zu 600 pro Tick Seelen basierend auf der aktuellen Welle"], "laterne": ["Seelenhaftes Verlangen", "Der prozentuale Ertrag pro Seele erhöht sich um den Faktor 20 pro Stufe"], "diamantblock": ["Meeeeehr Farm!", "Pro neu erreichte Zahleneinheit erhöht sich der Kaktusertrag der Farm um 1% pro Stufe."]}},
+ seele:{store:"ms",title:"Seelen Talentbaum",
+  grid:[
+   [0,0,["s_moos","Moosblock"],0,["s_fackel0","Seelenfackel"],0,["s_komp","Komparator"],0,0],
+   [0,0,0,0,0,0,0,0,0],
+   [["s_karte","Karte"],0,["s_pfeil","Pfeil"],0,["knochen","Knochen"],0,["s_uhr","Uhr"],0,["s_schwert","Schwert"]],
+   [0,0,0,0,0,0,0,0,0],
+   [["s_rakete","Feuerwerksrakete"],0,["s_eis","Eis"],0,0,0,["s_moos2","Moosblock"],0,["s_erde","Seelenerde"]],
+   [0,0,0,0,0,0,0,0,0],
+   [["s_erde2","Seelenerde"],0,["s_laterne","Seelaterne"],0,["s_feuer","Seelenlagerfeuer"],0,["s_fackel6","Seelenfackel"],0,0]
+  ],
+  olive:["0,3","0,5","1,2","1,4","1,6","2,1","2,3","2,5","2,7","3,2","3,6","4,1","4,7","5,2","5,6","6,1","6,3","6,5"],
+  req:{s_fackel0:[],s_moos:["s_fackel0"],s_komp:["s_fackel0"],knochen:["s_fackel0"],s_pfeil:["knochen","s_moos"],s_uhr:["knochen","s_komp"],s_karte:["s_pfeil"],s_eis:["s_pfeil"],s_schwert:["s_uhr"],s_moos2:["s_uhr"],s_rakete:["s_eis"],s_erde:["s_moos2"],s_laterne:["s_eis"],s_fackel6:["s_moos2"],s_feuer:["s_laterne","s_fackel6"],s_erde2:["s_laterne"]},
+  max:{knochen:1,s_rakete:1,s_erde:1,s_erde2:1,s_feuer:1},noskill:[],desc:{"s_moos": ["Bessere Wellen", "Pro Punkt erhältst du 3 mal mehr Seelen aus Wellen"], "s_fackel0": ["Seelenernter", "Pro Punkt geben Monster 100% mehr Seelen"], "s_komp": ["Meister der Wiederholung", "Für jede Wiederholung einer Welle am Stück (Bis zu 8×Stufe) wird der Seelenertrag beim Absolvieren einer Welle um 30% pro Stufe erhöht."], "s_karte": ["Permanente Schwäche", "Sämtliche Monster in Wellen haben um 0,5% verringertes Leben pro Stufe und das absolute Leben der Zombies wird um 20 pro Stufe verringert"], "s_pfeil": ["Starke Schüsse", "Der Schaden normaler Pfeile von Türmen wird um 0,5% verstärkt pro Stufe und pro Stufe wird der Turm- und Brückenschaden um 3 erhöht"], "knochen": ["Bezwinger des Todes", "Der Seelenverlust bei Tod oder Wellendurchbruch wird halbiert"], "s_uhr": ["Idle Erfahrung", "Nach Ablaufen eines Zeitintervals, welchem dem Zeitlimit der höchsten Welle entspricht, erhälst du pro Stufe 6% der Erfahrung und der Seelen der Welle."], "s_schwert": ["Kraftvolle Hiebe", "Dein Schaden erhöht sich um 1% und dein absoluter Schaden erhöht sich um 8 pro Stufe."], "s_rakete": ["Herr der Türme", "Die Pfeile der Türme sind nun immer effektiv unabhängig vom Typ des Monsters"], "s_eis": ["Herr der Elemente", "Der Schaden sämtlicher Elementarpfeile wird um 0,5% pro Stufe und der Turm- und Brückenschaden um 3 pro Stufe verstärkt"], "s_moos2": ["Hartnäckiges Grinden", "[Funktioniert nicht in dieser Season]", 1], "s_erde": ["Seelen Entzug", "Es besteht eine Chance von 20% das beim Töten eines Monsters mit dem Schwert 50% der Seelen der aktuellen Welle generiert werden."], "s_erde2": ["Seelendieb", "Türme haben beim Schuss eine 5% Chance 5% der Seelen der aktuellen Welle zu generieren."], "s_laterne": ["Glückswelle", "Pro Stufe +20% Chance, dass nach erfolgreichem Abschluss einer Welle 200 mal so viele Seelen erhalten werden"], "s_feuer": ["Seelenfürst", "[Funktioniert nicht in dieser Season]", 1], "s_fackel6": ["Seelenwahn", "Multipliziert den Seelenertrag um den Faktor 1,02 pro Stufe für jede neu erreichte Zahleneinheit der gesamten Seelen."]}},
+ forschung:{store:"mf",title:"Forschung Talentbaum",
+  grid:[
+   [0,0,["f_kaktus","Kaktus"],0,["f_maske","Maske"],0,["f_trank","Trank"],0,0],
+   [0,0,0,0,0,0,0,0,0],
+   [["f_netz","Netz"],0,["f_fackel","Seelenfackel"],0,["f_barren","Goldbarren"],0,["f_tresor","Tresor"],0,["f_erde","Erde"]],
+   [0,0,0,0,0,0,0,0,0],
+   [["f_leiter","Leiter"],0,["f_truhe","Truhe"],0,0,0,["f_stein","Steinblock"],0,["f_gold","Goldblock"]],
+   [0,0,0,0,0,0,0,0,0],
+   [0,0,["f_schloss","Verschlossen"],0,["f_laterne","Seelaterne"],0,["f_smaragd","Smaragd"],0,0]
+  ],
+  olive:["0,3","0,5","1,2","1,4","1,6","2,1","2,3","2,5","2,7","3,2","3,6","4,1","4,7","5,2","5,6","6,3","6,5"],
+  req:{f_maske:[],f_kaktus:["f_maske"],f_trank:["f_maske"],f_barren:["f_maske"],f_fackel:["f_kaktus","f_barren"],f_tresor:["f_trank","f_barren"],f_netz:["f_fackel"],f_truhe:["f_fackel"],f_erde:["f_tresor"],f_stein:["f_tresor"],f_gold:["f_stein"],f_smaragd:["f_stein"],f_leiter:["f_truhe"],f_schloss:["f_truhe"],f_laterne:["f_schloss","f_smaragd"]},
+  max:{f_leiter:1,f_truhe:1,f_stein:2,f_laterne:1,f_smaragd:1},noskill:[],noreset:["f_laterne"],desc:{"f_kaktus": ["Zeitkaktus", "Lässt beim Abbauen des Startkaktus mit einer Chance von Stufe zu 12000 einen Kaktus spawnen der die Zeit laufender Forschungen um 30 Sekunden verringert."], "f_maske": ["Genie", "Pro Punkt erhöht sich die Forschungsgeschwindigkeit um 10%"], "f_trank": ["500er IQ", "Erhöht das Limit der Warteschlange um 4 Slot pro Stufe."], "f_netz": ["Zeitspinner", "Pro 20 mit dem Schwert getötete Gegner reduziert sich die Zeit von laufenden Forschungen um Stufe Sekunden."], "f_fackel": ["Geisterforschung", "Erhöht bei laufender Forschung den Seelenertrag um den Faktor 4"], "f_barren": ["Wissenschaftliche Ermäßigung", "Pro Stufe sinkt der Preis für Forschung um 10%."], "f_tresor": ["Unerbittlicher Forscher", "Die Zeitstrafe bei Tod oder Wellendurchbruch wird um 32% pro Stufe reduziert."], "f_erde": ["Forschungs-Subventionen", "Erhöht bei laufender Forschung den Kaktus-Ertrag um den Faktor 4"], "f_leiter": ["Smart Home", "Du kannst nun über das Menü Forschungen in Auftrag geben."], "f_truhe": ["Analytischer Forscher", "Du kannst die Warteschlange nun über das Menü einsehen."], "f_stein": ["Einstein", "Pro Punkt einen aktiven Slot mehr für Forschungen"], "f_gold": ["Casino Forscher", "Es besteht eine Chance von Stufe / 10 das die Forschung nach der Hälfte der Zeit abgeschlossen wird."], "f_schloss": ["Zeitcontainer", "Alle 6 Stunden die du am Stück offline bist sammelts du einen von Stufe Stunden Boost für den Zeitcontainer. (Forschungsgeschwindigkeit +20% wenn aktiv)"], "f_laterne": ["Seelenforscher", "Mit dem Talent kannst du aktive Forschungen sofort für 1% (10% bei Tier) deiner Seelen beenden (Maximal 1000 Mal, Minimum 1 Millionen Seelen benötigt).", 0, "Dieses Talent kann nicht zurückgesetzt werden."], "f_smaragd": ["Warteschlangen Booster", "Sämtliche Forschungen in der Warteschlange werden pro vergangene Minute einer aktiven Forschung um 1 Sekunde reduziert."]}}
+};
+let MC,MC_OLIVE,MC_REQ,MC_MAX,MC_NOSKILL,MC_NORESET,MC_DESC,MC_POS,MC_NAME,MC_ID_AT,SK,SK_TITLE;
+function useTree(k){
+  const T=TREES[k];
+  MC=T.grid;MC_OLIVE=new Set(T.olive);MC_REQ=T.req;MC_MAX=T.max;MC_NOSKILL=new Set(T.noskill);MC_NORESET=new Set(T.noreset||[]);MC_DESC=T.desc;SK=T.store;SK_TITLE=T.title;
+  MC_POS={};MC_NAME={};MC_ID_AT={};
+  MC.forEach((row,y)=>row.forEach((it,x)=>{if(it){MC_POS[it[0]]=y+","+x;MC_NAME[it[0]]=it[1];MC_ID_AT[y+","+x]=it[0];}}));
+  Object.keys(MC_DESC).forEach(id=>MC_NAME[id]=MC_DESC[id][0]);
+}
+useTree("kaktus");
+const mcMax=id=>MC_MAX[id]||5;
+function mcCnt(id){return((st[SK]||{})[MC_POS[id]])||0;}
+function mcMissing(id){return MC_REQ[id].filter(r=>mcCnt(r)<mcMax(r));}
+const KLB_ORDER=(()=>{
+  const o=[],add=(t,id,n)=>{for(let i=0;i<n;i++)o.push([t,id]);};
+  add("forschung","f_maske",5);
+  add("kaktus","kuchen",5);add("kaktus","erde",5);
+  add("forschung","f_barren",5);add("forschung","f_trank",5);add("forschung","f_tresor",5);add("forschung","f_stein",2);
+  add("kaktus","kaktus",1);
+  add("kaktus","sandstein",5);add("kaktus","goldbarren",5);add("kaktus","diamant",5);
+  add("kaktus","gras",5);add("kaktus","busch",5);add("kaktus","goldblock",5);add("kaktus","fackel",5);
+  add("kaktus","laterne",5);
+  add("kaktus","knochen",5);add("kaktus","truhe",5);add("kaktus","schloss",5);add("kaktus","diamantblock",5);
+  return o;
+})();
+let FLASH=null;
+const SLB_ORDER=(()=>{const o=[],add=(id,n)=>{for(let i=0;i<n;i++)o.push(["seele",id]);};
+  add("s_fackel0",5);add("s_moos",5);add("knochen",1);add("s_pfeil",5);add("s_eis",5);add("s_rakete",1);add("s_laterne",5);
+  add("s_komp",5);add("s_uhr",5);add("s_moos2",5);add("s_fackel6",5);
+  add("s_karte",5);add("s_schwert",5);add("s_erde",1);add("s_erde2",1);add("s_feuer",1);
+  return o;})();
+const CLB_ORDER=(()=>{const o=[],add=(t,id,n)=>{for(let i=0;i<n;i++)o.push([t,id]);};
+  [["s_fackel0",5],["s_moos",5],["knochen",1],["s_pfeil",5],["s_karte",5],["s_eis",5],["s_rakete",1],["s_laterne",5]].forEach(a=>add("seele",a[0],a[1]));
+  [["f_maske",5],["f_trank",5],["f_barren",5],["f_tresor",5],["f_stein",2]].forEach(a=>add("forschung",a[0],a[1]));
+  [["kuchen",5],["gras",5],["kaktus",1],["busch",5],["goldblock",5],["fackel",5],["diamantblock",5],["erde",5],["sandstein",5],["goldbarren",5],["diamant",5],["laterne",5]].forEach(a=>add("kaktus",a[0],a[1]));
+  add("forschung","f_gold",5);add("forschung","f_smaragd",1);
+  [["knochen",5],["truhe",5],["schloss",5]].forEach(a=>add("kaktus",a[0],a[1]));
+  return o;})();
+const ORDERS={kaktus:()=>KLB_ORDER,seelen:()=>SLB_ORDER,casual:()=>CLB_ORDER};
+const EXTRA_TREE={kaktus:"kaktus",seelen:"seele",casual:"kaktus"};
+const allocM=(md,y)=>{const O=ORDERS[md](),r={kaktus:{},forschung:{},seele:{}};O.slice(0,y).forEach(([t,id])=>{r[t][id]=(r[t][id]||0)+1;});return r;};
+const sktPts=k=>{
+  const md=st.mode||"kaktus";
+  if(md==="custom"){
+    const b=(st.mb&&st.mb[k])||0;
+    return b;
+  }
+  const y=getBuy(),n=Object.values(allocM(md,y)[k]||{}).reduce((a,b)=>a+b,0);
+  return n+(k===EXTRA_TREE[md]?Math.max(0,y-ORDERS[md]().length):0);
+};
+const mcFull=()=>{const o={};MC.forEach((row,y)=>row.forEach((it,x)=>{if(it&&!MC_NOSKILL.has(it[0]))o[y+","+x]=mcMax(it[0]);}));return o;};
+const BUY_COST=["7", "159", "3.831k", "92.437k", "2.230m", "53.823m", "1.298b", "31.339b", "756.237b", "18.248t", "440.335t", "10.625aa", "256.394aa", "6.186ab", "149.291ab", "3.602ac", "86.928ac", "2.097ad", "50.615ad", "1.221ae", "29.472ae", "711.170ae", "17.160af", "414.094af", "9.992ag", "241.115ag", "5.818ah", "140.394ah", "3.387ai", "81.747ai", "1.972aj", "47.599aj", "1.148ak", "27.715ak", "668.789ak", "16.138al", "389.416al", "9.396am", "226.746am", "5.471an", "132.027an", "3.185ao", "76.876ao", "1.855ap", "44.762ap", "1.080aq", "26.064aq", "628.933aq", "15.176ar", "366.210ar", "8.836as", "213.233as", "5.145at", "124.159at", "2.996au", "72.294au", "1.744av", "42.095av", "1.015aw", "24.510aw", "591.453aw", "14.271ax", "344.386ax", "8.310ay", "200.526ay", "4.838az", "116.760az", "2.817ba", "67.986ba", "1.640bb", "39.586bb", "955.235bb", "23.050bc", "556.206bc", "13.421bd", "323.863bd", "7.814be", "188.576be", "4.550bf", "109.802bf", "2.649bg", "63.934bg", "1.542bh", "37.227bh", "898.309bh", "21.676bi", "523.059bi", "12.621bj", "304.562bj", "7.349bk", "177.338bk", "4.279bl", "103.258bl", "2.491bm", "60.124bm", "1.450bn", "35.008bn", "844.775bn", "20.384bo", "491.888bo", "11.869bp", "286.412bp", "6.911bq", "166.769bq", "4.024br", "97.105br", "2.343bs", "56.541bs", "1.364bt", "32.922bt", "794.432bt", "19.169bu", "462.575bu", "11.162bv", "269.344bv", "6.499bw", "156.831bw", "3.784bx", "91.318bx", "2.203by", "53.172by", "1.283bz", "30.960bz", "747.089bz", "18.027ca", "435.008ca", "10.496cb", "253.293cb", "6.112cc", "147.485cc", "3.558cd", "85.876cd", "2.072ce", "50.003ce", "1.206cf", "29.115cf", "702.567cf", "16.953cg", "409.084cg", "9.871ch", "238.198ch", "5.747ci", "138.696ci", "3.346cj", "80.758cj", "1.948ck", "47.023ck", "1.134cl", "27.380cl", "660.698cl"];
+const getBuy=()=>{const md=st.mode||"kaktus";const v=md==="custom"?(st.buy||0):((st.buys&&st.buys[md]!=null)?st.buys[md]:150);return Math.max(0,Math.min(150,v));};
+const setBuy=v=>{const md=st.mode||"kaktus";v=Math.max(0,Math.min(150,v));if(md==="custom")st.buy=v;else{st.buys=st.buys||{};st.buys[md]=v;}};
+const sumO=o=>Object.values(o||{}).reduce((a,b)=>a+b,0);
+const TK=["kaktus","seele","forschung"],NODEKEY={kaktus:"mc",seele:"ms",forschung:"mf"};
+const nodesOf=k=>sumO(st[NODEKEY[k]]);
+const curTree=()=>st.skt==="seele"?"seele":st.skt==="forschung"?"forschung":"kaktus";
+const mpInit=()=>{if(!st.mp){st.mp={};TK.forEach(k=>st.mp[k]=nodesOf(k));const d=getBuy()-sumO(st.mp);if(d>0)st.mp.kaktus+=d;}st.mb=st.mb||{};};
+const availOf=k=>{mpInit();return(st.mp[k]||0)-nodesOf(k);};
+const buyHtml=()=>{
+  const y=getBuy();
+  return `<div class="skbuy"><div class="skbt">Gekaufte Punkte: <b>${y}/150</b></div><div class="skbr"><button type="button" class="skb" data-buy="-1" aria-label="Punkt abziehen"${y<=0?" disabled":""}>&minus;</button><span class="skbc"><span>Kosten:</span><b>${y>=150?"–":BUY_COST[y]+" Seelen"}</b></span><button type="button" class="skb" data-buy="1" aria-label="Punkt kaufen"${y>=150?" disabled":""}>+</button></div><div class="skbm"><button type="button" class="skmm" data-buyset="0"${y<=0?" disabled":""}>Min</button><button type="button" class="skmm" data-buyset="150"${y>=150?" disabled":""}>Max</button></div></div>`;
+};
+const SKT_TIPS={
+  kaktus:["Basis-Talent Kaktus","mg","Pro investierten Punkt erhältst du ein Talentpunkt und der Kaktusertrag erhöht sich um den Faktor 10"],
+  seele:["Basis-Talent Seelen","mcy","Pro investierten Punkt erhältst du ein Talentpunkt und der Seelenertrag erhöht sich um den Faktor 3"],
+  forschung:["Basis-Talent Forschung","mcw","Für jeden investierten Punkt erhältst du einen Talentpunkt, die Forschungszeit verkürzt sich um 15 Sekunden, und die Forschungskosten werden gesenkt."]
+};
+const SKT_TIP=k=>{
+  const t=SKT_TIPS[k];if(!t)return "";
+  return `<span class="mct skm"><span class="mctt ${t[1]}">${t[0]} (${sktPts(k)}/150)</span><span class="mctd">${t[2]}</span></span>`;
+};
+const SKT=[["kaktus","Kaktus","Kaktus Talentbaum"],["seele","Seele","Seelen Talentbaum"],["forschung","Forschung","Forschungs-Baum"]];
+function skillHtml(){
+  const md=st.mode||"kaktus";
+  if(!["custom","kaktus","seelen","casual"].includes(md))return '<p class="notice">Für diesen Modus folgt der Skilltree in Kürze.</p>';
+  const cur=SKT.find(t=>t[0]===st.skt)||SKT[0];
+  const sel=`<div class="skt"><div class="sktw"><div class="seg" role="group" aria-label="Skilltree wählen">${SKT.map(t=>`<button type="button" data-skt="${t[0]}" aria-pressed="${t[0]===cur[0]}">${t[1]} ${sktPts(t[0])}/150${SKT_TIP(t[0])}</button>`).join("")}</div></div></div>`;
+  let body;
+  if(md==="custom"&&cur[0]==="forschung")body=skillTree("forschung",false,false);
+  else if(cur[0]==="kaktus"||cur[0]==="seele"||cur[0]==="forschung")body=skillTree(cur[0],md!=="custom",md==="custom"?false:allocM(md,getBuy())[cur[0]]);
+  else body=`<div class="mc"><h2>${cur[2]}</h2><p class="mce">Folgt in Kürze.</p></div>`;
+  if(md!=="custom")return sel+`<div class="skrow">${body}${buyHtml()}</div>`;
+  const side=`<div class="skside"><button type="button" class="reset" data-skreset="cur">Diesen Baum zurücksetzen</button></div>`;
+  return sel+`<div class="skrow">${side}${body}${buyHtml()}</div>`;
+}
+function skillTree(key,ro,full){
+  useTree(key);
+  st[SK]=st[SK]||{};
+  const M=ro?(full===true?mcFull():(full&&typeof full==="object")?Object.fromEntries(Object.keys(full).map(id=>[MC_POS[id],full[id]])):{}):st[SK];
+  const maxedAt=(y,x)=>MC[y]&&MC[y][x]&&!MC_NOSKILL.has(MC_ID_AT[y+","+x])&&(M[y+","+x]||0)>=mcMax(MC_ID_AT[y+","+x]);
+  let c="";
+  MC.forEach((row,y)=>row.forEach((it,x)=>{
+    if(it){const ns=MC_NOSKILL.has(it[0]),n=M[y+","+x]||0,miss=ro?[]:mcMissing(it[0]),lk=ns||(miss.length>0&&n===0);
+      const tip=it[1]+(ns?" (nicht skillbar)":lk?" (gesperrt: benötigt "+miss.map(m=>MC_NAME[m]).join(", ")+")":"");
+      const d=MC_DESC[it[0]],side=(x<=2?" tl":x>=6?" tr":"")+(y<=1?" tb":"");
+      const dt=d?`<div class="mct"><div class="mctt"><i>${MC_ICON[it[0]]}</i>${d[0]} (${n}/${mcMax(it[0])})</div><div class="mctd${d[2]?" w":""}">${d[1]}</div>${d[3]?`<div class="mctd w">${d[3]}</div>`:""}</div>`:"";
+      c+=`<div class="mcs i${n>=mcMax(it[0])?" max":""}${lk?" lk":""}${ro?" ro":""}${FLASH&&FLASH.tree===key&&FLASH.id===it[0]?(FLASH.neg?" flash neg":" flash"):""}${d?" hd":""}${side}" data-mc="${y},${x}" data-id="${it[0]}" ${d?"":`data-n="${tip}"`} role="button" tabindex="0" aria-label="${d?d[0]:tip}${ns?"":" "+n+"/"+mcMax(it[0])}">${MC_ICON[it[0]]}${ns?"":`<span class="mcc">${n}/${mcMax(it[0])}</span>`}${dt}</div>`;
+    }else if(MC_OLIVE.has(y+","+x)){
+      const g=maxedAt(y-1,x)||maxedAt(y+1,x)||maxedAt(y,x-1)||maxedAt(y,x+1);
+      c+=`<div class="mcs o${g?" g":""}"></div>`;
+    }else c+=`<div class="mcs"></div>`;
+  }));
+  return `<div class="mc"><h2>${SK_TITLE}${(st.mode||"kaktus")==="custom"?`<span class="skav">Verfügbare Punkte: <b>${availOf(key)}</b></span>`:""}</h2><div class="mcg">${c}</div></div>`;
+}
+function removeOne(tk,k){
+  useTree(tk);const store=st[NODEKEY[tk]]||{},n=store[k]||0,id=MC_ID_AT[k];
+  if(!n||!id||MC_NORESET.has(id))return false;
+  if(n>=mcMax(id)&&Object.keys(MC_REQ).some(o=>MC_REQ[o].includes(id)&&((store[MC_POS[o]])||0)>0))return false;
+  if(n>1)store[k]=n-1;else delete store[k];
+  return true;
+}
+function removeAny(){
+  const h=st.mh||[];
+  for(let i=h.length-1;i>=0;i--){const [tk,k]=h[i];if(k==="base")continue;h.splice(i,1);if(removeOne(tk,k))return [tk,k];}
+  for(const tk of ["kaktus","seele","forschung"])for(const k of Object.keys(st[NODEKEY[tk]]||{}))if(removeOne(tk,k))return [tk,k];
+  return null;
+}
+function mcStep(el,dir){
+  if((st.mode||"kaktus")!=="custom")return;
+  useTree(curTree());
+  if(!el||MC_NOSKILL.has(el.dataset.id))return;
+  st[SK]=st[SK]||{};const k=el.dataset.mc,id=el.dataset.id;let n=st[SK][k]||0;
+  if(dir>0){if(n>=mcMax(id)||mcMissing(id).length||(availOf(curTree())<=0&&getBuy()>=150))return;n++;}
+  else{
+    if(n===0||MC_NORESET.has(id))return;
+    // nicht zurücknehmen, solange davon abhängige Felder Punkte haben
+    if(n>=mcMax(id)&&Object.keys(MC_REQ).some(o=>MC_REQ[o].includes(id)&&mcCnt(o)>0))return;
+    n--;
+  }
+  if(dir>0&&availOf(curTree())<=0){const c=curTree();st.mp[c]++;st.mb[c]=(st.mb[c]||0)+1;(st.mh=st.mh||[]).push([c,"base"]);setBuy(getBuy()+1);}
+  if(n)st[SK][k]=n;else delete st[SK][k];
+  const tk=curTree();
+  st.mh=st.mh||[];
+  if(dir>0)st.mh.push([tk,k]);else{for(let i=st.mh.length-1;i>=0;i--)if(st.mh[i][0]===tk&&st.mh[i][1]===k){st.mh.splice(i,1);break;}}
+  save();render();
+}
+out.addEventListener("click",e=>{
+  const bs=e.target.closest("[data-buyset]");
+  if(st.tab==="skill"&&bs&&!bs.disabled){
+    if((st.mode||"kaktus")==="custom"){mpInit();
+      if(+bs.dataset.buyset>=150){const c=curTree(),d=150-getBuy();st.mp[c]+=d;st.mb[c]=(st.mb[c]||0)+d;}
+      else{st.mc={};st.ms={};st.mf={};st.mp={kaktus:0,seele:0,forschung:0};st.mb={};st.mh=[];}
+      setBuy(sumO(st.mp));}
+    else setBuy(+bs.dataset.buyset);
+    save();render();return;}
+  const bb=e.target.closest("[data-buy]");
+  if(st.tab==="skill"&&bb&&!bb.disabled){const dir=+bb.dataset.buy;
+    const bm=st.mode||"kaktus";
+    if(ORDERS[bm]){
+      const y=getBuy(),ORD=ORDERS[bm]();
+      if(dir>0||y>0){
+        const step=ORD[dir>0?y:y-1];
+        st.skt=step?step[0]:EXTRA_TREE[bm];
+        FLASH=step?{tree:step[0],id:step[1],neg:dir<0}:null;
+      }
+    }
+    if(bm==="custom"){
+      mpInit();const cur=curTree();
+      if(dir>0){if(getBuy()>=150)return;st.mp[cur]++;st.mb[cur]=(st.mb[cur]||0)+1;(st.mh=st.mh||[]).push([cur,"base"]);setBuy(getBuy()+1);save();render();return;}
+      let T=availOf(cur)>0?cur:TK.find(k=>availOf(k)>0),fl=null;
+      if(!T){const r=removeAny();if(!r)return;T=r[0];fl={tree:r[0],id:MC_ID_AT[r[1]],neg:true};}
+      st.mp[T]--;
+      if((st.mb[T]||0)>0){st.mb[T]--;const h=st.mh||[];for(let q=h.length-1;q>=0;q--)if(h[q][0]===T&&h[q][1]==="base"){h.splice(q,1);break;}}
+      setBuy(getBuy()-1);st.skt=T;FLASH=fl;save();render();FLASH=null;return;}
+    setBuy(getBuy()+dir);save();render();FLASH=null;return;}
+  const r=e.target.closest("[data-skreset]");
+  if(st.tab==="skill"&&r){
+    const tk=curTree();mpInit();
+    st.mh=(st.mh||[]).filter(h=>h[0]!==tk);
+    st[NODEKEY[tk]]={};st.mp[tk]=0;st.mb[tk]=0;
+    setBuy(sumO(st.mp));
+    save();render();
+  }
+});
+out.addEventListener("click",e=>{const b=e.target.closest("[data-skt]");if(st.tab==="skill"&&b){
+  if(e.shiftKey&&(st.mode||"kaktus")==="custom"){
+    if(getBuy()<150){mpInit();st.mp[b.dataset.skt]++;st.mb[b.dataset.skt]=(st.mb[b.dataset.skt]||0)+1;(st.mh=st.mh||[]).push([b.dataset.skt,"base"]);setBuy(getBuy()+1);save();render();}
+    return;}
+  st.skt=b.dataset.skt;save();render();return;}});
+out.addEventListener("click",e=>{if(st.tab==="skill")mcStep(e.target.closest("[data-mc]"),1);});
+out.addEventListener("contextmenu",e=>{const el=e.target.closest("[data-mc]");if(st.tab==="skill"&&el){e.preventDefault();mcStep(el,-1);}});
+out.addEventListener("keydown",e=>{if(st.tab==="skill"&&(e.key==="Enter"||e.key===" ")){const el=e.target.closest("[data-mc]");if(el){e.preventDefault();mcStep(el,1);}}});
 function lsubBar(){
   return `<div class="lsub"><div class="seg" role="group" aria-label="Ansicht"><button type="button" data-lsub="list" aria-pressed="${st.lsub!=="plan"}">Essenzen pro Level</button><button type="button" data-lsub="plan" aria-pressed="${st.lsub==="plan"}">Kombinierte Wellen</button></div></div>`;
 }
 function render(){
   build();
+  document.getElementById("modes").hidden=st.tab!=="skill";
+  document.querySelectorAll("#modeSeg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.mode===(st.mode||"kaktus")));
   hideTip();
   document.getElementById("checkHead").hidden=st.tab!=="check";
   document.getElementById("progHead").hidden=st.tab!=="prog";
-  document.getElementById("tList").setAttribute("aria-selected",st.tab==="list");
-  document.getElementById("tCheck").setAttribute("aria-selected",st.tab==="check");
+  const isEss=st.tab==="list"||st.tab==="check";
+  document.getElementById("tList").setAttribute("aria-selected",isEss);
+  document.getElementById("essSw").hidden=!isEss;
+  document.getElementById("swList").setAttribute("aria-pressed",st.tab==="list");
+  document.getElementById("swCheck").setAttribute("aria-pressed",st.tab==="check");
   document.getElementById("tProg").setAttribute("aria-selected",st.tab==="prog");
   document.getElementById("tSword").setAttribute("aria-selected",st.tab==="sword");
   document.getElementById("tAsp").setAttribute("aria-selected",st.tab==="asp");
   document.getElementById("tBp").setAttribute("aria-selected",st.tab==="bp");
+  document.getElementById("tMinion").setAttribute("aria-selected",st.tab==="minion");
+  document.getElementById("tSkill").setAttribute("aria-selected",st.tab==="skill");
   if(st.tab==="list"){out.innerHTML=lsubBar()+(st.lsub==="plan"?planHtml():listHtml());return;}
   if(st.tab==="sword"){out.innerHTML=swordHtml();return;}
   if(st.tab==="asp"){out.innerHTML=aspHtml();return;}
   if(st.tab==="bp"){out.innerHTML=bpHtml();return;}
+  if(st.tab==="minion"){out.innerHTML='<p class="notice">Die Minions folgen in Kürze.</p>';return;}
+  if(st.tab==="skill"){out.innerHTML=skillHtml();return;}
   if(st.tab==="prog"){
     const sel=document.getElementById("progSel");
     if(!sel.options.length)Object.entries(PROG).forEach(([k,v])=>sel.add(new Option(v.title,k)));
@@ -425,13 +778,17 @@ out.addEventListener("click",e=>{
   if(e.target.tagName==="INPUT"){toggle(tr.dataset.k);return;}
   toggle(tr.dataset.k);
 });
+document.getElementById("tMinion").onclick=()=>{st.tab="minion";save();render();window.scrollTo(0,0);};
+document.getElementById("modeSeg").onclick=e=>{const b=e.target.closest("[data-mode]");if(b){st.mode=b.dataset.mode;save();render();}};
+document.getElementById("tSkill").onclick=()=>{st.tab="skill";save();render();window.scrollTo(0,0);};
 document.getElementById("tBp").onclick=()=>{st.tab="bp";save();render();window.scrollTo(0,0);};
 document.getElementById("tAsp").onclick=()=>{st.tab="asp";save();render();window.scrollTo(0,0);};
 document.getElementById("tSword").onclick=()=>{st.tab="sword";save();render();window.scrollTo(0,0);};
 document.getElementById("tProg").onclick=()=>{st.tab="prog";save();render();window.scrollTo(0,0);};
 document.getElementById("progSel").onchange=e=>{st.prog=e.target.value;save();render();};
-document.getElementById("tList").onclick=()=>{st.tab="list";save();render();window.scrollTo(0,0);};
-document.getElementById("tCheck").onclick=()=>{st.tab="check";save();render();window.scrollTo(0,0);};
+document.getElementById("tList").onclick=()=>{if(st.tab!=="check")st.tab="list";save();render();window.scrollTo(0,0);};
+document.getElementById("swList").onclick=()=>{st.tab="list";save();render();};
+document.getElementById("swCheck").onclick=()=>{st.tab="check";save();render();};
 document.getElementById("vTier").onclick=()=>{st.view="tier";save();render();};
 document.getElementById("vAmt").onclick=()=>{st.view="amt";save();render();};
 document.getElementById("f").oninput=e=>{e.target.value=e.target.value.replace(/\D/g,"");const v=Math.floor(+e.target.value);st.f=v>=2?Math.min(v,336):null;save();render();};
