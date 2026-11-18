@@ -107,7 +107,6 @@ tbody tr:hover{background:color-mix(in srgb,var(--accent) 7%,transparent)}
 tbody tr.done td{color:var(--done)}
 tbody tr.done td.e{text-decoration:line-through}
 input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent);cursor:pointer;margin:0;vertical-align:middle}
-.tag{display:inline-block;min-width:2.2em;text-align:center;font-size:.78rem;font-weight:700;color:#fff;border-radius:5px;padding:1px 6px;margin-left:8px;background:var(--c)}
 .empty{padding:18px;text-align:center;color:var(--muted)}
 .mc{max-width:560px;margin:8px auto;background:linear-gradient(160deg,#2a3f43,#16262a 70%);border:3px solid #0d1719;border-radius:10px;padding:12px 14px 16px;box-shadow:0 0 0 2px #3b5559,0 10px 28px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.08)}
 .mc h2{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 10px;font:700 1.5rem/1.1 "Courier New",monospace;color:#ffff55;text-shadow:2px 2px 0 #3f3f15,0 0 14px rgba(255,255,85,.25);letter-spacing:.5px}
@@ -166,13 +165,11 @@ input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent);cursor:po
 .skt .seg button:hover .mct.skm,.skt .seg button:focus-visible .mct.skm{display:block}
 .skm .mctt{display:block;margin-bottom:5px}.skm .mctd{display:block}
 .mg{color:#55ff55}.mctt.mcy{color:#55ffff}.mctt.mcw{color:#ffff55}
-.skt .seg button:last-child .mct.skm{left:auto;right:0}.my{color:#ffff55;font-weight:400}
-.mch{margin:8px 2px 0;color:#9db3b6;font:12px/1.3 "Courier New",monospace}
+.skt .seg button:last-child .mct.skm{left:auto;right:0}
 .mcs svg{width:78%;height:78%;display:block;filter:drop-shadow(0 2px 2px rgba(0,0,0,.5))}
 .mcs[data-n]:hover::after{content:attr(data-n);position:absolute;bottom:108%;left:50%;transform:translateX(-50%);background:#14061f;color:#fff;border:2px solid #3a1a7a;border-radius:3px;padding:2px 8px;font:12px/1.3 "Courier New",monospace;white-space:nowrap;z-index:4;pointer-events:none}
 #essSw[hidden]{display:none}
 .lsub{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:0 0 14px}
-.planbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:0 0 12px}
 table.plan td{vertical-align:top}
 table.plan td.miss{color:#e5484d;font-weight:600}
 table.plan td.muted{color:var(--muted)}
@@ -560,7 +557,7 @@ const ORDERS={kaktus:()=>KLB_ORDER,seelen:()=>SLB_ORDER,casual:()=>CLB_ORDER};
 const EXTRA_TREE={kaktus:"kaktus",seelen:"seele",casual:"kaktus"};
 const allocM=(md,y)=>{const O=ORDERS[md](),r={kaktus:{},forschung:{},seele:{}};O.slice(0,y).forEach(([t,id])=>{r[t][id]=(r[t][id]||0)+1;});return r;};
 const sktPts=k=>{
-  const md=st.mode||"kaktus";
+  const md=mode();
   if(md==="custom"){
     const b=(st.mb&&st.mb[k])||0;
     return b;
@@ -570,8 +567,10 @@ const sktPts=k=>{
 };
 const mcFull=()=>{const o={};MC.forEach((row,y)=>row.forEach((it,x)=>{if(it&&!MC_NOSKILL.has(it[0]))o[y+","+x]=mcMax(it[0]);}));return o;};
 const BUY_COST=["7", "159", "3.831k", "92.437k", "2.230m", "53.823m", "1.298b", "31.339b", "756.237b", "18.248t", "440.335t", "10.625aa", "256.394aa", "6.186ab", "149.291ab", "3.602ac", "86.928ac", "2.097ad", "50.615ad", "1.221ae", "29.472ae", "711.170ae", "17.160af", "414.094af", "9.992ag", "241.115ag", "5.818ah", "140.394ah", "3.387ai", "81.747ai", "1.972aj", "47.599aj", "1.148ak", "27.715ak", "668.789ak", "16.138al", "389.416al", "9.396am", "226.746am", "5.471an", "132.027an", "3.185ao", "76.876ao", "1.855ap", "44.762ap", "1.080aq", "26.064aq", "628.933aq", "15.176ar", "366.210ar", "8.836as", "213.233as", "5.145at", "124.159at", "2.996au", "72.294au", "1.744av", "42.095av", "1.015aw", "24.510aw", "591.453aw", "14.271ax", "344.386ax", "8.310ay", "200.526ay", "4.838az", "116.760az", "2.817ba", "67.986ba", "1.640bb", "39.586bb", "955.235bb", "23.050bc", "556.206bc", "13.421bd", "323.863bd", "7.814be", "188.576be", "4.550bf", "109.802bf", "2.649bg", "63.934bg", "1.542bh", "37.227bh", "898.309bh", "21.676bi", "523.059bi", "12.621bj", "304.562bj", "7.349bk", "177.338bk", "4.279bl", "103.258bl", "2.491bm", "60.124bm", "1.450bn", "35.008bn", "844.775bn", "20.384bo", "491.888bo", "11.869bp", "286.412bp", "6.911bq", "166.769bq", "4.024br", "97.105br", "2.343bs", "56.541bs", "1.364bt", "32.922bt", "794.432bt", "19.169bu", "462.575bu", "11.162bv", "269.344bv", "6.499bw", "156.831bw", "3.784bx", "91.318bx", "2.203by", "53.172by", "1.283bz", "30.960bz", "747.089bz", "18.027ca", "435.008ca", "10.496cb", "253.293cb", "6.112cc", "147.485cc", "3.558cd", "85.876cd", "2.072ce", "50.003ce", "1.206cf", "29.115cf", "702.567cf", "16.953cg", "409.084cg", "9.871ch", "238.198ch", "5.747ci", "138.696ci", "3.346cj", "80.758cj", "1.948ck", "47.023ck", "1.134cl", "27.380cl", "660.698cl"];
-const getBuy=()=>{const md=st.mode||"kaktus";const v=md==="custom"?(st.buy||0):((st.buys&&st.buys[md]!=null)?st.buys[md]:150);return Math.max(0,Math.min(150,v));};
-const setBuy=v=>{const md=st.mode||"kaktus";v=Math.max(0,Math.min(150,v));if(md==="custom")st.buy=v;else{st.buys=st.buys||{};st.buys[md]=v;}};
+const MODES=["kaktus","seelen","casual","custom"];
+const mode=()=>MODES.includes(st.mode)?st.mode:"kaktus";
+const getBuy=()=>{const md=mode();const v=md==="custom"?(st.buy||0):((st.buys&&st.buys[md]!=null)?st.buys[md]:150);return Math.max(0,Math.min(150,v));};
+const setBuy=v=>{const md=mode();v=Math.max(0,Math.min(150,v));if(md==="custom")st.buy=v;else{st.buys=st.buys||{};st.buys[md]=v;}};
 const sumO=o=>Object.values(o||{}).reduce((a,b)=>a+b,0);
 const TK=["kaktus","seele","forschung"],NODEKEY={kaktus:"mc",seele:"ms",forschung:"mf"};
 const nodesOf=k=>sumO(st[NODEKEY[k]]);
@@ -593,14 +592,10 @@ const SKT_TIP=k=>{
 };
 const SKT=[["kaktus","Kaktus","Kaktus Talentbaum"],["seele","Seele","Seelen Talentbaum"],["forschung","Forschung","Forschungs-Baum"]];
 function skillHtml(){
-  const md=st.mode||"kaktus";
-  if(!["custom","kaktus","seelen","casual"].includes(md))return '<p class="notice">Für diesen Modus folgt der Skilltree in Kürze.</p>';
+  const md=mode();
   const cur=SKT.find(t=>t[0]===st.skt)||SKT[0];
   const sel=`<div class="skt"><div class="sktw"><div class="seg" role="group" aria-label="Skilltree wählen">${SKT.map(t=>`<button type="button" data-skt="${t[0]}" aria-pressed="${t[0]===cur[0]}">${t[1]} ${sktPts(t[0])}/150${SKT_TIP(t[0])}</button>`).join("")}</div></div></div>`;
-  let body;
-  if(md==="custom"&&cur[0]==="forschung")body=skillTree("forschung",false,false);
-  else if(cur[0]==="kaktus"||cur[0]==="seele"||cur[0]==="forschung")body=skillTree(cur[0],md!=="custom",md==="custom"?false:allocM(md,getBuy())[cur[0]]);
-  else body=`<div class="mc"><h2>${cur[2]}</h2><p class="mce">Folgt in Kürze.</p></div>`;
+  const body=skillTree(cur[0],md!=="custom",md==="custom"?false:allocM(md,getBuy())[cur[0]]);
   if(md!=="custom")return sel+`<div class="skrow">${body}${buyHtml()}</div>`;
   const side=`<div class="skside"><button type="button" class="reset" data-skreset="cur">Diesen Baum zurücksetzen</button></div>`;
   return sel+`<div class="skrow">${side}${body}${buyHtml()}</div>`;
@@ -622,7 +617,7 @@ function skillTree(key,ro,full){
       c+=`<div class="mcs o${g?" g":""}"></div>`;
     }else c+=`<div class="mcs"></div>`;
   }));
-  return `<div class="mc"><h2>${SK_TITLE}${(st.mode||"kaktus")==="custom"?`<span class="skav">Verfügbare Punkte: <b>${availOf(key)}</b></span>`:""}</h2><div class="mcg">${c}</div></div>`;
+  return `<div class="mc"><h2>${SK_TITLE}${mode()==="custom"?`<span class="skav">Verfügbare Punkte: <b>${availOf(key)}</b></span>`:""}</h2><div class="mcg">${c}</div></div>`;
 }
 function removeOne(tk,k){
   useTree(tk);const store=st[NODEKEY[tk]]||{},n=store[k]||0,id=MC_ID_AT[k];
@@ -638,7 +633,7 @@ function removeAny(){
   return null;
 }
 function mcStep(el,dir){
-  if((st.mode||"kaktus")!=="custom")return;
+  if(mode()!=="custom")return;
   useTree(curTree());
   if(!el||MC_NOSKILL.has(el.dataset.id))return;
   st[SK]=st[SK]||{};const k=el.dataset.mc,id=el.dataset.id;let n=st[SK][k]||0;
@@ -659,7 +654,7 @@ function mcStep(el,dir){
 out.addEventListener("click",e=>{
   const bs=e.target.closest("[data-buyset]");
   if(st.tab==="skill"&&bs&&!bs.disabled){
-    if((st.mode||"kaktus")==="custom"){mpInit();
+    if(mode()==="custom"){mpInit();
       if(+bs.dataset.buyset>=150){const c=curTree(),d=150-getBuy();st.mp[c]+=d;st.mb[c]=(st.mb[c]||0)+d;}
       else{st.mc={};st.ms={};st.mf={};st.mp={kaktus:0,seele:0,forschung:0};st.mb={};st.mh=[];}
       setBuy(sumO(st.mp));}
@@ -667,7 +662,7 @@ out.addEventListener("click",e=>{
     save();render();return;}
   const bb=e.target.closest("[data-buy]");
   if(st.tab==="skill"&&bb&&!bb.disabled){const dir=+bb.dataset.buy;
-    const bm=st.mode||"kaktus";
+    const bm=mode();
     if(ORDERS[bm]){
       const y=getBuy(),ORD=ORDERS[bm]();
       if(dir>0||y>0){
@@ -695,7 +690,7 @@ out.addEventListener("click",e=>{
   }
 });
 out.addEventListener("click",e=>{const b=e.target.closest("[data-skt]");if(st.tab==="skill"&&b){
-  if(e.shiftKey&&(st.mode||"kaktus")==="custom"){
+  if(e.shiftKey&&mode()==="custom"){
     if(getBuy()<150){mpInit();st.mp[b.dataset.skt]++;st.mb[b.dataset.skt]=(st.mb[b.dataset.skt]||0)+1;(st.mh=st.mh||[]).push([b.dataset.skt,"base"]);setBuy(getBuy()+1);save();render();}
     return;}
   st.skt=b.dataset.skt;save();render();return;}});
@@ -708,7 +703,7 @@ function lsubBar(){
 function render(){
   build();
   document.getElementById("modes").hidden=st.tab!=="skill";
-  document.querySelectorAll("#modeSeg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.mode===(st.mode||"kaktus")));
+  document.querySelectorAll("#modeSeg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.mode===mode()));
   hideTip();
   document.getElementById("checkHead").hidden=st.tab!=="check";
   document.getElementById("progHead").hidden=st.tab!=="prog";
