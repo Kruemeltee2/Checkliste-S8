@@ -30,23 +30,21 @@ header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px so
 .dc:hover{background:var(--line)}
 h1{margin:0;font-size:1.35rem;font-weight:700}
 .tabs{display:flex;gap:4px;margin:0 0 10px;border-bottom:1px solid var(--line);flex-wrap:wrap}
-.tabs button{white-space:nowrap}
 .sub{font-size:.88rem;color:var(--muted)}
-.ptitle .prec{margin-left:12px;font-size:.9rem;font-weight:600;color:#d93025}
-.tabs button{border:0;border-bottom:3px solid transparent;background:transparent;color:var(--muted);padding:6px 14px 8px;font:inherit;font-weight:600;cursor:pointer;margin-bottom:-1px}
+.tabs button{white-space:nowrap;border:0;border-bottom:3px solid transparent;background:transparent;color:var(--muted);padding:6px 14px 8px;font:inherit;font-weight:600;cursor:pointer;margin-bottom:-1px}
 .tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--accent)}
 table.ro tbody tr{cursor:default}
 table.ro tbody tr:hover{background:transparent}
 #progSel{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);margin-bottom:2px;min-width:14em}
 .ptitle{margin:0 0 8px;font-size:1.2rem}.ptitle span{color:var(--muted);font-weight:500}
+.ptitle .prec{margin-left:12px;font-size:.9rem;font-weight:600;color:#d93025}
 .stage{margin-bottom:12px}
 .pmeta{display:flex;align-items:center;gap:12px;margin-bottom:8px;font-size:.92rem;color:var(--muted)}
 .bar+table{margin-top:14px}
 .ctr{text-align:center}th.ctr{text-align:center}
-.chip{--cc:#8f2fd9;display:inline-flex;align-items:center;gap:8px;min-width:8.5em;padding:3px 14px 3px 10px;border-radius:999px;font-weight:600;color:var(--ink);background:color-mix(in srgb,var(--cc) 17%,transparent);border:1px solid color-mix(in srgb,var(--cc) 55%,transparent);transition:opacity .15s}
+.chip{--cc:#8f2fd9;display:inline-flex;white-space:nowrap;align-items:center;gap:8px;min-width:8.5em;padding:3px 14px 3px 10px;border-radius:999px;font-weight:600;color:var(--ink);background:color-mix(in srgb,var(--cc) 17%,transparent);border:1px solid color-mix(in srgb,var(--cc) 55%,transparent);transition:opacity .15s}
 .chip::before{content:"";flex:none;width:10px;height:10px;border-radius:50%;background:var(--cc)}
 tbody tr.done .chip{opacity:.5}
-.chip{white-space:nowrap}
 table.asp th,table.asp td{white-space:nowrap}
 .scroll{overflow-x:auto;border-radius:10px}
 .bar+.scroll{margin-top:14px}
@@ -73,6 +71,40 @@ td.warn{background:color-mix(in srgb,#e53935 24%,transparent);color:var(--ink)}
 .callout b{display:block;margin-bottom:2px}
 .chip.b{--cc:#4a8be0}.chip.o{--cc:#f29a00}td.e.warn{background:color-mix(in srgb,#e53935 24%,transparent);color:var(--ink)}
 .chip.g{--cc:#5fa84d}.chip.n{--cc:#8a928c}
+/* Minions */
+.mnbox{margin:0 0 12px;padding:10px 14px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--c);border-radius:6px;line-height:1.5;font-size:.95rem}
+.mnbox b{color:var(--ink)}
+.mnbox.warn{--c:#c98a3c}
+.mnbox.info{--c:#7f8c99}
+.mnbox.ok{--c:var(--accent)}
+.mnbox .mnrec{margin:8px 0 0}
+.mnnote{max-width:560px;margin:0 auto 14px}
+.mnsel{display:flex;justify-content:center;margin:16px 0 14px}
+.mnsel .seg{flex-wrap:wrap}
+@media(max-width:640px){.mnsel{display:block}.mnsel .seg{display:flex}.mnsel .seg button{flex:1 1 auto}}
+.mnintro{margin:18px 0 12px;text-align:center;font-weight:500}
+.mnhint{margin:24px 0;text-align:center;color:var(--muted)}
+.mc.first{margin-top:18px}
+.mct.clk{pointer-events:none;bottom:100%}
+.mct.clk .mctd small{display:block;color:#9db3b6}
+.mcs.i.on{box-shadow:inset 0 0 0 2px #7dff9a,0 0 10px rgba(125,255,154,.45)}
+.mnpanel{max-width:560px;margin:14px auto 0}
+.mnpanel.mnstd{margin-top:18px}
+.mnpanel h3{margin:0 0 8px;font-size:1.1rem}
+.mnpanel h3 small{margin-left:6px;font-size:.85rem;font-weight:400;color:var(--muted)}
+.mnpanel p{margin:0 0 12px;line-height:1.5}
+.mnl{margin:8px 0 0;padding-left:20px}
+.mnl.mnl2{margin:0 0 14px}
+.rl{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-wrap:wrap;gap:6px 14px}
+.rl li,.rtab .rn{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--c)}
+.rl li::before,.rtab .rn::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--c)}
+.rl li{gap:7px}
+.rl small{font-weight:400;color:var(--muted)}
+.rtab{width:100%;border-collapse:collapse;margin:0 0 12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.rtab th,.rtab td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line)}
+.rtab tr:last-child td{border-bottom:0}
+.rtab th{font-size:.85rem;color:var(--muted);font-weight:600;background:color-mix(in srgb,var(--line) 40%,transparent)}
+.rtab td:last-child,.rtab th:last-child{text-align:center;font-variant-numeric:tabular-nums}
 .notes{margin-top:18px;padding:12px 16px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px}
 .notes h3{margin:0 0 6px;font-size:1rem}.notes ul{margin:0;padding-left:20px}.notes li{margin:3px 0}
 .total{display:flex;justify-content:space-between;gap:12px;font-size:.92rem;color:var(--muted);margin-bottom:6px}
@@ -154,7 +186,6 @@ input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent);cursor:po
 @media(max-width:1060px){.skrow{grid-template-columns:1fr}.skrow .mc,.skside,.skbuy{grid-column:1}.skbuy{grid-row:3;justify-self:center}.skside{grid-row:1;justify-self:center;flex-direction:row;width:auto}.skrow .mc{grid-row:2}}
 .skside button{width:100%;margin:0;padding:8px 12px;text-align:center}
 .skt{display:flex;justify-content:center;margin:4px 0 12px}
-.mce{margin:6px 2px 4px;color:#9db3b6}
 .skav{font:400 .9rem/1.2 "Segoe UI",system-ui,sans-serif;color:#cfe3e6;text-shadow:none;letter-spacing:0;white-space:nowrap}
 .skav b{color:#fff}
 .skt .seg{overflow:visible}
@@ -180,7 +211,8 @@ table.plan tr.now td{background:color-mix(in srgb,var(--accent) 16%,transparent)
 table.plan .mob{cursor:help;text-decoration:underline dotted;text-underline-offset:3px}
 table.plan .mob:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
 /* (c) Kruemeltee2 - Signatur KT2-S8-7f3a9c1e-4b2d-48a6-9e0c-d51b6a2f83e7 */
-.kt2sig{margin:28px 0 18px;text-align:center;font-size:.8rem;color:var(--muted)}
+.kt2sig{position:fixed;left:0;right:0;bottom:0;z-index:3;padding:34px 12px calc(10px + env(safe-area-inset-bottom));text-align:center;font-size:.8rem;color:var(--muted);background:linear-gradient(to bottom,color-mix(in srgb,var(--bg) 0%,transparent),var(--bg) 70%);pointer-events:none}
+body{padding-bottom:76px}
 .kt2sig a{color:inherit}
 </style>
 </head>
@@ -591,6 +623,124 @@ const SKT_TIP=k=>{
   return `<span class="mct skm"><span class="mctt ${t[1]}">${t[0]} (${sktPts(k)}/150)</span><span class="mctd">${t[2]}</span></span>`;
 };
 const SKT=[["kaktus","Kaktus","Kaktus Talentbaum"],["seele","Seele","Seelen Talentbaum"],["forschung","Forschung","Forschungs-Baum"]];
+/* ===== Minions ===== */
+const MINIONS=[["bill","Salty Bill"],["nest","Nest"],["anspitzer","Anspitzer"],["auto","Automatisierungsstation"]];
+
+/* Pixel-Icons (16x16, SVG) */
+const ICONS={
+ gold:'<svg viewBox="0 0 16 16"><path fill="#1f3a45" d="M1 4h14v10H1z"/><path fill="#f2a63a" d="M2 5h12v8H2z"/><path fill="#fbe05a" d="M2 5h12v3H2zM4 8h2v5H4zM9 8h2v5H9z"/><path fill="#f7f2e3" d="M3 3h10v2H3zM5 5h2v1H5z"/><path fill="#e08a1e" d="M2 9h12v1H2zM12 10h2v3h-2z"/></svg>',
+ magma:'<svg viewBox="0 0 16 16"><path fill="#1f3a45" d="M5 1h6v1h3v3h1v6h-1v3h-3v1H5v-1H2v-3H1V5h1V2h3z"/><path fill="#8a7468" d="M5 2h6v1h2v2h1v6h-1v2h-2v1H5v-1H3v-2H2V5h1V3h2z"/><path fill="#5c4a45" d="M4 4h3v2H4zM9 3h3v2H9zM10 9h4v2h-4zM3 11h4v2H3z"/><path fill="#f6c844" d="M7 3h2v10H7zM4 7h8v2H4z"/><path fill="#ee8a22" d="M5 5h1v2H5zM11 6h1v2h-1zM6 10h2v2H6zM10 11h2v1h-2z"/><path fill="#d6392f" d="M3 5h1v1H3zM12 4h1v1h-1zM12 11h1v1h-1zM8 13h1v1H8z"/></svg>',
+ ruby:'<svg viewBox="0 0 16 16"><path fill="#1c2c36" d="M6 1h5v1h2v2h1v6h-1v2h-2v2H8v1H5v-2H4v-2H2V6h1V4h1V2h2z"/><path fill="#e9384b" d="M6 2h5v1h1v2h1v5h-1v1h-1v2H8v1H6v-1H5v-2H3V6h1V4h1V3h1z"/><path fill="#ff6a78" d="M6 3h3v1H6zM5 5h2v3H5z"/><path fill="#8d2a78" d="M11 8h2v2h-1v2h-2v1H8v-1h2v-2h1zM4 10h1v2h2v1H5v-1H4z"/><path fill="#fff" d="M9 5h2v2H9z"/><path fill="#43b4f2" d="M7 6h2v1H7zM6 7h2v2H6zM8 7h1v1H8z"/></svg>',
+ cactus:'<svg viewBox="0 0 16 16"><path fill="#a6d430" d="M8 1l6 3-6 3-6-3z"/><path fill="#6fa61e" d="M2 4l6 3v8L2 12z"/><path fill="#4b7a14" d="M8 7l6-3v8l-6 3z"/><path fill="#e9d6a9" d="M6 3h1v1H6zM9 2h1v1H9zM8 4h1v1H8zM10 4h1v1h-1zM4 5h1v1H4zM2 8h1v1H2zM13 8h1v1h-1zM8 10h1v1H8z"/><path fill="#3e6511" d="M3 7l4 2v1L3 8zM3 10l4 2v1l-4-2zM9 9l4-2v1l-4 2z"/></svg>',
+ egg:'<svg viewBox="0 0 16 16"><path fill="#1f3a45" d="M6 1h4v1h2v2h1v4h1v4h-1v2h-2v1H6v-1H4v-2H3V8h1V4h1V2h1z"/><path fill="#cdb7b1" d="M6 2h4v1h2v2h1v3h1v3h-1v2h-2v1H6v-1H4v-2H3V8h1V5h1V3h1z"/><path fill="#f6eeea" d="M6 3h3v1h1v2H9v1H7v1H6V6H5V4h1zM7 9h2v2H7z"/><path fill="#e4cfc8" d="M5 8h1v2H5zM10 6h1v2h-1zM4 11h8v1H4z"/><path fill="#b49b96" d="M5 12h6v1H5zM12 8h1v3h-1z"/></svg>',
+ anvil:'<svg viewBox="0 0 16 16"><path fill="#1c2a30" d="M3 2h9v1h2v4h-2v1h-1v2h2v1h1v3H3v-3h1v-1h2V8H5V7H3z"/><path fill="#5b5f63" d="M4 3h8v1h1v2h-1v1H4z"/><path fill="#7a7e82" d="M5 3h5v1H5z"/><path fill="#3f4246" d="M4 4h8v3H4zM6 8h4v2H6z"/><path fill="#33363a" d="M5 11h8v1H5z"/><path fill="#2a2d30" d="M4 12h9v2H4z"/></svg>',
+ grind:'<svg viewBox="0 0 16 16"><path fill="#1c2a30" d="M6 1h8v1h1v9h-1v2h-1v1H8v-2H7v4H3v-1H2V8h1V7h1V6h1V2h1z"/><path fill="#a39d9b" d="M7 2h7v3H7z"/><path fill="#8b8584" d="M7 5h4v8H7z"/><path fill="#6a6564" d="M11 5h3v6h-1v1h-2z"/><path fill="#4a2f1d" d="M3 8h3v7H3z"/><path fill="#6b4528" d="M4 7h2v2H4zM4 9h1v5H4z"/></svg>',
+ crystal:'<svg viewBox="0 0 16 16"><path fill="#e8a5fa" d="M9 3h5v4h-3z"/><path fill="#b04be6" d="M8 4l3 3-3 3-3 3-2-1v-2l3-3z"/><path fill="#c46cee" d="M9 4l2 3-2 2-2 2-2 1 1-2 2-2z"/><path fill="#5b22c0" d="M4 12l4-3 3-2h3l-4 5H4z"/><path fill="#7a34d6" d="M5 11l4-3 2-1-3 4z"/></svg>',
+ magnet:'<svg viewBox="0 0 16 16"><path fill="#f3f1f6" d="M3 2h3v4H3zM10 2h3v4h-3z"/><path fill="#c8456a" d="M3 6h3v3H5v1h1v1h4v-1h1V9h-1V6h3v4h-1v1h-1v1H5v-1H4v-1H3z"/><path fill="#8d2a4e" d="M3 8h1v2H3zM12 8h1v2h-1z"/><path fill="#f3f1f6" d="M6 11h4v3H6z"/><path fill="#9b8fb0" d="M7 12h2v2H7z"/></svg>',
+ log:'<svg viewBox="0 0 16 16"><path fill="#c9a468" d="M8 1l6 3-6 3-6-3z"/><path fill="#6b4a26" d="M2 4l6 3v8L2 12z"/><path fill="#4e3519" d="M8 7l6-3v8l-6 3z"/><path fill="#a8834a" d="M6 4h4v1H6zM7 3h2v1H7z"/><path fill="#5a3d1e" d="M4 8h1v4H4zM6 9h1v4H6zM10 9h1v3h-1zM12 7h1v3h-1z"/></svg>',
+ stone:'<svg viewBox="0 0 16 16"><path fill="#d4d3cf" d="M8 1l6 3-6 3-6-3z"/><path fill="#aaa8a4" d="M2 4l6 3v8L2 12z"/><path fill="#8c8a86" d="M8 7l6-3v8l-6 3z"/><path fill="#4a403c" d="M5 3h2v1H5zM9 4h2v1H9zM4 8h2v1H4zM3 10h1v1H3zM10 9h2v1h-2zM9 11h2v1H9zM6 12h1v1H6z"/></svg>',
+ craft:'<svg viewBox="0 0 16 16"><path fill="#6a4a2a" d="M8 1l6 3-6 3-6-3z"/><path fill="#b08850" d="M2 4l6 3v8L2 12z"/><path fill="#8a6a3c" d="M8 7l6-3v8l-6 3z"/><path fill="#4a331b" d="M6 3h4v1H6zM5 4h1v1H5zM10 4h1v1h-1zM7 5h2v1H7z"/><path fill="#3c2a16" d="M2 6h1v5H2zM8 8h1v6H8zM13 6h1v5h-1z"/><path fill="#c9a468" d="M3 8h4v1H3zM9 8h4v1H9z"/></svg>',
+ bow:'<svg viewBox="0 0 16 16"><path fill="#e59a3c" d="M8 2h5v1h1v1h-2V3H9v1H8v1H7v2H6v1H5v1H4v1H3v2h1v1H3v1H2v-3h1v-1h1V8h1V7h1V5h1V4h1V3h1z"/><path fill="#f6c46a" d="M9 2h3v1H9zM7 4h1v1H7zM6 6h1v1H6zM5 8h1v1H5z"/><path fill="#dfe8ee" d="M13 4h1v1h-1zM12 5h1v1h-1zM11 6h1v1h-1zM10 7h1v1h-1zM9 8h1v1H9zM8 9h1v1H8zM7 10h1v1H7zM6 11h1v1H6zM5 12h1v1H5zM4 13h1v1H4z"/><path fill="#5d7585" d="M12 4h1v1h-1zM10 6h1v1h-1zM8 8h1v1H8zM6 10h1v1H6zM4 12h1v1H4z"/></svg>'};
+
+/* Bausteine */
+const note=(kind,label,html)=>`<div class="mnbox ${kind}" role="note">${label?`<b>${label}</b> `:""}${html}</div>`;
+const rec=html=>note("ok","Empfehlung:",html);
+const panel=(title,body)=>`<div class="mnpanel"><h3>${title}</h3>${body}</div>`;
+const list=(items,cls="")=>`<ul class="mnl${cls}">${items.map(i=>`<li>${i}</li>`).join("")}</ul>`;
+
+/* Infotexte (Klick auf ein Symbol); Schlüssel = gespeicherte Auswahl in st.bsel */
+const DUST=[["--t1","Grau","Gewöhnlicher Staub",1],["--t2","Grün","Ungewöhnlicher Staub",3],["--t3","Blau","Seltener Staub",10],["--t4","Lila","Epischer Staub",15],["--t5","Orange","Legendärer Staub",25]];
+const THORN=[["--t1","Gewöhnlich"],["--t2","Ungewöhnlich"],["--t3","Selten"],["--t4","Episch"],["--t5","Legendär"],["--t6","Ewig"," <small>(in dieser Season deaktiviert)</small>"]];
+const FN={
+  shop:{t:"Minion Shop",html:()=>panel("Minion Shop",
+    `<p>Der Shop ist dafür da, um die zum Minion-System zugehörigen Taschen aufzuwerten und neue Minions kaufen zu können.</p>
+    <p>Minions kosten Elementare Rückstände, die beim Zerlegen entstehen.</p>
+    ${rec(list(["Nur legendäre Minions kaufen.","Die Minion-Taschenupgrades können immer gekauft werden (solange sie keinen legendären Staub kosten).","Die anderen Taschenslots sind erst mal irrelevant.","Carry-Minion erst mal ignorieren (kostet 2x)."]))}`)},
+  zer:{t:"Pricklets zerlegen",html:()=>panel("Pricklets zerlegen",
+    `<p>Beim Zerlegen könnt ihr eure gesamte Pricklet-Tasche entleeren, um daraufhin Upgrades zu kaufen und neue Minions sammeln zu können. Je nach Rarität erhaltet ihr unterschiedliche Materialien beim Zerlegen.</p>
+    <table class="rtab"><thead><tr><th>Rarität</th><th>Material</th><th title="Elementare Rückstände">Elementare Rückstände</th></tr></thead><tbody>${DUST.map(([c,r,n,v])=>`<tr style="--c:var(${c})"><td><span class="rn">${r}</span></td><td>${n}</td><td>${v}</td></tr>`).join("")}</tbody></table>
+    <p>Den Staub benötigt man sowohl zum Upgraden der Minions als auch für den Shop.</p>
+    ${rec("Alle Minions zerstören und gute Minions kaufen.")}
+    ${note("warn","Wichtig!","Solltest du aufs Late Game spielen und versuchen, mehrere Eternal Minions zu erspielen, warte mit dem Zerstören von legendären Minions, bis du ein paar Level in dem Staub-Glück-Recycler-Upgrade hast!")}`)},
+  auf:{t:"Minion aufwerten",html:()=>panel("Minion aufwerten",
+    `<p>Für das Aufwerten der Minions müssen die Minions eine bestimmte Menge an XP gesammelt haben + Staub der jeweiligen Rarität wird benötigt (die genaue Menge kann im Wiki nachgelesen werden).</p>
+    ${rec("Legendäre Minions zum Verschmelzen aufwerten.")}`)},
+  ver:{t:"Minions verschmelzen",html:()=>panel("Minions verschmelzen",
+    `${note("info","","Die Verschmelzung der Minions ist relevant für den seasonübergreifenden (Eternal/Ewig) Fortschritt!")}
+    <p>Zum Verschmelzen benötigt man insgesamt <b>10 Schmelzpunkte</b> + mindestens ein Minion nach Wahl auf <b>lvl 5</b>. Jedes Minion hat diese sogenannten Schmelzpunkte, sein Level jedoch macht die Menge der Schmelzpunkte aus:</p>
+    <table class="rtab"><thead><tr><th>Level</th><th>Schmelzpunkte</th></tr></thead><tbody><tr><td>Level 1</td><td>1 Schmelzpunkt</td></tr><tr><td>Level 2</td><td>2 Schmelzpunkte</td></tr><tr><td>…</td><td>…</td></tr></tbody></table>
+    ${note("warn","Achtung!","Für das Verschmelzen benötigt man 10 Schmelzpunkte vom <b>SELBEN</b> Typ. Das heißt bspw.:"+list(["1 Recycler-Minion lvl 5 + 5 Recycler-Minions auf lvl 1","1 Recycler-Minion lvl 5 + 3 Recycler-Minions auf lvl 1 + 1 Recycler-Minion auf lvl 2","etc."]))}
+    ${rec("Ich kann noch nicht genau sagen, welcher Eternal Minion sich als Erstes lohnt. Dafür fehlt aktuell noch der Progress und die Schwachstellenanalyse.")}`)},
+  zucht:{t:"Pricklet-Zucht",html:()=>panel("Pricklet-Zucht",
+    `<p>Das Breeden ist sehr simpel gestaltet: Du wählst 2 verschiedene Minions (aus verschiedenen Gruppen) aus und erhältst dafür ein Minion, das alle Eigenschaften der Eltern erbt.</p>
+    ${note("warn","Wichtig!","Das 2. ausgewählte Minion vererbt seine Fähigkeiten aber nur zu <b>70&nbsp;%</b>.")}
+    ${rec("Für das Sammeln von Erfahrung lohnt es sich, die höchstmögliche Rarität zu breeden (max. Epic).")}
+    ${note("info","Ausblick:","Das Breeden wird hauptsächlich relevant, sobald man die ersten Eternal Minions besitzt.")}`)},
+  nauf:{t:"Nest aufwerten",html:()=>panel("Nest aufwerten",
+    `<p>Das Nest kann in 3 Kategorien verbessert werden:</p>
+    ${list(["Die Zuchtdauer wird reduziert.","Die Abklingzeit, bis erneut gebreedet werden kann, wird reduziert.","Die Chance für Zwillinge erhöht sich."]," mnl2")}
+    ${rec("Erst mal nur Zuchtdauer und Abklingzeit aufwerten, da Zwillinge erst bei Eternal Minions eine Rolle spielen.")}`)},
+  "s-her":{t:"Dornen herstellen",html:()=>panel("Dornen herstellen",
+    `<p>Du kannst gefundene Dornen jederzeit erneut herstellen, sobald du sie 1x gefunden hast (wie Baupläne).</p>
+    ${rec("Der Pricklet-Dorn (erhöht die Chance, Minions zu finden) sollte sofort hergestellt und genutzt werden, wenn man ihn findet.")}`)},
+  "s-kom":{t:"Dornen kombinieren",html:()=>panel("Dornen kombinieren",
+    `<p>5 identische Dornen können zu einem Dorn der höheren Seltenheit aufgewertet werden (max. Legendär).</p>
+    ${rec("Den Pricklet-Dorn „aufwerten“, sobald man kann.")}`)},
+  "s-zer":{t:"Dornen zerlegen",html:()=>panel("Dornen zerlegen <small>(im Spiel steht „Entfernen“)</small>",
+    `<p>Zerlegte Dornen geben 1 Dornenfragment der jeweiligen Seltenheit, exquisite Dornen 3 Dornenfragmente.</p>
+    ${rec("Noch unsicher, wie man am besten vorgehen sollte.")}`)},
+  "s-soc":{t:"Sockel-Dorn",html:()=>panel("Sockel-Dorn",
+    `<p>Ein Minion kann bis zu 3 Dornen gleichzeitig tragen. Das Sockeln kostet lediglich Abfall (2. Modus vom Recycler).</p>
+    ${rec("Pricklet-Dorn so oft wie möglich verwenden.")}`)},
+  "s-ent":{t:"Dornen entfernen",html:()=>panel("Dornen entfernen",
+    `<p>Falls ein Minion zerlegt werden soll oder einen wichtigen Dorn zur Weiterverwendung trägt, kann dieser hier entfernt und beim Sockeln wiederverwendet werden.</p>
+    <p>Dieser Prozess kostet ebenfalls nur Abfall.</p>
+    ${rec("Bei Platzproblemen nach und nach die Dornen entfernen und wichtige Dornen direkt umsockeln, falls sie auf dem falschen Minion sind.")}`)}
+};
+
+/* Menüs: Slot-Nummer (0-basiert) -> [Icon, Infotext-Schlüssel]; ohne Schlüssel = reine Deko */
+const VIEWS={
+  bill:{title:"Salty Bill",
+    top:`<p class="mnintro">Salty Bill ist für das Zerlegen, Aufwerten, Verschmelzen und für den Shop verantwortlich.</p>`,
+    slots:{4:["gold","shop"],12:["magma","zer"],13:["ruby","auf"],14:["cactus","ver"]}},
+  nest:{title:"Nest",
+    top:`<p class="mnintro">Das Nest ist für das Paaren der Minions zuständig.</p>${note("warn mnnote","Achtung!","Die Eltern verschwinden bei diesem Prozess leider, nur das (oder die) Kind(er) überlebt.")}`,
+    slots:{12:["egg","zucht"],14:["anvil","nauf"]}},
+  anspitzer:{title:"Anspitzer",
+    top:`<div class="mnpanel mnstd"><p>Minions können beim Erhalt (nicht beim Kauf) Dornen besitzen. Diese Dornen sind wie passive Stat-Boosts (ähnlich wie bspw. Münz-Chance auf der Rüstung).</p>
+    <p>Dornen kommen auch in den Raritäten:</p>
+    <ul class="rl">${THORN.map(([c,n,x])=>`<li style="--c:var(${c})">${n}${x||""}</li>`).join("")}</ul>
+    <p>Zusätzlich können sie exquisit (Stern-Indikator) sein. Ein exquisiter Dorn erhöht den Stat-Boost des ursprünglichen Dorns um <b>30&nbsp;%</b>!</p>
+    ${rec("Vor allem am Anfang lohnt es sich eher, Minions mit Dornen aufgrund ihrer Boosts einzusetzen.")}</div>`,
+    slots:{11:["anvil","s-her"],12:["grind","s-kom"],13:["magma","s-zer"],14:["crystal","s-soc"],15:["magnet","s-ent"]}},
+  auto:{title:"Automatisierungsstation",rows:4,first:true,
+    slots:{11:["cactus"],12:["bow"],13:["log"],14:["stone"],15:["craft"],20:["cactus"],22:["anvil"]},
+    bottom:`<div class="mnpanel"><p>In der Automatisierungsstation können die Minions letztendlich eingesetzt werden. Jeder Minion kann nur in seinem Bereich arbeiten – so arbeitet der Recycler-Minion nur im Recycler (<b>entweder</b> Abfall- oder Recycler-Modus).</p>
+    <p>Minions arbeiten so lange, bis die Energie auf 0 sinkt. Diese regeneriert sich entweder über Zeit oder durch das Füttern von Abfall.</p>
+    ${rec("Falls auf dem Weg Minions mit sehr guten Dornen gefunden werden, lohnt es sich sehr, diese direkt einzusetzen, um die passiven Boni zu erhalten (diese gelten nämlich immer, auch wenn der Minion keine Energie mehr hat).<p class=\"mnrec\">Ansonsten nach und nach mit besseren Minions austauschen, um noch mehr von ihren Standard-Boosts zu profitieren.</p><p class=\"mnrec\">Ich nutze bspw. gerne den Recycler-, Ofen- und Essenz-Minion auf legendär!</p>")}</div>`}
+};
+
+/* Ingame-Menü: 9 Spalten, Titel in Pixel-Schrift */
+function guiHtml(title,cells,rows=3,first=false){
+  return `<div class="mc${first?" first":""}" role="img" aria-label="${title} Menü"><h2>${title}</h2><div class="mcg">${Array.from({length:rows*9},(_,i)=>cells[i]||'<div class="mcs"></div>').join("")}</div></div>`;
+}
+function fnIcon(key,svg){
+  const on=st.bsel===key;
+  return `<div class="mcs i ro hd${on?" on":""}" data-fn="${key}" tabindex="0" role="button" aria-pressed="${on}">${svg}<span class="mct clk"><span class="mctt">${FN[key].t}</span><span class="mctd"><small>Klicke für Infos</small></span></span></div>`;
+}
+function menuView(v){
+  const cells={};
+  for(const i in v.slots){const [icon,key]=v.slots[i];cells[i]=key?fnIcon(key,ICONS[icon]):`<div class="mcs i ro">${ICONS[icon]}</div>`;}
+  const open=Object.values(v.slots).some(s=>s[1]&&s[1]===st.bsel)?FN[st.bsel].html():"";
+  return `${v.top||""}${guiHtml(v.title,cells,v.rows,v.first)}${open}${v.bottom||""}`;
+}
+function toggleInfo(key){st.bsel=st.bsel===key?null:key;save();render();}
+function minionHtml(){
+  return `${note("warn","Disclaimer:","Alle Infos sind selbst erarbeitet und können Fehler enthalten! Daher bitte nicht beim Team oder dem Server beschweren, falls etwas nicht 100&nbsp;% korrekt ist – ich gebe mein Bestes.")}
+  ${note("info","Info:","Das Minion-System (inkl. Entleeren der Tasche) ist erst mit dem <b>Fabriklvl 90</b> möglich.")}
+  <div class="mnsel"><div class="seg" role="group" aria-label="Minion-Bereich wählen">${MINIONS.map(([id,l])=>`<button type="button" data-mn="${id}" aria-pressed="${id===st.minion}">${l}</button>`).join("")}</div></div>
+  ${VIEWS[st.minion]?menuView(VIEWS[st.minion]):'<p class="mnhint">Wähle oben einen Bereich aus.</p>'}`;
+}
 function skillHtml(){
   const md=mode();
   const cur=SKT.find(t=>t[0]===st.skt)||SKT[0];
@@ -696,7 +846,7 @@ out.addEventListener("click",e=>{const b=e.target.closest("[data-skt]");if(st.ta
   st.skt=b.dataset.skt;save();render();return;}});
 out.addEventListener("click",e=>{if(st.tab==="skill")mcStep(e.target.closest("[data-mc]"),1);});
 out.addEventListener("contextmenu",e=>{const el=e.target.closest("[data-mc]");if(st.tab==="skill"&&el){e.preventDefault();mcStep(el,-1);}});
-out.addEventListener("keydown",e=>{if(st.tab==="skill"&&(e.key==="Enter"||e.key===" ")){const el=e.target.closest("[data-mc]");if(el){e.preventDefault();mcStep(el,1);}}});
+out.addEventListener("keydown",e=>{if(st.tab==="minion"&&(e.key==="Enter"||e.key===" ")&&e.target.closest("[data-fn]")){e.preventDefault();toggleInfo(e.target.closest("[data-fn]").dataset.fn);return;}if(st.tab==="skill"&&(e.key==="Enter"||e.key===" ")){const el=e.target.closest("[data-mc]");if(el){e.preventDefault();mcStep(el,1);}}});
 function lsubBar(){
   return `<div class="lsub"><div class="seg" role="group" aria-label="Ansicht"><button type="button" data-lsub="list" aria-pressed="${st.lsub!=="plan"}">Essenzen pro Level</button><button type="button" data-lsub="plan" aria-pressed="${st.lsub==="plan"}">Kombinierte Wellen</button></div></div>`;
 }
@@ -722,7 +872,7 @@ function render(){
   if(st.tab==="sword"){out.innerHTML=swordHtml();return;}
   if(st.tab==="asp"){out.innerHTML=aspHtml();return;}
   if(st.tab==="bp"){out.innerHTML=bpHtml();return;}
-  if(st.tab==="minion"){out.innerHTML='<p class="notice">Die Minions folgen in Kürze.</p>';return;}
+  if(st.tab==="minion"){out.innerHTML=minionHtml();return;}
   if(st.tab==="skill"){out.innerHTML=skillHtml();return;}
   if(st.tab==="prog"){
     const sel=document.getElementById("progSel");
@@ -775,6 +925,9 @@ out.addEventListener("click",e=>{
   const sr=e.target.closest("tr[data-s]");
   if(sr){const k=sr.dataset.s,store=st.swd||(st.swd={});if(store[k])delete store[k];else store[k]=true;save();render();return;}
   if(e.target.id==="swordReset"){if(confirm("Alle Häkchen der Waffen Progression zurücksetzen?")){st.swd={};save();render();}return;}
+  const fn=e.target.closest("[data-fn]");if(fn){toggleInfo(fn.dataset.fn);return;}
+  const mn=e.target.closest("[data-mn]");
+  if(mn){st.minion=st.minion===mn.dataset.mn?null:mn.dataset.mn;save();render();return;}
   const S=curSet();
   const sb=e.target.closest("[data-stage]");
   if(sb){st.stg=st.stg||{};st.stg[S.id]=sb.dataset.stage;save();render();return;}
