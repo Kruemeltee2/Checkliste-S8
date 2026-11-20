@@ -431,7 +431,7 @@ function listHtml(){
     SEQ.map((k,i)=>{const m=k.match(/^(.*?)(\d+)$/);
       return `<tr><td class="n">${i+2}</td><td class="nc">${fmt((i+3)*1000)}</td><td>${m[1]} T${m[2]}</td><td class="n">${WAVE[k]}</td></tr>`;}).join("")+'</tbody></table>';
 }
-const PLAN=[["1-13",603,"-","-"],["15-20",946,"Piglin T1","-"],["21-24",1141,"-","-"],["21-29",1237,"Endermite T2","-"],["25 + 30",1471,"-","Endermite T2"],["30-40",1923,"Skeleton T3","Piglin T3"],["31-41",1929,"Wither T3, Endermite T2","-"],["31-34",1950,"-","Wither T3, Huhn T3, Blaze T3, Piglin T3"]];
+const PLAN=[["1-13",603,"-","-"],["15-20",946,"Piglin T1","-"],["21-24",1141,"-","-"],["21-29",1237,"Endermite T2","-"],["25 + 30",1471,"-","Endermite T2"],["30-40",1923,"Skeleton T3, Lohe T3","Piglin T3"],["31-41",1929,"Wither T3, Endermite T2","-"],["31-34",1950,"-","Wither T3, Huhn T3, Blaze T3, Piglin T3"]];
 function planLevels(t){
   let m=/^(\d+)\s*-\s*(\d+)$/.exec(t);
   if(m){const a=Math.max(2,+m[1]),b=Math.min(336,+m[2]),o=[];for(let L=a;L<=b;L++)o.push(L);return o;}
