@@ -660,11 +660,11 @@ const FN={
     `<p>Beim Zerlegen könnt ihr eure gesamte Pricklet-Tasche entleeren, um daraufhin Upgrades zu kaufen und neue Minions sammeln zu können. Je nach Rarität erhaltet ihr unterschiedliche Materialien beim Zerlegen.</p>
     <table class="rtab"><thead><tr><th>Rarität</th><th>Material</th><th title="Elementare Rückstände">Elementare Rückstände</th></tr></thead><tbody>${DUST.map(([c,r,n,v])=>`<tr style="--c:var(${c})"><td><span class="rn">${r}</span></td><td>${n}</td><td>${v}</td></tr>`).join("")}</tbody></table>
     <p>Den Staub benötigt man sowohl zum Upgraden der Minions als auch für den Shop.</p>
-    ${rec("Alle Minions zerstören und gute Minions kaufen.")}
+    ${rec("Alle Minions bis auf Epics und Legendaries zerlegen und gute Minions kaufen.")}
     ${note("warn","Wichtig!","Solltest du aufs Late Game spielen und versuchen, mehrere Eternal Minions zu erspielen, warte mit dem Zerstören von legendären Minions, bis du ein paar Level in dem Staub-Glück-Recycler-Upgrade hast!")}`)},
   auf:{t:"Minion aufwerten",html:()=>panel("Minion aufwerten",
     `<p>Für das Aufwerten der Minions müssen die Minions eine bestimmte Menge an XP gesammelt haben + Staub der jeweiligen Rarität wird benötigt (die genaue Menge kann im Wiki nachgelesen werden).</p>
-    ${rec("Legendäre Minions zum Verschmelzen aufwerten.")}`)},
+    ${rec("Epische und legendäre Minions zum Verschmelzen aufwerten.")}`)},
   ver:{t:"Minions verschmelzen",html:()=>panel("Minions verschmelzen",
     `${note("info","","Die Verschmelzung der Minions ist relevant für den seasonübergreifenden (Eternal/Ewig) Fortschritt!")}
     <p>Zum Verschmelzen benötigt man insgesamt <b>10 Schmelzpunkte</b> + mindestens ein Minion nach Wahl auf <b>lvl 5</b>. Jedes Minion hat diese sogenannten Schmelzpunkte, sein Level jedoch macht die Menge der Schmelzpunkte aus:</p>
