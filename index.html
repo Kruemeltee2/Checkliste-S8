@@ -168,6 +168,8 @@ input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent);cursor:po
 .mctd{color:#e8e8e8}.mctd.w{color:#ff5555}
 .modes{margin:0 0 10px;display:flex;justify-content:center}
 .modes[hidden]{display:none}
+@media(max-width:640px){.modes{padding:0 10px}.modes .seg{display:flex;width:100%}.modes .seg button{flex:1 1 auto;padding:7px 6px;font-size:.85rem}}
+@media(max-width:360px){.modes .seg button{padding:7px 3px;font-size:.8rem}}
 .skrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,560px) minmax(0,1fr);gap:16px;align-items:start}
 .skrow .mc{margin:0;grid-column:2;grid-row:1}
 .skside{grid-column:1;grid-row:1;justify-self:end;display:flex;flex-direction:column;gap:8px;width:100%;max-width:190px}
@@ -228,7 +230,7 @@ body{padding-bottom:76px}
     <button id="tMinion" type="button" role="tab">Minions</button>
     <button id="tSkill" type="button" role="tab">Skilltree</button>
   </nav>
-  <div class="modes" id="modes" hidden><div class="seg" id="modeSeg" role="group" aria-label="Modus"><button type="button" data-mode="kaktus">Kaktus LB</button><button type="button" data-mode="seelen">Seelen LB</button><button type="button" data-mode="casual">Casual</button><button type="button" data-mode="custom">Custom</button></div></div>
+  <div class="modes" id="modes" hidden><div class="seg" id="modeSeg" role="group" aria-label="Modus"><button type="button" data-mode="kaktus">Kaktus LB</button><button type="button" data-mode="seelen">Seelen LB</button><button type="button" data-mode="casual">Casual</button><button type="button" data-mode="kruemel">Kruemels Skillung</button><button type="button" data-mode="custom">Custom</button></div></div>
   <div id="essSw" class="lsub" hidden><div class="seg" role="group" aria-label="Ansicht"><button type="button" id="swList">Essenzen</button><button type="button" id="swCheck">Checkliste</button></div></div>
   <div id="progHead" hidden><select id="progSel" aria-label="Seite wählen"></select></div>
   <div id="checkHead">
@@ -623,8 +625,20 @@ const CLB_ORDER=(()=>{const o=[],add=(t,id,n)=>{for(let i=0;i<n;i++)o.push([t,id
   add("forschung","f_gold",5);add("forschung","f_smaragd",1);
   [["knochen",5],["truhe",5],["schloss",5]].forEach(a=>add("kaktus",a[0],a[1]));
   return o;})();
-const ORDERS={kaktus:()=>KLB_ORDER,seelen:()=>SLB_ORDER,casual:()=>CLB_ORDER};
-const EXTRA_TREE={kaktus:"kaktus",seelen:"seele",casual:"kaktus"};
+const KRM_ORDER=(()=>{const o=[],add=(t,id,n)=>{for(let i=0;i<n;i++)o.push([t,id]);};
+  add("forschung","f_maske",5);
+  add("kaktus","kuchen",5);add("kaktus","erde",5);
+  add("forschung","f_barren",5);add("forschung","f_trank",5);add("forschung","f_tresor",5);add("forschung","f_stein",2);
+  add("kaktus","kaktus",1);
+  add("kaktus","sandstein",5);add("kaktus","goldbarren",5);add("kaktus","diamant",5);
+  add("kaktus","gras",5);add("kaktus","busch",5);add("kaktus","goldblock",5);add("kaktus","fackel",5);
+  add("kaktus","laterne",5);
+  add("kaktus","knochen",5);add("kaktus","truhe",5);add("kaktus","schloss",5);add("kaktus","diamantblock",5);
+  add("kaktus","base",150-6-o.length);
+  add("forschung","f_gold",5);add("forschung","f_smaragd",1);
+  return o;})();
+const ORDERS={kaktus:()=>KLB_ORDER,seelen:()=>SLB_ORDER,casual:()=>CLB_ORDER,kruemel:()=>KRM_ORDER};
+const EXTRA_TREE={kaktus:"kaktus",seelen:"seele",casual:"kaktus",kruemel:"kaktus"};
 const allocM=(md,y)=>{const O=ORDERS[md](),r={kaktus:{},forschung:{},seele:{}};O.slice(0,y).forEach(([t,id])=>{r[t][id]=(r[t][id]||0)+1;});return r;};
 const sktPts=k=>{
   const md=mode();
@@ -637,7 +651,7 @@ const sktPts=k=>{
 };
 const mcFull=()=>{const o={};MC.forEach((row,y)=>row.forEach((it,x)=>{if(it&&!MC_NOSKILL.has(it[0]))o[y+","+x]=mcMax(it[0]);}));return o;};
 const BUY_COST=["7", "159", "3.831k", "92.437k", "2.230m", "53.823m", "1.298b", "31.339b", "756.237b", "18.248t", "440.335t", "10.625aa", "256.394aa", "6.186ab", "149.291ab", "3.602ac", "86.928ac", "2.097ad", "50.615ad", "1.221ae", "29.472ae", "711.170ae", "17.160af", "414.094af", "9.992ag", "241.115ag", "5.818ah", "140.394ah", "3.387ai", "81.747ai", "1.972aj", "47.599aj", "1.148ak", "27.715ak", "668.789ak", "16.138al", "389.416al", "9.396am", "226.746am", "5.471an", "132.027an", "3.185ao", "76.876ao", "1.855ap", "44.762ap", "1.080aq", "26.064aq", "628.933aq", "15.176ar", "366.210ar", "8.836as", "213.233as", "5.145at", "124.159at", "2.996au", "72.294au", "1.744av", "42.095av", "1.015aw", "24.510aw", "591.453aw", "14.271ax", "344.386ax", "8.310ay", "200.526ay", "4.838az", "116.760az", "2.817ba", "67.986ba", "1.640bb", "39.586bb", "955.235bb", "23.050bc", "556.206bc", "13.421bd", "323.863bd", "7.814be", "188.576be", "4.550bf", "109.802bf", "2.649bg", "63.934bg", "1.542bh", "37.227bh", "898.309bh", "21.676bi", "523.059bi", "12.621bj", "304.562bj", "7.349bk", "177.338bk", "4.279bl", "103.258bl", "2.491bm", "60.124bm", "1.450bn", "35.008bn", "844.775bn", "20.384bo", "491.888bo", "11.869bp", "286.412bp", "6.911bq", "166.769bq", "4.024br", "97.105br", "2.343bs", "56.541bs", "1.364bt", "32.922bt", "794.432bt", "19.169bu", "462.575bu", "11.162bv", "269.344bv", "6.499bw", "156.831bw", "3.784bx", "91.318bx", "2.203by", "53.172by", "1.283bz", "30.960bz", "747.089bz", "18.027ca", "435.008ca", "10.496cb", "253.293cb", "6.112cc", "147.485cc", "3.558cd", "85.876cd", "2.072ce", "50.003ce", "1.206cf", "29.115cf", "702.567cf", "16.953cg", "409.084cg", "9.871ch", "238.198ch", "5.747ci", "138.696ci", "3.346cj", "80.758cj", "1.948ck", "47.023ck", "1.134cl", "27.380cl", "660.698cl"];
-const MODES=["kaktus","seelen","casual","custom"];
+const MODES=["kaktus","seelen","casual","kruemel","custom"];
 const mode=()=>MODES.includes(st.mode)?st.mode:"kaktus";
 const getBuy=()=>{const md=mode();const v=md==="custom"?(st.buy||0):((st.buys&&st.buys[md]!=null)?st.buys[md]:150);return Math.max(0,Math.min(150,v));};
 const setBuy=v=>{const md=mode();v=Math.max(0,Math.min(150,v));if(md==="custom")st.buy=v;else{st.buys=st.buys||{};st.buys[md]=v;}};
