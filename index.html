@@ -172,7 +172,8 @@ input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent);cursor:po
 .runn{margin-top:16px}
 .runm{display:flex;justify-content:center;margin:0 0 14px}
 .runac input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-.rung{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,4fr) minmax(0,3fr);grid-template-rows:auto auto auto 18px auto auto auto 18px auto auto auto;gap:8px}
+.rung{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,4fr) minmax(0,3fr);grid-template-rows:auto auto auto 18px auto auto auto 18px auto auto auto auto;gap:8px}
+.runk{grid-column:2;grid-row:12;text-align:center;font-weight:700}
 .runt{align-self:center;display:flex;flex-direction:column;gap:6px;padding:8px;box-sizing:border-box;background:var(--surface);border:1px solid var(--line);border-radius:10px}
 .runt h3{margin:0;text-align:center;font-size:.8rem;font-weight:700;color:var(--muted)}
 .runs{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
@@ -955,7 +956,7 @@ function runenGrid(){
   const slot=r=>r&&(ac==null||ac>=r[1])?`<i class="on" title="${r[0]} (Ebene ${r[1]})"><b>${r[0]}</b><small>Ebene ${r[1]}</small></i>`:"<i></i>";
   const slotsOf=a=>a.slice().sort((x,y)=>x[1]-y[1]).concat([null,null,null]).slice(0,3).map(slot).join("");
   const tower=(n,r,c)=>{let T=C.sw&&ac!=null&&ac<C.sw[n]?C.ex:(C.t[n]||C.def);const al=C.alt&&C.alt[n];if(al&&ac!=null&&ac>=al[0]&&ac<al[1])T={p:T.p,r:al[2]};const nm=T.p+" "+n;return `<div class="runt" style="grid-row:${r}/${r+3};grid-column:${c}" role="group" aria-label="${nm}"><h3>${nm}</h3><div class="runs">${slotsOf(T.r)}</div></div>`;};
-  return RUNEN_T.map(t=>tower(t[0],t[1],t[2])).join("")+`<div class="runb"><div class="runt" role="group" aria-label="Brücke"><h3>Brücke</h3><div class="runs">${slotsOf(C.b)}</div></div></div>`;
+  return RUNEN_T.map(t=>tower(t[0],t[1],t[2])).join("")+`<div class="runb"><div class="runt" role="group" aria-label="Brücke"><h3>Brücke</h3><div class="runs">${slotsOf(C.b)}</div></div></div><div class="runk">Kaktusfeld</div>`;
 }
 function runenHtml(){
   if(st.acE>100)st.acE=100;
